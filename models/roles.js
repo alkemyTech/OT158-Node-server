@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Roles.init({
-    id: DataTypes.INTEGER,
     name: DataTypes.STRING,
     description: DataTypes.STRING
   }, {
