@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     isDeleted: DataTypes.BOOLEAN
   }, {
     sequelize,
-    modelName: 'Organization',
+    modelName: 'Organizations',
   });
-  return Organization;
+  return Organizations;
 };
