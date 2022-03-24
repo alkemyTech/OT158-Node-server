@@ -1,7 +1,7 @@
 const getAll = async (req, res, next) => {
   try {
     const result = await newsService.getAll(req);
-    res.status(200).json(result);
+    res.status(200).json({ data: result });
   } catch (error) {
     next(error);
   }
@@ -9,7 +9,7 @@ const getAll = async (req, res, next) => {
 const create = async (req, res, next) => {
   try {
     const result = await newsService.create(req);
-    res.status(200).json(result);
+    res.status(200).json({ data: result });
   } catch (error) {
     next(error);
   }
@@ -17,7 +17,7 @@ const create = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     const result = await newsService.update(req);
-    res.status(200).json(result);
+    res.status(200).json({ data: result });
   } catch (error) {
     next(error);
   }
@@ -25,7 +25,7 @@ const update = async (req, res, next) => {
 const remove = async (req, res, next) => {
   try {
     const result = await newsService.remove(req);
-    res.status(200).json(result);
+    res.status(200).json({ data: result });
   } catch (error) {
     next(error);
   }
