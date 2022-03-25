@@ -1,6 +1,11 @@
-const { Members } = require('../models');
+const db = require("../models")
 
-const create = async (newMember) => {
-    
+
+module.exports = {
+    getAll :async () => {
+        const result = await db.Roles.findAll()
+        return result
+
+    }
+
 }
-module.exports = { create };
