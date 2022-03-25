@@ -1,7 +1,7 @@
-const isAdmin = (req,res,next)=>{
+const adminValidator = (req,res,next)=>{
   next();
 }
 
 module.exports= {
-  isAdmin
+  adminValidator
 }

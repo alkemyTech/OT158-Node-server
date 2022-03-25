@@ -6,15 +6,12 @@ const getAll =async({params})=>{
 }
 const create =async({body})=>{
   body.type='news';
-  body.createdAt= new Date();
-  body.updatedAt= new Date();
   const result = await newsRepository.create(body)
   return result
 }
 const update =async({body,params})=>{
   const {id}=params;
   const where = {id};
-  body.updatedAt= new Date();
   const result = await newsRepository.update(body,where)
   return result
 }
