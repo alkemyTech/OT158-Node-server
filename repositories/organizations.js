@@ -1,19 +1,19 @@
-const db = require('../models/index')
+const {Organizations} = require('../models')
 
 const getAll = async ()=>{
-  const result = await db.Organizations.findAll();
+  const result = await Organizations.findAll();
   return result
 }
 const create = async (organization)=>{
-  const result = await db.Organizations.create(organization);
+  const result = await Organizations.create(organization);
   return result
 }
 const update = async (organization,options)=>{
-  const result = await db.Organizations.update(organization,options);
+  const result = await Organizations.update(organization,options);
   return result
 }
 const remove = async (options)=>{
-  const result = await db.Organizations.update({isDeleted:true},options);
+  const result = await Organizations.update({isDeleted:true},options);
   return result
 }
 
