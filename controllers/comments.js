@@ -3,8 +3,9 @@ const commentsService = require('../services/comments');
 
 const create = async (req, res, next) => {
     try {
-        const result = await commentsService.create(req);
-        res.status(200).json({
+        const body = req.body
+        const result = await commentsService.create(body);
+        res.status(201).json({
             data: result
         });
     }
