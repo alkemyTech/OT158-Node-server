@@ -1,4 +1,4 @@
-const model = require('../models/users')
+const model = require('../models/user')
 
 const getAll = async () => {
     const result = [];
