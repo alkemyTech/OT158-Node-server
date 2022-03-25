@@ -9,6 +9,6 @@ const {
 
 
 /* GET users listing. */
-router.post('/', validatorHandler(createCommentsSchema, 'body'), commentsController.create);
+router.post('/', commentsController.create);
 
 module.exports = router;
