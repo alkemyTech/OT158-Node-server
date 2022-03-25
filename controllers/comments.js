@@ -8,6 +8,7 @@ const create = async (req, res, next) => {
         res.status(201).json({
             data: result
         });
+        console.log(result)
     }
     catch (err) {
         next(err);
