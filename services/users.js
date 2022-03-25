@@ -5,4 +5,9 @@ const getAll = async (req)  => {
     return result;
 }
 
-module.exports = { getAll };
+const create = async (res) => {
+    const result = await usersRepository.create(req);
+    return result;
+}
+
+module.exports = { getAll, create };
