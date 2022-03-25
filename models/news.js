@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      New.belongsTo(models.Category, {as: 'category'});
+      New.belongsTo(models.Categories, {as: 'category'});
     }
   }
   New.init({
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     categoryId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'New',
+    modelName: 'News',
   });
-  return New;
+  return News;
 };

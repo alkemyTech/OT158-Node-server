@@ -12,6 +12,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      type: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       content: {
         allowNull: false,
         type: Sequelize.TEXT
@@ -29,8 +33,6 @@ module.exports = {
           model: 'Categories', 
           key: 'id' 
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
       },
       createdAt: {
         allowNull: false,
