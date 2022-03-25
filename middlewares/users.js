@@ -1,4 +1,4 @@
-const isAdmin = async (req,res,next)=>{
+const isAdmin = (req,res,next)=>{
   next();
 }
 

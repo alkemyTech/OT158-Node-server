@@ -1,3 +1,5 @@
+const newsService = require('../services/news')
+
 const getAll = async (req, res, next) => {
   try {
     const result = await newsService.getAll(req);
