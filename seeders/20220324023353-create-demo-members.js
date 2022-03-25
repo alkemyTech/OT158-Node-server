@@ -2,9 +2,9 @@
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.bulkInsert('members', [
+        await queryInterface.bulkInsert('Members', [
             {
-                name: 'Member one',
+                name: 'Member test one',
                 facebookUrl: 'https://www.facebook.com/memberOne',
                 instagramUrl: 'https://www.instagram.com/memberOne',
                 linkedinUrl: 'https://www.linkendin.com/memberOne',
@@ -15,7 +15,7 @@ module.exports = {
                 updatedAt: new Date
             },
             {
-                name: 'Member two',
+                name: 'Member test two',
                 facebookUrl: 'https://www.facebook.com/memberTwo',
                 instagramUrl: 'https://www.instagram.com/memberTwo',
                 linkedinUrl: 'https://www.linkendin.com/memberTwo',
