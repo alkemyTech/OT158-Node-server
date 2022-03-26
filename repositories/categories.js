@@ -6,6 +6,11 @@ module.exports = {
         const result = await db.Categories.findAll()
         return result
 
+    },
+
+    create: async(categories)=>{
+        const result = await db.Categories.create(categories)
+        return result
     }
 
 }
