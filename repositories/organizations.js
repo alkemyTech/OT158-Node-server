@@ -4,6 +4,10 @@ const getAll = async ()=>{
   const result = await Organizations.findAll();
   return result
 }
+const getById = async (id)=>{
+  const result = await Organizations.findByPk(id);
+  return result
+}
 const create = async (organization)=>{
   const result = await Organizations.create(organization);
   return result
@@ -19,6 +23,7 @@ const remove = async (options)=>{
 
 module.exports={
   getAll,
+  getById,
   create,
   update,
   remove

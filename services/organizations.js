@@ -3,6 +3,11 @@ const getAll = async (req)=>{
   const result = await organizationsRepository.getAll();
   return result
 }
+const getById = async ({params})=>{
+  const {id} = params
+  const result = await organizationsRepository.getById(id);
+  return result
+}
 const create = async ({body})=>{
   const result = await organizationsRepository.create(body);
   return result
@@ -22,6 +27,7 @@ const remove = async ({params})=>{
 
 module.exports={
   getAll,
+  getById,
   create,
   update,
   remove

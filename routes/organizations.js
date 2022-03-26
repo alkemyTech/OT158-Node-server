@@ -4,6 +4,8 @@ const router = express.Router();
 
 /* GET organizations listing. */
 router.get('/', organizationsController.getAll);
+/* GET organization with id. */
+router.getById('/', organizationsController.getById);
 /* POST a new organization. */
 router.post('/', organizationsController.create);
 /* PUT an edit on a organization. */
