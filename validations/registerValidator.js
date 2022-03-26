@@ -5,10 +5,12 @@ const db = require('../models');
 module.exports = [
     check('firstName')
     .notEmpty()
+    .isAlpha()
     .withMessage('name required'),
 
     check('lastName')
     .notEmpty()
+    .isAlpha()
     .withMessage('last name required'),
 
     check('email')
