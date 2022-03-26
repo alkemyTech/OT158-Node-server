@@ -19,12 +19,12 @@ module.exports = {
       },
       organizationId: {
         type: Sequelize.INTEGER,
-        references: {
+        references: {//table not exists. Run migrations with this block comment 
           model: 'Organizations',
           key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'SET NULL'//
       },
       createdAt: {
         allowNull: false,
