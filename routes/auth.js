@@ -3,7 +3,7 @@ const { create } = require('../controllers/users');
 const registerValidator = require('../validations/registerValidator');
 
 /* routes */
-router.post('/auth/register', registerValidator, create);
+router.post('/register', registerValidator, create);
 
 
 
