@@ -1,15 +1,6 @@
 const { create } = require('../repositories/members');
 
-const create = async ({ name, facebookUrl, instagramUrl, linkedinUrl, image, description }) => {
-    const newMember = {
-        name,
-        facebookUrl,
-        instagramUrl,
-        linkedinUrl,
-        image,
-        description
-    }
-
+const createService = async (newMember) => {
     const memberCreationService = await create(newMember)
         .then(memberCreated => {
             return memberCreated
@@ -18,4 +9,4 @@ const create = async ({ name, facebookUrl, instagramUrl, linkedinUrl, image, des
     return memberCreationService;
 }
 
-module.exports = { create };
+module.exports = { createService };
