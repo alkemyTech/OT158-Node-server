@@ -20,11 +20,11 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.INTEGER,
     email: DataTypes.STRING,
     welcomeText: DataTypes.TEXT,
-    aboutUsText: DataTypes.TEXT,
-    timestamps: true,
-    paranoid: true
+    aboutUsText: DataTypes.TEXT
   }, {
     sequelize,
+    timestamps: true,
+    paranoid: true,
     modelName: 'Organizations',
   });
   return Organizations;
