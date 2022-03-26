@@ -3,19 +3,19 @@ const getAll = async (req)=>{
   const result = await organizationsRepository.getAll();
   return result
 }
-const getById = async ()=>{
+const getById = async (req)=>{
   const result = await organizationsRepository.getById();
   return result
 }
-const create = async ()=>{
+const create = async (req)=>{
   const result = await organizationsRepository.create();
   return result
 }
-const update = async ()=>{
+const update = async (req)=>{
   const result = await organizationsRepository.update();
   return result
 }
-const remove = async ({params})=>{
+const remove = async ()=>{
   const result = await organizationsRepository.remove();
   return result
 }
