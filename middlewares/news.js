@@ -15,9 +15,9 @@ const validate = validations => {
 };
 
 const validData = validate([
-  body('name').isLength({min:1,max:50}),
-  body('content').isLength({min:1,max:255}),
-  body('image').isLength({min:1}),
+  body('name').notEmpty().isLength({min:1,max:50}),
+  body('content').notEmpty().isLength({min:1,max:255}),
+  body('image').notEmpty().isLength({min:1}),
   body('categoryId').isDecimal().custom(async (value)=>{
     const category = await getById(value)
     if(!category) return Promise.reject('Incorrect category value');
