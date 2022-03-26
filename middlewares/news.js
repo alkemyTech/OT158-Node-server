@@ -1,5 +1,5 @@
 const { validationResult, body } = require('express-validator');
-const {getOne} = require('../repositories/categories')
+const {getById} = require('../repositories/categories')
 
 const validate = validations => {
   return async (req, res, next) => {
@@ -19,7 +19,7 @@ const validData = validate([
   body('content').isLength({min:1,max:255}),
   body('image').isLength({min:1}),
   body('categoryId').isDecimal().custom(async (value)=>{
-    const category = await getOne(value)
+    const category = await getById(value)
     if(!category) return Promise.reject('Incorrect category value');
   }),
 ])
