@@ -16,7 +16,7 @@ const update= async(news,options)=>{
   return result
 }
 const remove= async(options)=>{
-  const result = await News.update({isDeleted:true},options)
+  const result = await News.destry(options)
   return result
 }
 

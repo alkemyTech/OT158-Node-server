@@ -24,9 +24,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      idDeleted: {
-        type: Sequelize.BOOLEAN
-      },
       categoryId: {
         type: Sequelize.INTEGER,
         references: { 
