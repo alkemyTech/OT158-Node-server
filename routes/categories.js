@@ -1,8 +1,10 @@
 const express = require('express');
-const { create }= require("../controllers/categories");
+const { create, getAll }= require("../controllers/categories");
+const { creationValidation }=require("../middleware/categories")
 const router = express.Router();
 
 /* GET users listing. */
-router.post('/',create);
+/* router.get('/',getAll); */
+router.post('/',creationValidation,create);
 
 module.exports = router;

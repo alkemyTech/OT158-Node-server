@@ -3,7 +3,7 @@ const categoriesService = require('../services/categories');
 module.exports = {
     getAll: async (req, res, next) => {
         try {
-            const result = await categoriesService.getAll(req);
+            const result = await categoriesService.getAll();
             res.status(200).json({
                 meta: {
                     status: 200,
