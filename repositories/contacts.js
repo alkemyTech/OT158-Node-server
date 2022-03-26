@@ -1,10 +1,7 @@
 const { Contacts } = require("../models");
 
-
-const create = async (req) => {
-  const contact = { ...req };
-
-  const result = await Contacts.create(contact);
+const create = async (newContact) => {
+  const result = await Contacts.create(newContact);
 
   return result;
 };
