@@ -7,8 +7,8 @@ const getById= async()=>{
   const result = {result:true};
   return result
 }
-const create= async()=>{
-  const result = {result:true};
+const create= async(body)=>{
+  const result = News.create(body);
   return result
 }
 const update= async()=>{

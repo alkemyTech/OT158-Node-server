@@ -8,8 +8,9 @@ const getById =async(req)=>{
   const result = await newsRepository.getById()
   return result
 }
-const create =async(req)=>{
-  const result = await newsRepository.create()
+const create =async({body})=>{
+  body.type="news"
+  const result = await newsRepository.create(body)
   return result
 }
 const update =async(req)=>{
