@@ -18,13 +18,13 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     content: DataTypes.STRING,
     image: DataTypes.STRING,
-    // softDeletes??
     deletedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'activities',
-    //timestamps here it's ok??
+    //timestamps 
     timestamps: true,
+    // softDeletes
     paranoid:true
   });
   return activities;
