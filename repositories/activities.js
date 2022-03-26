@@ -9,9 +9,6 @@ module.exports = { getAll };*/
 
 class ActivitiesRepository {
 
-    constructor(){
-
-    }
 
     async findAllActivities(){
         return await Activities.find();
