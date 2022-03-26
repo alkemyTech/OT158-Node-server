@@ -6,7 +6,7 @@ const { adminValidator } = require('../middlewares/users');
 
 router.get('/',newsController.getAll)
 router.get('/:id',newsController.getById)
-router.post('/',adminValidator,validData,newsController.create)
+router.post('/',newsController.create)
 router.put('/:id',newsController.update)
 router.delete('/:id',newsController.remove)
 

@@ -1,29 +1,23 @@
 const newsRepository = require('../repositories/news')
 
-const getAll =async({params})=>{
+const getAll =async(req)=>{
   const result = await newsRepository.getAll()
   return result
 }
-const getById =async({params})=>{
-  const {id} = params
-  const result = await newsRepository.getById(id)
+const getById =async(req)=>{
+  const result = await newsRepository.getById()
   return result
 }
-const create =async({body})=>{
-  body.type='news';
-  const result = await newsRepository.create(body)
+const create =async(req)=>{
+  const result = await newsRepository.create()
   return result
 }
-const update =async({body,params})=>{
-  const {id}=params;
-  const where = {id};
-  const result = await newsRepository.update(body,where)
+const update =async(req)=>{
+  const result = await newsRepository.update()
   return result
 }
-const remove =async({params})=>{
-  const {id}=params;
-  const where = {id};
-  const result = await newsRepository.remove(where)
+const remove =async(req)=>{
+  const result = await newsRepository.remove()
   return result
 }
 

@@ -1,22 +1,22 @@
 const {News} = require('../models')
-const getAll= async(options)=>{
-  const result = await News.findAll(options)
+const getAll= async()=>{
+  const result = {result:true};
   return result
 }
-const getById= async(id)=>{
-  const result = await News.findByPk(id)
+const getById= async()=>{
+  const result = {result:true};
   return result
 }
-const create= async(news,options)=>{
-  const result = await News.create(news,options)
+const create= async()=>{
+  const result = {result:true};
   return result
 }
-const update= async(news,options)=>{
-  const result = await News.update(news,options)
+const update= async()=>{
+  const result = {result:true};
   return result
 }
-const remove= async(options)=>{
-  const result = await News.destry(options)
+const remove= async()=>{
+  const result = {result:true};
   return result
 }
 
