@@ -1,9 +1,7 @@
-const { Comments } = require('../models/comments');
+const model = require('../models');
 
 const create = async (newComments) => {
-    //const result = await model.
-    const result = await Comments
-    console.log(result)
+    const result = await model.Comments.create(newComments)
     return result
 }
-module.exports = { create };
+module.exports = { create };    
