@@ -1,31 +1,10 @@
 const newsRepository = require('../repositories/news')
 
-const getAll =async(req)=>{
-  const result = await newsRepository.getAll()
-  return result
-}
-const getById =async(req)=>{
-  const result = await newsRepository.getById()
-  return result
-}
 const create =async({body})=>{
   body.type="news"
   const result = await newsRepository.create(body)
   return result
 }
-const update =async(req)=>{
-  const result = await newsRepository.update()
-  return result
-}
-const remove =async(req)=>{
-  const result = await newsRepository.remove()
-  return result
-}
-
 module.exports={
-  getAll,
-  getById,
-  create,
-  update,
-  remove
+  create
 }
