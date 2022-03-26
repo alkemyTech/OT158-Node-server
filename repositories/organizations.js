@@ -1,23 +1,23 @@
 const {Organizations} = require('../models')
 
 const getAll = async ()=>{
-  const result = await Organizations.findAll();
+  const result = {result:true};
   return result
 }
-const getById = async (id)=>{
-  const result = await Organizations.findByPk(id);
+const getById = async ()=>{
+  const result = {result:true};
   return result
 }
-const create = async (organization)=>{
-  const result = await Organizations.create(organization);
+const create = async ()=>{
+  const result = {result:true};
   return result
 }
-const update = async (organization,options)=>{
-  const result = await Organizations.update(organization,options);
+const update = async ()=>{
+  const result = {result:true};
   return result
 }
-const remove = async (options)=>{
-  const result = await Organizations.destroy(options);
+const remove = async ()=>{
+  const result = {result:true};
   return result
 }
 
