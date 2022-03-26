@@ -17,7 +17,7 @@ const update = async (organization,options)=>{
   return result
 }
 const remove = async (options)=>{
-  const result = await Organizations.update({isDeleted:true},options);
+  const result = await Organizations.destroy(options);
   return result
 }
 

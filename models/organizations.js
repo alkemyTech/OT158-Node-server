@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     welcomeText: DataTypes.TEXT,
     aboutUsText: DataTypes.TEXT,
-    isDeleted: DataTypes.BOOLEAN
+    timestamps: true,
+    paranoid: true
   }, {
     sequelize,
     modelName: 'Organizations',

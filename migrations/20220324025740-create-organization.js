@@ -33,9 +33,6 @@ module.exports = {
       aboutUsText: {
         type: Sequelize.TEXT
       },
-      isDeleted: {
-        type: Sequelize.BOOLEAN
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
