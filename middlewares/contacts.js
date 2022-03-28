@@ -1,8 +1,8 @@
 const { check, validationResult } = require("express-validator");
 
 const contactValidation = async (req, res, next) => {
-  await check("name", "This field cannot be empty").notEmpty().run(req);
-  await check("email", "This field cannot be empty").notEmpty().run(req);
+  await check("name", "Name is required").notEmpty().run(req);
+  await check("email", "Email is required").notEmpty().isEmail().run(req);
 
   const result = validationResult(req);
   if (!result.isEmpty()) {
