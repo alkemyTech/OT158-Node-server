@@ -2,7 +2,7 @@
 
 const jwt = requiere('jwt-simple')
 const moment = require('moment')
-const confif = require('../bin/www')
+const config = require('.env')
 
 function createToken (users) {
     const payload = {
