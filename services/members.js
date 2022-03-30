@@ -1,6 +1,12 @@
-const membersRepository = require('../repositories/members');
+const { create, getAll } = require('../repositories/members');
 
-const create = async ()  => {
+const createService = async ()  => {
     
-}
-module.exports = { create };
+};
+
+const getAllService = async () => {
+    const listAll = await getAll()
+    return listAll
+};
+
+module.exports = { createService, getAllService };

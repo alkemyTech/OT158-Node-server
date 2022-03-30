@@ -3,4 +3,10 @@ const { Members } = require('../models');
 const create = async (newMember) => {
     
 }
-module.exports = { create };
+
+const getAll = async () => {
+    const GetAll = await Members.findAll()
+    return GetAll
+}
+
+module.exports = { create, getAll };
