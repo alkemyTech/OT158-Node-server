@@ -14,12 +14,27 @@ module.exports = (sequelize, DataTypes) => {
   }
   News.init(
     {
-      name: DataTypes.STRING,
-      content: DataTypes.TEXT,
-      image: DataTypes.STRING,
+      name: 
+      {type:DataTypes.STRING,
+        allowNull: false
+      },
+      content: 
+      {type:DataTypes.TEXT,
+        allowNull: false
+      },
+      image: 
+      {type:DataTypes.STRING,
+        allowNull: false
+      },
       deletedAt: DataTypes.DATE,
-      categoryId: DataTypes.INTEGER,
-      type: DataTypes.STRING,
+      categoryId: 
+      {type:DataTypes.INTEGER,
+        allowNull: false
+      },
+      type: 
+      {type:DataTypes.STRING,
+        allowNull: false
+      },
     },
     {
       sequelize,
