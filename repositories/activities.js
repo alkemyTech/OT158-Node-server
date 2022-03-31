@@ -1,4 +1,4 @@
-const {Activities} = require('../models')
+const {Activities} = require('../modules')
 
 /*const getAllActivities = async () => {
     const result = [];

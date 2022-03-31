@@ -2,7 +2,7 @@
 
 const express = require('express')
 const users = require('../models/users')
-const service = require('../sevices')
+const modules = require('../modules/index')
 
 function signUp (req, res) {
     const users = new users({
