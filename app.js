@@ -25,12 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/activities', activitiesRouter)
 
-//endpoint activities
-app.get('/activities', (req,res) => {
-res.send({ message: 'I am in activities'})
-})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
