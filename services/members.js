@@ -1,26 +1,25 @@
-const { create, update, getById } = require('../repositories/members');
-
+const { create, getById } = require('../repositories/members');
 const createService = async () => {
 
 }
 
-const updateService = async ({ id }, dataUpdate) => {
+const updateService = async ({ params, body }) => {
     return await getById({
         where: {
-            id: id
+            id: params.id
         }
     })
         .then(member => {
-            if (member == null) {
-                return 0
-            }
-            return update(dataUpdate, {
-                where: {
-                    id: id
+            if (member === null)
+                return {
+                    state: -1
                 }
-            })
-                .then(memberUpdated => {
-                    return memberUpdated
+            return member.update(body)
+            .then(memberUpdated => {
+                    return {
+                        state: 1,
+                        data: memberUpdated
+                    }
                 })
         })
 

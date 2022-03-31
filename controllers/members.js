@@ -2,7 +2,7 @@ const { createService, updateService } = require('../services/members');
 
 const create = async (req, res, next) => {
     try {
-        
+
     }
     catch (err) {
         next(err);
@@ -11,23 +11,29 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
     try {
-        const resultService = await updateService(idMember = req.params, dataUpdate = req.body);
-
+        const resultService = await updateService(req);
+        
         const RESULTS = {
-            0: () => {
+            '-1': () => {
                 res.status(404).json({
                     msg: 'No member register'
                 })
             },
+            0: () => {
+                res.status(400).json({
+                    msg: 'Member not update'
+                })
+            },
             1: () => {
                 return res.status(200).json({
-                    msg: 'Succes member updated'
+                    msg: 'Successful member update',
+                    data: resultService.data
                 })
             }
         };
 
-        const result = RESULTS[resultService]
-            ? RESULTS[resultService]()
+        const result = RESULTS[resultService.state]
+            ? RESULTS[resultService.state]()
             : res.status(500).json({ msg: 'Error' })
 
         return result
