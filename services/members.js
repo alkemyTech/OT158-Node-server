@@ -1,6 +1,29 @@
-const membersRepository = require('../repositories/members');
+const { create, update, getById } = require('../repositories/members');
 
-const create = async ()  => {
-    
+const createService = async () => {
+
 }
-module.exports = { create };
+
+const updateService = async ({ id }, dataUpdate) => {
+    return await getById({
+        where: {
+            id: id
+        }
+    })
+        .then(member => {
+            if (member == null) {
+                return 0
+            }
+            return update(dataUpdate, {
+                where: {
+                    id: id
+                }
+            })
+                .then(memberUpdated => {
+                    return memberUpdated
+                })
+        })
+
+}
+
+module.exports = { createService, updateService };
