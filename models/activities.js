@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     content: DataTypes.STRING,
     image: DataTypes.STRING,
+    activitiesId: DataTypes.INTEGER,
     // softDeletes??
     deletedAt: DataTypes.DATE
   }, {
