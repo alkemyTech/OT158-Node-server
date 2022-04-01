@@ -1,9 +1,10 @@
 const express = require('express');
-const { create, getAll } = require('../controllers/members');
+const { getAll, create, update } = require('../controllers/members');
 const router = express.Router();
-const { creationValidation } = require('../middlewares/members')
+const { validation } = require('../middlewares/members')
 
 router.get('/', getAll);
-router.post('/', creationValidation, create);
+router.post('/', validation, create);
+router.put('/:id', validation, update)
 
 module.exports = router;
