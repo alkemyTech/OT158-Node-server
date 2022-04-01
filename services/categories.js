@@ -18,9 +18,14 @@ const create = async (req) => {
 const update = async (id, data)=>{
   const categories = await categoriesRepository.getById(id)
   if(categories){
-    await categoriesRepository.update(id,data)
-    const result= await categoriesRepository.getById(id)
-    return result
+    const updatedCategorie =await categoriesRepository.update(id,data)
+    if(updatedCategorie===1){
+      const result= await categoriesRepository.getById(id)
+      return result
+    }
+    else{
+      return error
+    }
   }
   else{
     return error
