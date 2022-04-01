@@ -1,6 +1,12 @@
 const { create, getById } = require('../repositories/members');
-const createService = async () => {
 
+const createService = async (newMember) => {
+  const memberCreationService = await create(newMember)
+    .then(memberCreated => {
+      return memberCreated
+    })
+
+  return memberCreationService;
 }
 
 const updateService = async (id, body) => {
