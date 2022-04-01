@@ -1,9 +1,9 @@
 const { check, validationResult } = require("express-validator");
 
-const creationValidation = async (req, res, next) => {
+const validation = async (req, res, next) => {
   await check('name')
     .notEmpty()
-    .withMessage('This field email cannot be empty').bail()
+    .withMessage('This field name cannot be empty').bail()
     .isString()
     .withMessage('This field must be a string')
     .run(req);
@@ -20,4 +20,4 @@ const creationValidation = async (req, res, next) => {
   next();
 };
 
-module.exports = { creationValidation };
+module.exports = { validation };
