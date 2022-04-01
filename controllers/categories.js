@@ -2,6 +2,7 @@ const categoriesService = require('../services/categories');
 
 const getAll = async (req, res, next) => {
     try {
+
         const result = await categoriesService.getAll();
         res.status(200).json({
             meta: {
@@ -19,6 +20,7 @@ const getAll = async (req, res, next) => {
         })
     }
 }
+
 
 const create = async (req, res, next) => {
     try {

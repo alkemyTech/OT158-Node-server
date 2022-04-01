@@ -2,9 +2,11 @@ const categoriesRepository = require('../repositories/categories');
 
 
 const getAll = async () => {
+
     const result = await categoriesRepository.getAll();
     return result;
 }
+
 
 const create = async (req) => {
 
