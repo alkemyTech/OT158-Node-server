@@ -6,4 +6,12 @@ const getAll = async () => {
 
 }
 
-module.exports = { getAll }
+
+const create = async (categories) => {
+    const result = await db.Categories.create(categories)
+    return result
+}
+
+
+module.exports = { getAll, create }
+
