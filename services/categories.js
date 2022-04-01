@@ -18,7 +18,7 @@ const update = async (id, data) => {
   if (categories) {
     const updatedCategorie =
       await categoriesRepository.update(id, data);
-    if (updatedCategorie === 1) {
+    if (updatedCategorie[0] === 1) {
       const result = await categoriesRepository.getById(id);
       return result;
     } else {
