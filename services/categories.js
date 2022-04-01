@@ -9,11 +9,7 @@ const getAll = async () => {
 };
 
 const create = async (req) => {
-  const result = await categoriesRepository
-    .create(req)
-    .then((categories) => {
-      return categories;
-    });
+  const result = await categoriesRepository.create(req)
   return result;
 };
 module.exports = { getAll, create };
