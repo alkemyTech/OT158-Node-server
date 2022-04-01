@@ -16,4 +16,17 @@ const create = async (req) => {
         })
     return result;
 }
-module.exports = { getAll, create }
+
+
+const update = async (id, data)=>{
+  const categories = await categoriesRepository.getById(id)
+  if(categories){
+    await categoriesRepository.update(id,data)
+    const result= await categoriesRepository.getById(id)
+    return result
+  }
+  else{
+    return error
+  }
+}
+module.exports = { getAll, create, update }
