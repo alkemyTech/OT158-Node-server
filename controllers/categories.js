@@ -56,10 +56,10 @@ const update = async(req,res,next)=>{
     });
   }
   catch (error){
-    return res.status(400).json({
-      status: 400,
-      message: error
-  })
+    res.status(error.status).json({
+      status: error.status,
+      msg: error.message
+    })
   }
 }
 

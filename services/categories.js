@@ -22,10 +22,14 @@ const update = async (id, data) => {
       const result = await categoriesRepository.getById(id);
       return result;
     } else {
-      return error;
+      const error = new Error('Categories not updated');
+    error.status = 400;
+    throw error;
     }
   } else {
-    return error;
+    const error = new Error('Categories not found');
+    error.status = 404;
+    throw error;
   }
 };
 module.exports = { getAll, create, update };
