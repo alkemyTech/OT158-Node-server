@@ -1,13 +1,23 @@
 const { Members } = require("../models");
 
-const create = async newMember => {
-  const memberCreationRepository = await Members.create(newMember);
-  return memberCreationRepository;
-};
-
 const getAll = async () => {
   const GetAll = await Members.findAll();
   return GetAll
 };
 
-module.exports = { create, getAll };
+const create = async newMember => {
+  const memberCreationRepository = await Members.create(newMember);
+  return memberCreationRepository;
+};
+
+const getById = async (member) => {
+  const obtaining = await Members.findOne(member)
+  return obtaining
+};
+
+const update = async (dataUpdate, updateMember) => {
+  const updated = await Members.update(dataUpdate, updateMember);
+  return updated
+};
+
+module.exports = { getAll, create, getById, update };
