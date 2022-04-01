@@ -1,4 +1,13 @@
-const newsService = require('../services/news')
+const newsService = require('../services/news');
+
+const getAll = async (req, res, next) => {
+  try {
+    const result = await newsService.getAll(req);
+    res.status(200).json({ data: result });
+  } catch (error) {
+    next(error);
+  }
+};
 
 const create = async (req, res, next) => {
   try {
@@ -9,5 +18,6 @@ const create = async (req, res, next) => {
   }
 };
 module.exports = {
+  getAll,
   create
 };
