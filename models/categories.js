@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: DataTypes.STRING,
     image: DataTypes.STRING,
-    deleteAt: DataTypes.DATE
+    deletedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Categories',
