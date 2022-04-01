@@ -11,5 +11,14 @@ const create = async (categories) => {
     return result
 }
 
+const update = async (id, data)=>{
+  const result = await db.Categories.update(data,{where: {id:id}})
+  return result
+}
 
-module.exports = { getAll, create }
+const getById = async(id)=>{
+  const result = await db.Categories.findByPk(id)
+  return result
+}
+
+module.exports = { getAll, create, update , getById }
