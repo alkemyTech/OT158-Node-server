@@ -27,6 +27,11 @@ const updateService = async (id, body) => {
         }
       return member.update(body)
         .then(memberUpdated => {
+          if (member !== memberUpdated)
+            return {
+              state: 0,
+              data: memberUpdated
+            }
           return {
             state: 1,
             data: memberUpdated
