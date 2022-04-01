@@ -1,8 +1,8 @@
 const express = require('express');
-const membersController = require('../controllers/members');
+const { create } = require('../controllers/members');
 const router = express.Router();
+const { creationValidation } = require('../middlewares/members')
 
-/* GET users listing. */
-router.post('/', membersController.create);
+router.post('/', creationValidation, create);
 
 module.exports = router;
