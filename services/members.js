@@ -1,13 +1,18 @@
-const { create, getById } = require('../repositories/members');
+const { getAll, create, getById } = require('../repositories/members');
+
+const getAllService = async () => {
+  const listAll = await getAll();
+  return listAll
+};
 
 const createService = async (newMember) => {
   const memberCreationService = await create(newMember)
     .then(memberCreated => {
       return memberCreated
-    })
+    });
 
   return memberCreationService;
-}
+};
 
 const updateService = async (id, body) => {
   return await getById({
@@ -30,4 +35,4 @@ const updateService = async (id, body) => {
     })
 }
 
-module.exports = { createService, updateService };
+module.exports = { getAllService, createService, updateService };

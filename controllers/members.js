@@ -1,4 +1,15 @@
-const { createService, updateService } = require('../services/members');
+const { getAllService, createService, updateService } = require('../services/members');
+
+const getAll = async (req, res, next) => {
+  try {
+    const result = await getAllService()
+    res.status(200).json({
+      data: result
+    })
+  } catch (err) {
+    next(err)
+  }
+};
 
 const create = async (req, res, next) => {
   try {
@@ -51,4 +62,4 @@ const update = async (req, res, next) => {
   }
 };
 
-module.exports = { create, update };
+module.exports = { create, update, getAll };
