@@ -30,33 +30,14 @@ const create = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     const { id } = req.params;
+
     const body = req.body;
-    const resultService = await updateService(id, body);
 
-    const RESULTS = {
-      '-1': () => {
-        res.status(404).json({
-          msg: 'No member register'
-        })
-      },
-      0: () => {
-        res.status(400).json({
-          msg: 'Member not update'
-        })
-      },
-      1: () => {
-        return res.status(200).json({
-          msg: 'Successful member update',
-          data: resultService.data
-        })
-      }
-    };
+    const result = await updateService(id, body);
 
-    const result = RESULTS[resultService.state]
-      ? RESULTS[resultService.state]()
-      : res.status(500).json({ msg: 'Error' })
-
-    return result
+    return res.status(200).json({
+      data: result
+    })
   } catch (err) {
     next(err);
   }
