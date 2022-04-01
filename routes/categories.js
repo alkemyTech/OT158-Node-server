@@ -4,7 +4,7 @@ const { creationValidation }=require("../middleware/categories")
 const router = express.Router();
 
 /* GET users listing. */
-/* router.get('/',getAll); */
+router.get('/',getAll);
 router.post('/',creationValidation,create);
 router.put("/:id", update)
 
