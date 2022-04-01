@@ -6,7 +6,6 @@ const getAll = async () => {
 
 }
 
-
 const create = async (categories) => {
     const result = await db.Categories.create(categories)
     return result
@@ -14,4 +13,3 @@ const create = async (categories) => {
 
 
 module.exports = { getAll, create }
-
