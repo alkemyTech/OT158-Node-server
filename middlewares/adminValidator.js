@@ -12,18 +12,3 @@ const adminValidator = async (req, res, next) => {
 };
 
 module.exports = { adminValidator };
-
-
-
-// function checkAdminRole(req, res, next) {
-//   const user = req.user;
-//   if (user.role === 'Admin') {
-//     next();
-//   } else {
-//     next(
-//       boom.unauthorized(
-//         'Unauthorized!You cannot do this, Admins have been notified'
-//       )
-//     );
-//   }
-// }
