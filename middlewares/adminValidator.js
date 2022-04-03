@@ -1,7 +1,7 @@
 const adminValidator = async (req, res, next) => {
   const { roleId } = req.data;
   try {
-    if (roleId === '1') {
+    if (roleId === 1) {
       next();
     } else {
       return res
