@@ -1,8 +1,7 @@
-const { roleAdmin } = require('./config/config');
-
 const adminValidator = async (req, res, next) => {
+  const user = req.user;
   try {
-    if (req.user.roleId === process.env.DB_ROLE) {
+    if (user.role === "Admin") {
       next();
     } else {
       return res.status(403).json({ error: "Admin role required" });
