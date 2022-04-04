@@ -1,4 +1,4 @@
-const { Organizations } = require('../models/organizations');
+const { Organizations } = require('../models')
 
 const getOne = async (id) => {
   const result = await Organizations.findOne({
