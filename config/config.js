@@ -8,7 +8,8 @@ module.exports = {
         "host": process.env.DB_HOST,
         "port": process.env.DB_PORT,
         "dialect": "mysql",
-        "secretToken": process.env.SECRET_TOKEN
+        "secretToken": process.env.SECRET_TOKEN,
+        "roleId": process.env.ROLE_ID
     },
     "test": {
         "username": process.env.DB_USER,
@@ -16,7 +17,8 @@ module.exports = {
         "database": process.env.DB_NAME,
         "host": process.env.DB_HOST,
         "dialect": "mysql",
-        "secretToken": process.env.SECRET_TOKEN
+        "secretToken": process.env.SECRET_TOKEN,
+        "roleId": process.env.ROLE_ID
     },
     "production": {
         "username": process.env.DB_USER,
@@ -24,6 +26,7 @@ module.exports = {
         "database": process.env.DB_NAME,
         "host": process.env.DB_HOST,
         "dialect": "mysql",
-        "secretToken": process.env.SECRET_TOKEN
+        "secretToken": process.env.SECRET_TOKEN,
+        "roleId": process.env.ROLE_ID
     }
 }

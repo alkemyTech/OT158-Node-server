@@ -1,16 +1,32 @@
-const adminValidator = async (req, res, next) => {
-  const { roleId } = req.data;
+const { verifyToken } = require('../modules/auth');
+const { roleId } = require('../config/config');
+
+const adminValidator = (req, res, next) => {
+  const token = req.headers['Authorization'];
+
+  if (!token) {
+    return res.status(401).json({
+      auth: false,
+      message: 'No token provided'
+    })
+  }
+
   try {
-    if (roleId === 1) {
-      next();
-    } else {
-      return res
-        .status(403)
-        .json({ error: 'Admin role required' });
+    const decoded = verifyToken(token);
+
+    req.roleID = decoded.roleId
+
+    if (req.roleId !== roleId) {
+      return res.status(403).json({
+        auth: false,
+        message: 'Invalid token'
+
+      })
     }
   } catch (err) {
-    return res.status(500).send({ error: err.message });
+    next(err)
   }
-};
+  next()
+}
 
-module.exports = { adminValidator };
+module.exports = adminValidator;
