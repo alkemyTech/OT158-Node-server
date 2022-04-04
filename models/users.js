@@ -7,25 +7,6 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-<<<<<<< HEAD
-    static associate(models) {
-      Users.belongsTo(models.Roles, {as: 'role'});
-    }
-  };
-  Users.init({
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    email: DataTypes.STRING,
-    image: DataTypes.STRING,
-    password: DataTypes.STRING,
-    roleId: DataTypes.INTEGER,
-    deletedAt: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Users',
-  });
-  return Users;
-=======
 
 		static associate(models) {
 			Users.belongsTo(models.Roles, { as: 'role' });
@@ -65,5 +46,4 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	);
 	return Users;
->>>>>>> dev
 };
