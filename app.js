@@ -11,6 +11,7 @@ const usersRouter = require('./routes/users');
 const slidesRouter = require('./routes/slides');
 const categoriesRouter = require("./routes/categories")
 const contactRouter = require('./routes/contacts');
+const commentRouter = require('./routes/comments');
 const membersRouter = require('./routes/members');
 const authRouter = require('./routes/auth');
 
@@ -34,6 +35,7 @@ app.use('/users', usersRouter);
 app.use('/slides', slidesRouter);
 app.use("/categories", categoriesRouter)
 app.use("/contacts", contactRouter);
+app.use("/comments", commentRouter);
 app.use("/members", membersRouter);
 app.use("/auth", authRouter);
 
