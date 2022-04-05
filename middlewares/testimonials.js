@@ -1,6 +1,6 @@
 const { check, validationResult } = require('express-validator');
 
-const testimonialsValidation = async (req, res, next) => {
+const testimonialsValidator = async (req, res, next) => {
 	await check('name', 'Name is required').exists().notEmpty().run(req);
 	await check('content', 'Content is required').exists().notEmpty().isEmail().run(req);
 
@@ -16,4 +16,4 @@ const testimonialsValidation = async (req, res, next) => {
 	next();
 };
 
-module.exports = { testimonialsValidation };
+module.exports = { testimonialsValidator };
