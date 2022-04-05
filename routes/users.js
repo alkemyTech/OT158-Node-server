@@ -1,9 +1,8 @@
 const express = require('express');
+const usersController = require('../controllers/users');
 const router = express.Router();
-const { update, getAll } = require('../controllers/users');
 
 /* GET users listing. */
-router.get('/', getAll);
-router.patch('/:id', update)
+router.get('/', usersController.getAll);
 
 module.exports = router;
