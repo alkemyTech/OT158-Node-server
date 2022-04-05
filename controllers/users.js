@@ -8,13 +8,13 @@ const usersService = require('../services/users');
 
 const getAll = async (req, res, next) => {
     try {
-        const result = await usersService.getAll(req);
+        const data = await usersService.getAll();
         res.status(200).json({
-            data: result
+            data
         });
     }
-    catch (e) {
-        next(e);
+    catch (error) {
+        next(error);
     }
 };
 

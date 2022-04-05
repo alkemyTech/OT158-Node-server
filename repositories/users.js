@@ -3,7 +3,7 @@ const {
 } = require('../models')
 
 const getAll = async () => {
-  const result = [];
+  const result = await Users.findAll();
   return result;
 }
 

@@ -1,10 +1,8 @@
 const usersRepository = require('../repositories/users');
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
-const res = require('express/lib/response');
 
-
-const getAll = async (req)  => {
+const getAll = async ()  => {
     const result = await usersRepository.getAll();
     return result;
 }
