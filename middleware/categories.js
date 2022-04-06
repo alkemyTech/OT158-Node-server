@@ -5,7 +5,6 @@ const {
 
 module.exports = {
   creationValidation: async (req, res, next) => {
-    console.log(req.user);
     await check('name', 'This field cannot be empty')
       .notEmpty()
       .run(req);
