@@ -8,6 +8,21 @@ const create = async (req, res, next) => {
     next(error);
   }
 };
+
+const remove = async (req, res, next) => {
+  try {
+
+    const { id } = req.params;
+    const result = await newsService.remove(id);
+
+    res.status(200).json({ data: result });
+
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
-  create
+  create,
+  remove
 };
