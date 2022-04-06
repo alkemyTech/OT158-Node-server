@@ -2,8 +2,8 @@ const newsService = require('../services/news');
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await newsService.getAll(req);
-    res.status(200).json({ data: result });
+    const allNews = await newsService.getAll(req);
+    res.status(200).json({ data: allNews });
   } catch (error) {
     next(error);
   }
@@ -11,8 +11,8 @@ const getAll = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const result = await newsService.create(req);
-    res.status(200).json({ data: result });
+    const createdNew = await newsService.create(req);
+    res.status(200).json({ data: createdNew });
   } catch (error) {
     next(error);
   }

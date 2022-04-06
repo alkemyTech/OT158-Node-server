@@ -1,13 +1,11 @@
 const newsRepository = require('../repositories/news');
 
-const getAll = async () => {
-  const result = await newsRepository.getAll();
-  return result;
+const getAll = () => {
+  return newsRepository.getAll();
 };
-const create = async ({ body }) => {
+const create = ({ body }) => {
   body.type = 'news';
-  const result = await newsRepository.create(body);
-  return result;
+  return newsRepository.create(body);
 };
 module.exports = {
   getAll,
