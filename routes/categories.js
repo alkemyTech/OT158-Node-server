@@ -1,6 +1,6 @@
 const express = require('express');
 const { create, getAll, update }= require("../controllers/categories");
-const { creationValidation }=require("../middleware/categories")
+const { creationValidation }=require("../middlewares/categories")
 const router = express.Router();
 
 /* GET users listing. */
