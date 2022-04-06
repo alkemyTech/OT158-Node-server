@@ -5,5 +5,6 @@ const { validData } = require('../middlewares/news');
 const { adminValidator } = require('../middlewares/adminValidator');
 
 router.post('/',adminValidator,validData,newsController.create)
+router.delete('/:id', adminValidator.validData, newsController.remove)
 
 module.exports = router
