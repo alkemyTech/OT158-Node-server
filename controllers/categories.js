@@ -63,4 +63,25 @@ const update = async(req,res,next)=>{
   }
 }
 
-module.exports = { getAll, create, update }
+const getById = async (req, res, next) => {
+    try {
+
+      const id = req.params.id
+      const result = await categoriesService.getById(id);
+      res.status(200).json({
+        meta:{
+          status: 201,
+          url: ''
+        },
+        data: result
+      });
+
+    } catch (error) {
+      res.status(error.status).json({
+        status: error.status,
+        msg: error.message
+      })
+    }
+};
+
+module.exports = { getAll, create, update, getById }
