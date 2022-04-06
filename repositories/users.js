@@ -1,16 +1,13 @@
-const {
-  Users
-} = require('../models')
+const { Users } = require('../models');
 
-const getAll = async () => {
-  const result = await Users.findAll();
-  return result;
-}
+const getAll = () => {
+  return Users.findAll();
+};
 
 const create = async (user) => {
   let result = await Users.create(user);
   return result;
-}
+};
 
 module.exports = {
   getAll,
