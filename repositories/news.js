@@ -5,6 +5,12 @@ const create= async(body)=>{
   return result
 }
 
+const remove = async id => {
+  const result = await News.destroy({ where: { id }});
+  return result
+};
+
 module.exports={
-  create
+  create,
+  remove
 }
