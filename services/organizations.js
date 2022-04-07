@@ -1,9 +1,8 @@
 const organizationRepository = require('../repositories/organizations');
 
-const getDataOrganization = async (id) => {
-  const result = await organizationRepository.getOne(id);
-  return result;
-}
+const getDataOrganization = async () => {
+  return organizationRepository.getAll();
+};
 
 
 module.exports = { getDataOrganization };
