@@ -20,7 +20,7 @@ const getAll = async (req, res, next) => {
 
 
 const create = async (req, res, next) => {
-    
+
     try {
         const result = await usersService.create(req);
         res.status(200).json({
@@ -29,6 +29,19 @@ const create = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-} 
+}
 
-module.exports = { getAll, create };
+const remove = async (req,res,next)=>{
+  const id = req.params.id
+  try{
+    const result= await usersService.remove(id)
+    res.status(200).json({
+      data:result
+    })
+  }
+  catch (err){
+    next(err)
+  }
+}
+
+module.exports = { getAll, create, remove };

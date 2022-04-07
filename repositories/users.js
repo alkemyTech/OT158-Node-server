@@ -3,7 +3,7 @@ const {
 } = require('../models')
 
 const getAll = async () => {
-  const result = [];
+  const result = await Users.findAll();
   return result;
 }
 
@@ -12,7 +12,19 @@ const create = async (user) => {
   return result;
 }
 
+const remove = async (id) =>{
+  let result = await Users.destroy({where:{id:id}})
+  return result
+}
+
+const getById = async(id)=>{
+  const result = await Users.findByPk(id)
+  return result
+}
+
 module.exports = {
   getAll,
-  create
+  getById,
+  create,
+  remove
 };
