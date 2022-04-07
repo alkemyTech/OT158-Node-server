@@ -1,10 +1,10 @@
 const organizationService = require('../services/organizations');
 
-const getPublicData = async (req, res, next) => {
+const organizationData = async (req, res, next) => {
   try {
     const organization = await organizationService.getDataOrganization();
     res.status(200).json({
-      data: organization
+      organization: organization
     })
   } catch (err) {
     next(err)
@@ -12,4 +12,4 @@ const getPublicData = async (req, res, next) => {
 };
 
 
-module.exports = { getPublicData };
+module.exports = { organizationData };

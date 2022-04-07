@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { getPublicData } = require('../controllers/organizations');
+const { organizationData } = require('../controllers/organizations');
 
-router.get('/public', getPublicData);
+router.get('/public', organizationData);
 
 module.exports = router;

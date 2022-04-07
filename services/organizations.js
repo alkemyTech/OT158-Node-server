@@ -1,7 +1,16 @@
 const organizationRepository = require('../repositories/organizations');
 
 const getDataOrganization = async () => {
-  return organizationRepository.getAll();
+  const organization = await organizationRepository.getAll();
+  if (organization) {
+    return organization
+  } else {
+    const error = new Error('Bad Request');
+
+    error.status = 400;
+
+    throw error
+  };
 };
 
 
