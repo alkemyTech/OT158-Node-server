@@ -12,14 +12,12 @@ const create = async (user) => {
   return result;
 }
 
-const update = async (id, data) => {
-  const result = await Users.update(data, { where: { id: id } })
-  return result
+const update = (id, data) => {
+  return Users.update(data, { where: { id } });
 }
 
-const getById = async (id) => {
-  const result = await Users.findByPk(id)
-  return result
+const getById = (id) => {
+  return Users.findByPk(id);
 }
 
 module.exports = {
@@ -28,7 +26,3 @@ module.exports = {
   getById,
   update,
 };
-
-
-
-

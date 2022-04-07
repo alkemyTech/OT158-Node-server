@@ -23,8 +23,7 @@ const create = async (req) => {
 const update = async (id, data) => {
   const users = await usersRepository.getById(id);
   if (users) {
-    const updatedUser =
-      await usersRepository.update(id, data);
+    const updatedUser = await usersRepository.update(id, data);
     if (updatedUser) {
       return updatedUser
     } else {
@@ -40,4 +39,3 @@ const update = async (id, data) => {
 };
 
 module.exports = { getAll, create, update };
-
