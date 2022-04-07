@@ -36,7 +36,7 @@ const remove = async (req,res,next)=>{
   try{
     const result= await usersService.remove(id)
     res.status(200).json({
-      data:result
+      msg:"Deleted successful"
     })
   }
   catch (err){
