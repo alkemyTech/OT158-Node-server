@@ -10,7 +10,7 @@ const statusCodes = {
   Created: 201,
 
   /*
-  For Prefligh
+  For Prefligh 
   */
   Accepted: 202,
 
