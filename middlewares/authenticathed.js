@@ -1,12 +1,9 @@
-const {
-  verifyToken,
-  createToken
-} = require('../modules/auth');
+const { verifyToken } = require('../modules/auth');
 const usersRepository = require('../repositories/users');
 
 const authenticathed = async (req, res, next) => {
   try {
-    const { authorization } = req.headers;
+    const authorization = req.get('authoriazation');
     const payload = verifyToken(authorization);
     if (!payload) throwError('Invalid token!', 500);
     const user = await usersRepository.getById(payload.id);
