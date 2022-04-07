@@ -1,5 +1,4 @@
 const { verifyToken } = require('../modules/auth');
-const { roleId } = require('../config/config');
 
 const adminValidator = (req, res, next) => {
   const token = req.headers['Authorization'];
@@ -8,25 +7,25 @@ const adminValidator = (req, res, next) => {
     return res.status(401).json({
       auth: false,
       message: 'No token provided'
-    })
+    });
   }
 
   try {
     const decoded = verifyToken(token);
 
-    req.roleID = decoded.roleId
+    req.roleId = decoded.roleId;
 
-    if (req.roleId !== roleId) {
+    if (req.roleId === process.env.ROLE_ADMIN) {
+      return next();
+    } else {
       return res.status(403).json({
         auth: false,
-        message: 'Invalid token'
-
-      })
+        message: 'You need administrator permissions'
+      });
     }
   } catch (err) {
-    next(err)
+    next(err);
   }
-  next()
-}
+};
 
 module.exports = adminValidator;
