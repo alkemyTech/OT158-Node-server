@@ -19,8 +19,8 @@ const update = async (id, data) => {
   if (categories) {
 
     const updatedCategorieState = await categoriesRepository.update(id, data);
-    
-    if (updatedCategorieState[0] === updatedStateApproved) {
+
+    if (updatedCategorieState[0] === UPDATED_STATE_APPROVED) {
       const result = await categoriesRepository.getById(id);
       return result;
     } else {
