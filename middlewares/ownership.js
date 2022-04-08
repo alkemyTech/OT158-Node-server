@@ -1,5 +1,6 @@
 const { verifyToken } = require('../modules/auth');
 const { roleAdmin } = require('../config/config').development;
+const { Unauthorized, Forbidden } = require('../utils/status')
 
 const ownershipValidator = (req, res, next) => {
   const authorization = req.get('authorization');
@@ -8,12 +9,7 @@ const ownershipValidator = (req, res, next) => {
 
   const { id } = req.params;
 
-  if (!authorization) {
-    return res.status(401).json({
-      auth: false,
-      message: 'No token provided'
-    });
-  };
+  if (!authorization) throwError('No token provided', Unauthorized);
 
   try {
     const decoded = verifyToken(token);
@@ -27,15 +23,22 @@ const ownershipValidator = (req, res, next) => {
     };
 
     if (req.userId !== id.toString()) {
-      return res.status(403).json({
-        auth: false,
-        message: 'Invalid token'
-      });
+      throwError('Invalid token!', Forbidden);
     };
+
+    next();
+
   } catch (err) {
     next(err);
   };
-  next();
+};
+
+const throwError = (message, status) => {
+  const error = new Error(message);
+
+  error.status = status;
+
+  throw error;
 };
 
 module.exports = { ownershipValidator };

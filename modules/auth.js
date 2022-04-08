@@ -7,6 +7,7 @@ const createToken = (userInfo) => {
     userId: userInfo.id,
     roleId: userInfo.roleId
   };
+
   const options = {
     expiresIn: '24h'
   };
@@ -16,6 +17,7 @@ const createToken = (userInfo) => {
 
 const verifyToken = (token) => {
   const decodedToken = jwt.verify(token, secretToken);
+
   return decodedToken;
 }
 
