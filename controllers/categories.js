@@ -46,7 +46,7 @@ const update = async(req,res,next)=>{
   try{
     const id = req.params.id
     const body = req.body
-      const result= await categoriesService.update(id, body, res)
+      const result = await categoriesService.update(id, body, res)
       res.status(201).json({
         meta: {
             status: 201,
