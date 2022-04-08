@@ -1,10 +1,11 @@
 const slideRepository = require('../repositories/slides');
+const { NotFound } = require("../utils/status")
 
 const create = async (req)  => {
 
     let imageUrl = req.body.imageUrl;
 
-    /* 
+    /*
         Envio al servidor s3...
     */
 
@@ -15,4 +16,17 @@ const create = async (req)  => {
     return result;
 }
 
-module.exports = { create };
+const getById = async (slideId) => {
+  const slide = await slideRepository.getById(slideId);
+
+  if(slide){
+    return slide;
+  }
+  else{
+    const error = new Error("Slide not founde");
+    error.status = NotFound
+    throw error
+  }
+}
+
+module.exports = { create, getById };

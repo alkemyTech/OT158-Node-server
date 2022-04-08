@@ -1,8 +1,13 @@
-const { Slides } = require('../models')
+const { Slides } = require ('../models')
 
 const create = async (slide) => {
     let result = await Slides.create(slide);
     return result;
 }
 
-module.exports = { create };
+const getById = async (slideId) => {
+  let result = await Slides.findByPk(slideId)
+  return result
+}
+
+module.exports = { create, getById };

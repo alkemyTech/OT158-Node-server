@@ -1,4 +1,5 @@
 const service = require('../services/slides');
+const { OK } = require('../utils/status');
 
 module.exports = {
 
@@ -13,4 +14,17 @@ module.exports = {
         }
     },
 
-}
+    getById: async (req, res, next) => {
+      let id = req.params.id;
+      try{
+        let data = await service.getById(id);
+        res.status(OK).json({
+          data
+        });
+      }
+      catch (error){
+        next(error);
+      }
+    }
+
+};
