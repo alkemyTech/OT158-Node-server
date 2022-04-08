@@ -16,11 +16,12 @@ module.exports = (sequelize, DataTypes) => {
   Activities.init({
     name: DataTypes.STRING,
     content: DataTypes.STRING,
-    image: DataTypes.STRING
+    image: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Activities',
     paranoid: true,
+    timestamps: true,
   });
   return Activities;
 };
