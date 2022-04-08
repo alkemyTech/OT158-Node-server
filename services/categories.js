@@ -1,5 +1,5 @@
-const categoriesRepository = require('../repositories/categories');
-const updatedStateApproved=1
+const categoriesRepository = require ('../repositories/categories');
+const UPDATED_STATE_APPROVED = 1
 
 const getAll = async () => {
   const allCategories = await categoriesRepository.getAll();
@@ -17,8 +17,9 @@ const create = async (req) => {
 const update = async (id, data) => {
   const categories = await categoriesRepository.getById(id);
   if (categories) {
-    const updatedCategorieState =
-      await categoriesRepository.update(id, data);
+
+    const updatedCategorieState = await categoriesRepository.update(id, data);
+    
     if (updatedCategorieState[0] === updatedStateApproved) {
       const result = await categoriesRepository.getById(id);
       return result;
