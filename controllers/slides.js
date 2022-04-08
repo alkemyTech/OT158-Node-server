@@ -14,6 +14,20 @@ const create = async (req, res, next) => {
 
 };
 
+const getAll = async (req, res, next) => {
+
+  try {
+    let data = await service.getAll(req);
+    res.status(200).json({
+      data,
+    });
+  } catch (error) {
+    next(error);
+  }
+
+};
+
 module.exports = {
   create,
+  getAll,
 }
