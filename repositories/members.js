@@ -11,7 +11,7 @@ const create = async newMember => {
 };
 
 const getById = async (member) => {
-  const obtaining = await Members.findOne(member)
+  const obtaining = await Members.findByPk(member)
   return obtaining
 };
 
@@ -20,4 +20,8 @@ const update = async (dataUpdate, updateMember) => {
   return updated
 };
 
-module.exports = { getAll, create, getById, update };
+const remove = async (memberId) => {
+  return await Members.destroy({ where : { id : memberId }})
+}
+
+module.exports = { getAll, create, getById, update, remove };
