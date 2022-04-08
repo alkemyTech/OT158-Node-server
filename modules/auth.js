@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { secretToken } =
-  require('/../config/config').development;
+const { secretToken } = require('/../config/config').development;
 
 const createToken = (userInfo) => {
   const payload = {
@@ -15,12 +14,7 @@ const createToken = (userInfo) => {
 };
 
 const verifyToken = (token) => {
-  try {
-    const decodedToken = jwt.verify(token, secretToken);
-    return decodedToken;
-  } catch (error) {
-    return;
-  }
+  return jwt.verify(token, secretToken);
 };
 
 module.exports = { createToken, verifyToken };
