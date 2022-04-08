@@ -1,4 +1,6 @@
 const categoriesRepository = require ('../repositories/categories');
+const { BadRequest, NotFound } = require ("../utils/status")
+
 const UPDATED_STATE_APPROVED = 1
 
 const getAll = async () => {
@@ -25,12 +27,12 @@ const update = async (id, data) => {
       return result;
     } else {
       const error = new Error('Categories not updated');
-    error.status = 400;
+    error.status = BadRequest;
     throw error;
     }
   } else {
     const error = new Error('Categories not found');
-    error.status = 404;
+    error.status = NotFound;
     throw error;
   }
 };
