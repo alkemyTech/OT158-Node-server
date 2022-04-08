@@ -3,8 +3,7 @@ const {
 } = require('../models')
 
 const getAll = async () => {
-  const result = await Users.findAll();
-  return result;
+  return await Users.findAll();
 }
 
 const create = async (user) => {
@@ -12,9 +11,8 @@ const create = async (user) => {
   return result;
 }
 
-const remove = async (id) =>{
-  let result = await Users.destroy({where:{id:id}})
-  return result
+const remove = async (UserId) =>{
+  return await Users.destroy({ where:{ id : UserId } })
 }
 
 const getById = async(id)=>{

@@ -20,9 +20,11 @@ const create = async (req) => {
 
 const remove = async (id)=>{
   const user = await usersRepository.getById(id)
+  
   if(user){
-    let result = await usersRepository.remove(id)
-    return result
+
+    return await usersRepository.remove(id)
+
   }
   else{
     const error = new Error('User not found');
