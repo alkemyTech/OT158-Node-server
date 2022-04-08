@@ -1,9 +1,10 @@
 const newsService = require('../services/news');
+const { Ok, Created } = require('../utils/status');
 
 const getAll = async (req, res, next) => {
   try {
     const allNews = await newsService.getAll(req);
-    res.status(200).json({ data: allNews });
+    res.status(Ok).json({ data: allNews });
   } catch (error) {
     next(error);
   }
@@ -12,7 +13,7 @@ const getAll = async (req, res, next) => {
 const create = async (req, res, next) => {
   try {
     const createdNew = await newsService.create(req);
-    res.status(200).json({ data: createdNew });
+    res.status(Created).json({ data: createdNew });
   } catch (error) {
     next(error);
   }
