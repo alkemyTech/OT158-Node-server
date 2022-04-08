@@ -1,4 +1,5 @@
 const categoriesService = require('../services/categories');
+const { OK, BadRequest, Created } = require ("../utils/status")
 
 const getAll = async (req, res, next) => {
     try {
@@ -7,7 +8,7 @@ const getAll = async (req, res, next) => {
         const result = await categoriesService.getAll();
         res.status(200).json({
             meta: {
-                status: 200,
+                status: OK,
                 total: result.length,
                 url: ''
             },
@@ -15,8 +16,8 @@ const getAll = async (req, res, next) => {
         });
     }
     catch (error) {
-        return res.status(400).json({
-            status: 400,
+        return res.status(BadRequest).json({
+            status: BadRequest,
             message: error
         })
     }
@@ -26,17 +27,17 @@ const getAll = async (req, res, next) => {
 const create = async (req, res, next) => {
     try {
         const result = await categoriesService.create(req.body)
-        res.status(201).json({
+        res.status(Created).json({
             meta: {
-                status: 201,
+                status: Created,
                 url: ''
             },
             data: result
         });
     }
     catch (error) {
-        return res.status(400).json({
-            status: 400,
+        return res.status(BadRequest).json({
+            status: BadRequest,
             message: error
         })
     }
@@ -47,9 +48,9 @@ const update = async(req,res,next)=>{
     const id = req.params.id
     const body = req.body
       const result = await categoriesService.update(id, body, res)
-      res.status(201).json({
+      res.status(Created).json({
         meta: {
-            status: 201,
+            status: Created,
             url: ''
         },
         data: result
