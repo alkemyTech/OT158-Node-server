@@ -1,6 +1,8 @@
-const usersRepository = require('../repositories/users');
-const bcrypt = require('bcryptjs');
-const { validationResult } = require('express-validator');
+const usersRepository = require ('../repositories/users');
+const bcrypt = require ('bcryptjs');
+const { validationResult } = require ('express-validator');
+const { NotFound } = require ("../utils/status")
+
 
 const getAll = async ()  => {
     const result = await usersRepository.getAll();
@@ -20,7 +22,7 @@ const create = async (req) => {
 
 const remove = async (id)=>{
   const user = await usersRepository.getById(id)
-  
+
   if(user){
 
     return await usersRepository.remove(id)
@@ -28,7 +30,7 @@ const remove = async (id)=>{
   }
   else{
     const error = new Error('User not found');
-    error.status = 404;
+    error.status = NotFound;
     throw error;
   }
 
