@@ -23,12 +23,11 @@ const update = async (id, data) => {
     const updatedCategorieState = await categoriesRepository.update(id, data);
 
     if (updatedCategorieState[0] === UPDATED_STATE_APPROVED) {
-      const result = await categoriesRepository.getById(id);
-      return result;
+      return await categoriesRepository.getById(id);
     } else {
       const error = new Error('Categories not updated');
-    error.status = BadRequest;
-    throw error;
+      error.status = BadRequest;
+      throw error;
     }
   } else {
     const error = new Error('Categories not found');

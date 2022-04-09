@@ -6,7 +6,7 @@ const getAll = async (req, res, next) => {
 
 
         const result = await categoriesService.getAll();
-        res.status(200).json({
+        res.status(OK).json({
             meta: {
                 status: OK,
                 total: result.length,
