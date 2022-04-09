@@ -16,9 +16,7 @@ const createToken = (userInfo) => {
 }
 
 const verifyToken = (token) => {
-  const decodedToken = jwt.verify(token, secretToken);
-
-  return decodedToken;
+  return jwt.verify(token, secretToken);
 }
 
 
