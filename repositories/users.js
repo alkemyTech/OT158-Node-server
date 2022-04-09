@@ -5,8 +5,7 @@ const getAll = async () => {
 };
 
 const create = async (user) => {
-  let result = await Users.create(user);
-  return result;
+  return await Users.create(user);
 };
 
 const remove = async (userId) => {
