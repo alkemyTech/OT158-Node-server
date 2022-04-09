@@ -1,10 +1,10 @@
 const newsService = require('../services/news');
-const { Ok, Created } = require('../utils/status');
+const { OK, Created } = require('../utils/status');
 
 const getAll = async (req, res, next) => {
   try {
     const allNews = await newsService.getAll(req);
-    res.status(Ok).json({ data: allNews });
+    res.status(OK).json({ data: allNews });
   } catch (error) {
     next(error);
   }
