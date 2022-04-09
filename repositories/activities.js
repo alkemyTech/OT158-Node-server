@@ -1,5 +1,5 @@
 const { Activities } = require('../models');
 
-const getByIdActivity = async (id) => await Activities.findOne(id);
+const getActivityById = async (id) => await Activities.findOne(id);
 
-module.exports = { getByIdActivity };
+module.exports = { getActivityById };

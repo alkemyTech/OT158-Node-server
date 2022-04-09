@@ -1,9 +1,9 @@
-const { getByIdActivity } = require('../repositories/activities');
+const { getActivityById } = require('../repositories/activities');
 const { throwError } = require('../utils/errorHandler');
 const { Forbidden, NotFound } = require('../utils/status');
 
 const updateActivity = async (id, body) => {
-  const activity = await getByIdActivity({ where: { id: id } });
+  const activity = await getActivityById({ where: { id } });
 
   if (activity) {
     const updateStatus = await activity.update(body);
