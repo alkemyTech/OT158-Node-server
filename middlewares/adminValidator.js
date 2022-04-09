@@ -1,10 +1,11 @@
 const { verifyToken } = require('../modules/auth');
+const { Unauthorized, Forbidden  } = require('../utils/status');
 
 const adminValidator = (req, res, next) => {
   const token = req.headers['Authorization'];
 
   if (!token) {
-    return res.status(401).json({
+    return res.status(Unauthorized).json({
       auth: false,
       message: 'No token provided'
     });
@@ -18,7 +19,7 @@ const adminValidator = (req, res, next) => {
     if (req.roleId === process.env.ROLE_ADMIN) {
       return next();
     } else {
-      return res.status(403).json({
+      return res.status(Forbidden).json({
         auth: false,
         message: 'You need administrator permissions'
       });
