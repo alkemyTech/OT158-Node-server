@@ -8,11 +8,11 @@ const updateActivity = async (id, body) => {
   if (activity) {
     const updateStatus = await activity.update(body);
 
-    if (updateStatus) {
-      return updateStatus
-    } else {
+    if (!updateStatus) {
       throwError('Bad Request', Forbidden);
-    };
+    }
+
+    return updateStatus;
 
   } else {
     throwError('Record not found', NotFound);
