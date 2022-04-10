@@ -19,14 +19,28 @@ const getAll = async (req, res, next) => {
 };
 
 const create = async (req, res, next) => {
-  try {
-    const result = await usersService.create(req);
-    res.status(Created).json({
-      data: result
-    });
-  } catch (error) {
-    next(error);
-  }
-};
 
-module.exports = { getAll, create };
+    try {
+        const result = await usersService.create(req);
+        res.status(Created).json({
+            data: result,
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+const removeUser = async (req,res,next)=>{
+  const id = req.params.id
+  try {
+    const result = await usersService.remove(id)
+    res.status(OK).json({
+      msg:"Deleted successful"
+    })
+  }
+  catch (err){
+    next(err)
+  }
+}
+
+module.exports = { getAll, create, removeUser };
