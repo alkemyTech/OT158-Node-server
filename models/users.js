@@ -8,42 +8,42 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
 
-    static associate(models) {
-      Users.belongsTo(models.Roles, { as: 'role' });
-    }
-  }
-  Users.init(
-    {
-      firstName: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      lastName: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      photo: {
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      roleId: DataTypes.INTEGER,
-      deletedAt: DataTypes.DATE
-    },
-    {
-      sequelize,
-      modelName: 'Users',
-      timestamps: true,
-      paranoid: true
-    }
-  );
-  return Users;
+		static associate(models) {
+			Users.belongsTo(models.Roles, { as: 'role' });
+		}
+	}
+	Users.init(
+		{
+			firstName: {
+				type: DataTypes.STRING,
+				allowNull: false
+			},
+			lastName: {
+				type: DataTypes.STRING,
+				allowNull: false
+			},
+			email: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				unique: true
+			},
+			password: {
+				type: DataTypes.STRING,
+				allowNull: false
+			},
+			image: {
+				type: DataTypes.STRING,
+				allowNull: true
+			},
+			roleId: DataTypes.INTEGER,
+			deletedAt: DataTypes.DATE
+		},
+		{
+			sequelize,
+			modelName: 'Users',
+			timestamps: true,
+			paranoid: true
+		}
+	);
+	return Users;
 };

@@ -14,6 +14,8 @@ const contactRouter = require('./routes/contacts');
 const membersRouter = require('./routes/members');
 const newsRouter = require('./routes/news');
 const authRouter = require('./routes/auth');
+const backofficeRouter = require('./routes/backoffice');
+
 const app = express();
 app.use(cors());
 
@@ -32,11 +34,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/slides', slidesRouter);
-app.use('/categories', categoriesRouter);
-app.use('/contacts', contactRouter);
-app.use('/members', membersRouter);
-app.use('/auth', authRouter);
-app.use('/news', newsRouter);
+app.use("/categories", categoriesRouter)
+app.use("/contacts", contactRouter);
+app.use("/members", membersRouter);
+app.use("/news", newsRouter);
+app.use("/auth", authRouter);
+app.use('/backoffice', backofficeRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
