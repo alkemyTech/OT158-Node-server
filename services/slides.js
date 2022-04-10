@@ -19,13 +19,13 @@ const create = async (req)  => {
 const getById = async (slideId) => {
   const slide = await slideRepository.getById(slideId);
 
-  if(slide){
-    return slide;
-  }
-  else{
+  if(!slide){
     const error = new Error("Slide not founde");
     error.status = NotFound
     throw error
+  }
+  else{
+    return slide;
   }
 }
 
