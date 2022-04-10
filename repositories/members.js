@@ -11,8 +11,7 @@ const create = async newMember => {
 };
 
 const getById = async (member) => {
-  const obtaining = await Members.findByPk(member)
-  return obtaining
+  return await Members.findByPk(member)
 };
 
 const update = async (dataUpdate, updateMember) => {

@@ -3,7 +3,6 @@ const { NotFound, BadRequest } = require("../utils/status")
 
 const getAllService = async () => {
   const listAll = await getAll();
-
   return listAll
 };
 
@@ -14,9 +13,7 @@ const createService = async (newMember) => {
     return memberCreationService;
   } else {
     const error = new Error('Record not found');
-
     error.status = NotFound;
-
     throw error
   }
 
@@ -32,32 +29,26 @@ const updateService = async (id, body) => {
       return memberUpdated
     } else {
       const error = new Error('Bad Request');
-
       error.status = BadRequest;
-
       throw error
     }
   } else {
     const error = new Error('Record not found');
-
     error.status = NotFound;
-
     throw error
   }
 }
 
 const removeService = async (id)=>{
-  const user = await getById(id)
+  const user = await getById(id);
 
-  if(user){
-
-    return await remove(id)
-
-  }
-  else{
+  if(!user){
     const error = new Error('Member not found');
     error.status = NotFound;
     throw error;
+  }
+  else{
+    return await remove(id);
   }
 
 }
