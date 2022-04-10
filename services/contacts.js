@@ -1,8 +1,13 @@
-const contactsRepository = require("../repositories/contacts");
+const contactsRepository = require('../repositories/contacts');
 
-const create = async (newContact) => {
-  const result = await contactsRepository.create(newContact);
-  return result;
-};
+const create = (newContact) => {
+  return contactsRepository.create(newContact);
+}
 
-module.exports = { create };
+
+const getAll = () => {
+  return contactsRepository.getAll();
+}
+
+
+module.exports = { create, getAll };

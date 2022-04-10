@@ -1,5 +1,5 @@
 const categoriesRepository = require('../repositories/categories');
-const { throwError } = require('../utils/errorHandler')
+const { throwError } = require('../utils/errorHandler');
 const { BadRequest, NotFound } = require('../utils/status');
 
 const getAll = async () => {
