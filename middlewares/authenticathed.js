@@ -1,6 +1,7 @@
 const { verifyToken } = require('../modules/auth');
 const usersRepository = require('../repositories/users');
 const { Forbidden } = require('../utils/status')
+const { throwError } = require('../utils/errorHandler')
 
 const authenticathed = async (req, res, next) => {
   try {
@@ -8,9 +9,9 @@ const authenticathed = async (req, res, next) => {
     const payload = verifyToken(authorization);
 
     const user = await usersRepository.getById(payload.id);
-    if (!user || user.roleId !== payload.roleId){
+
+    if (!user || user.roleId !== payload.roleId)
       throwError('User non existent!', Forbidden);
-    }
 
     populateUserData(payload, req);
 
@@ -25,10 +26,5 @@ const populateUserData = (user, target) => {
   return target;
 };
 
-const throwError = (message, status) => {
-  const error = new Error(message);
-  error.status = status;
-  throw error;
-};
 
 module.exports = { authenticathed };
