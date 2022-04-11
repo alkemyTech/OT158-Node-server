@@ -5,14 +5,12 @@ const getDataOrganization = async () => {
   const organization = await organizationRepository.getOne();
 
   if (!organization) {
-
     const error = new Error('Organization not found');
     error.status = NotFound;
     throw error;
-
-  } else {
-    return await organization;
   }
+
+  return organization;
 };
 
 module.exports = { getDataOrganization };
