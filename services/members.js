@@ -47,10 +47,9 @@ const removeService = async (id)=>{
     error.status = NotFound;
     throw error;
   }
-  else{
-    return await remove(id);
-  }
 
+  return await remove(id);
+  
 }
 
 module.exports = { getAllService, createService, updateService, removeService };
