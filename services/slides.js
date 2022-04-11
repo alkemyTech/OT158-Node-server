@@ -17,7 +17,7 @@ const create = async (req) => {
   return result;
 }
 
-const getAll = async (req) => {
+const getAll = async (req) => { //creo que es innecesario  pasar req por parametro
   const result = await slideRepository.getAll();
   return result;
 }
