@@ -9,17 +9,17 @@ const createToken = (userInfo) => {
     }
     const options = {
         expiresIn:'24h'
-    } 
- 
+    }
+
     return jwt.sign(payload, secretToken, options)
 }
 
 const verifyToken = (token) => {
-    const decodedToken = jwt.verify(token, secretToken),
+    const decodedToken = jwt.verify(token, secretToken)
     return decodedToken
 }
 
 
 module.exports = { createToken, verifyToken }
-  
+
 
