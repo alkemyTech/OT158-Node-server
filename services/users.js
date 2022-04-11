@@ -3,10 +3,11 @@ const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const { NotFound, BadRequest } = require('../utils/status');
 
-const getAll = async () => {
-  const result = await usersRepository.getAll();
-  return result;
-};
+
+const getAll = async ()  => {
+    return await usersRepository.getAll();
+
+}
 
 const create = async (req) => {
   validationResult(req).throw();
