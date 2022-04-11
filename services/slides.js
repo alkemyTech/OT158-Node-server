@@ -24,9 +24,8 @@ const getById = async (slideId) => {
     error.status = NotFound
     throw error
   }
-  else{
-    return slide;
-  }
+  
+  return slide;
 }
 
 module.exports = { create, getById };
