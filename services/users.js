@@ -31,7 +31,7 @@ const update = async (id, data) => {
       throw error;
     }
 
-    return  await updatedUser;
+    return updatedUser;
 
     } else {
       const error = new Error('User not found');
