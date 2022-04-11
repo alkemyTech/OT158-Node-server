@@ -52,9 +52,9 @@ const update = async (req, res, next) => {
       body,
       res
     );
-    res.status(201).json({
+    res.status(Created).json({
       meta: {
-        status: 201,
+        status: Created,
         url: ''
       },
       data: result
