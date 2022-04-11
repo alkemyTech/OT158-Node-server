@@ -32,6 +32,7 @@ const update = async (id, data) => {
     throwError('Category not found', NotFound);
   }
 };
+
 const removeCategory = async (id) => {
   const category = await categoriesRepository.getById(id);
 

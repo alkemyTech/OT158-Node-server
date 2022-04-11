@@ -1,5 +1,5 @@
 const categoriesService = require('../services/categories');
-const { NoContent, OK, Created } = require('../utils/status')
+const { NoContent, OK, Created } = require('../utils/status');
 
 const getAll = async (req, res, next) => {
   try {
@@ -15,10 +15,9 @@ const getAll = async (req, res, next) => {
     });
   }
   catch (error) {
-    next(error)
+    next(error);
   }
-}
-
+};
 
 const create = async (req, res, next) => {
   try {
@@ -33,9 +32,9 @@ const create = async (req, res, next) => {
     });
   }
   catch (error) {
-    next(error)
+    next(error);
   }
-}
+};
 
 const update = async (req, res, next) => {
   try {
@@ -54,9 +53,9 @@ const update = async (req, res, next) => {
     });
   }
   catch (error) {
-    next(error)
+    next(error);
   }
-}
+};
 
 const remove = async (req, res, next) => {
   try {
@@ -66,9 +65,9 @@ const remove = async (req, res, next) => {
 
     res.status(NoContent).json({
       data: null
-    })
+    });
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
