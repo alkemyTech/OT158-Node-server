@@ -10,7 +10,7 @@ const storage = new S3({
     accessKeyId,
     secretAccessKey,
     bucketName
-});
+  });
 
 
 
