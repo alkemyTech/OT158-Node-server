@@ -5,26 +5,24 @@
 //remove
 
 const usersService = require('../services/users');
-const { OK } = require ("../utils/status")
+const {OK, Created} = require('../utils/status');
 
 const getAll = async (req, res, next) => {
-    try {
-        const result = await usersService.getAll(req);
-        res.status(OK).json({
-            data: result
-        });
-    }
-    catch (e) {
-        next(e);
-    }
+  try {
+    const usersList = await usersService.getAll();
+    res.status(OK).json({
+      data: usersList
+    });
+  } catch (error) {
+    next(error);
+  }
 };
-
 
 const create = async (req, res, next) => {
 
     try {
         const result = await usersService.create(req);
-        res.status(OK).json({
+        res.status(Created).json({
             data: result,
         });
     } catch (error) {
