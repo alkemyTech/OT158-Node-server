@@ -5,20 +5,19 @@ const { NotFound } = require ("../utils/status")
 
 
 const getAll = async ()  => {
-    const result = await usersRepository.getAll();
-    return result;
+    return await usersRepository.getAll();
+    
 }
 
 const create = async (req) => {
+  validationResult(req).throw();
 
-    validationResult(req).throw();
+  let user = { ...req.body };
+  user.password = await bcrypt.hash(req.body.password, 12);
 
-    let user = { ...req.body };
-    user.password = await bcrypt.hash(req.body.password, 12);
-
-    const result = await usersRepository.create(user);
-    return result;
-}
+  const result = await usersRepository.create(user);
+  return result;
+};
 
 const remove = async (id)=>{
   const user = await usersRepository.getById(id)

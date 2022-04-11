@@ -14,6 +14,7 @@ const contactRouter = require('./routes/contacts');
 const membersRouter = require('./routes/members');
 const authRouter = require('./routes/auth');
 
+const activitiesRouter = require('./routes/activities');
 const backofficeRouter = require('./routes/backoffice');
 
 const app = express();
@@ -38,6 +39,7 @@ app.use("/categories", categoriesRouter)
 app.use("/contacts", contactRouter);
 app.use("/members", membersRouter);
 app.use("/auth", authRouter);
+app.use("/actvities", activitiesRouter);
 app.use('/backoffice', backofficeRouter);
 
 // catch 404 and forward to error handler
