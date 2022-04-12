@@ -26,4 +26,16 @@ const remove = async (id) => {
   return await slideRepository.remove(id);
 };
 
-module.exports = { create, remove };
+const getById = async (slideId) => {
+  const slide = await slideRepository.getById(slideId);
+
+  if (!slide) {
+    const error = new Error('Slide not founde');
+    error.status = NotFound;
+    throw error;
+  }
+
+  return slide;
+};
+
+module.exports = { create, getById, remove };

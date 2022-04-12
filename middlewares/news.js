@@ -1,5 +1,6 @@
 const { validationResult, body } = require('express-validator');
 const {getById} = require('../repositories/categories')
+const {BadRequest} = require('../utils/status')
 
 const validate = validations => {
   return async (req, res, next) => {
@@ -10,7 +11,7 @@ const validate = validations => {
       return next();
     }
 
-    res.status(400).json({ errors: errors.array() });
+    res.status(BadRequest).json({ errors: errors.array() });
   };
 };
 

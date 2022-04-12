@@ -1,9 +1,7 @@
-const { Slides } = require('../models')
+const { Slides } = require('../models');
 
 const create = async (slide) => {
-    let result = await Slides.create(slide);
-    return result;
-}
+  return await Slides.create(slide);
 
 const remove = async (userId) => {
   return await Slides.destroy({ where: { id: userId } });
