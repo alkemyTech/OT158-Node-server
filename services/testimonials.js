@@ -1,8 +1,7 @@
 const testimonialsRepo = require('../repositories/testimonials');
 
 const create = async (body) => {
-	const data = await testimonialsRepo.create(body);
-	return data;
+	return await testimonialsRepo.create(body);
 };
 
 module.exports = { create };
