@@ -1,4 +1,3 @@
-
 const { updateActivity } = require('../services/activities');
 const { OK } = require('../utils/status')
 
