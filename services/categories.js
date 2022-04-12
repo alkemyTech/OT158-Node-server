@@ -17,24 +17,6 @@ const create = async (req) => {
 };
 
 const update = async (id, data) => {
-<<<<<<< HEAD
-	const categories = await categoriesRepository.getById(id);
-	if (categories) {
-		const updatedCategorie = await categoriesRepository.update(id, data);
-		if (updatedCategorie === 1) {
-			const result = await categoriesRepository.getById(id);
-			return result;
-		} else {
-			const error = new Error('Categories not updated');
-			error.status = 400;
-			throw error;
-		}
-	} else {
-		const error = new Error('Categories not found');
-		error.status = 404;
-		throw error;
-	}
-=======
   const categories = await categoriesRepository.getById(id);
   if (categories) {
 
@@ -52,7 +34,6 @@ const update = async (id, data) => {
     error.status = NotFound;
     throw error;
   }
->>>>>>> dev
 };
 
 const getById = async (id) => {
