@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-const db = require('../models');
-=======
 const db = require ("../models")
->>>>>>> dev
 
 const getAll = async () => {
 	const result = await db.Categories.findAll();
@@ -20,8 +16,7 @@ const update = async (id, data) => {
 };
 
 const getById = async (id) => {
-	const result = await db.Categories.findByPk(id);
-	return result;
+	return await db.Categories.findByPk(id);
 };
 
 module.exports = { getAll, create, update, getById };
