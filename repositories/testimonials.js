@@ -1,8 +1,7 @@
 const { Testimonials } = require('../models');
 
 const create = async (body) => {
-	const data = await Testimonials.create(body);
-	return data;
+	return await Testimonials.create(body);
 };
 
 module.exports = { create };
