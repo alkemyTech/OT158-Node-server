@@ -66,7 +66,6 @@ const update = async(req,res,next)=>{
 
 const getById = async (req, res, next) => {
     try {
-
       const id = req.params.id
       const result = await categoriesService.getById(id);
       res.status(OK).json({
@@ -76,7 +75,6 @@ const getById = async (req, res, next) => {
         },
         data: result
       });
-
     } catch (error) {
       res.status(error.status).json({
         status: error.status,
