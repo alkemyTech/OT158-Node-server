@@ -12,7 +12,7 @@ const slidesRouter = require('./routes/slides');
 const categoriesRouter = require('./routes/categories');
 const contactRouter = require('./routes/contacts');
 const membersRouter = require('./routes/members');
-const testimonialsRoutes = require('./routes/testimonials');
+const testimonialsRouter = require('./routes/testimonials');
 const authRouter = require('./routes/auth');
 const activitiesRouter = require('./routes/activities');
 const backofficeRouter = require('./routes/backoffice');
@@ -43,7 +43,7 @@ app.use("/members", membersRouter);
 app.use("/auth", authRouter);
 app.use("/actvities", activitiesRouter);
 app.use('/backoffice', backofficeRouter);
-app.use('/testimonials', testimonialsRoutes);
+app.use('/testimonials', testimonialsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
