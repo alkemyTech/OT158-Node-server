@@ -10,8 +10,7 @@ const remove = async id => {
   const newToRemove = await newsRepository.getById(id);
   if (!newToRemove) throw new Error('Bad request!');
 
-  const result = await newsRepository.remove(id);
-  return result
+  return await newsRepository.remove(id);
 };
 
 module.exports={

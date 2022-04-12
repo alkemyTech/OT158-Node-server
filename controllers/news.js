@@ -1,5 +1,5 @@
 const newsService = require('../services/news')
-const { OK } = require('../utils/status')
+const { OK, BadRequest } = require('../utils/status')
 
 const create = async (req, res, next) => {
   try {
@@ -19,7 +19,7 @@ const remove = async (req, res, next) => {
     res.status(OK).json({ data: result });
 
   } catch (error) {
-    next(error);
+    res.status(BadRequest).json(error)
   }
 };
 
