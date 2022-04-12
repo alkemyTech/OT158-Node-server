@@ -3,11 +3,9 @@ const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const { NotFound, BadRequest } = require('../utils/status');
 
-
-const getAll = async ()  => {
-    return await usersRepository.getAll();
-
-}
+const getAll = async () => {
+  return await usersRepository.getAll();
+};
 
 const create = async (req) => {
   validationResult(req).throw();
@@ -32,14 +30,8 @@ const update = async (id, data) => {
     }
 
     return updatedUser;
-
-    } else {
-      const error = new Error('User not found');
-      error.status = NotFound;
-      throw error;
-    }
-  };
-
+  }
+};
 
 const remove = async (id) => {
   const user = await usersRepository.getById(id);
