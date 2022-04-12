@@ -6,8 +6,7 @@ const create= async(body)=>{
 }
 
 const remove = async id => {
-  const result = await News.destroy({ where: { id }});
-  return result
+  return await News.destroy({ where: { id }});
 };
 
 module.exports={
