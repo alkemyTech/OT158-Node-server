@@ -1,6 +1,6 @@
 const express = require('express');
 const usersController = require('../controllers/users');
-const { adminValidator } = require('../middlewares/adminValidator');
+const adminValidator = require('../middlewares/adminValidator');
 const router = express.Router();
 
 /* GET users listing. */
