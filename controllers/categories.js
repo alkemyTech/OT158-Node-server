@@ -6,7 +6,6 @@ const getAll = async (req, res, next) => {
 
 
         const result = await categoriesService.getAll();
-
         res.status(OK).json({
             meta: {
                 status: OK,
