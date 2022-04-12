@@ -11,7 +11,6 @@ const {
 
 /* routes */
 router.post('/register', registerValidator, create);
-
 router.post('/login', loginValidation);
 
 module.exports = router;
