@@ -1,10 +1,13 @@
 const slideRepository = require('../repositories/slides');
+const {
+  NotFound
+} = require("../utils/status")
 
 const create = async (req) => {
 
   let imageUrl = req.body.imageUrl;
 
-  /* 
+  /*
       Envio al servidor s3...
   */
 
@@ -22,7 +25,20 @@ const getAll = async (req) => { //creo que es innecesario  pasar req por paramet
   return result;
 }
 
+const getById = async (slideId) => {
+  const slide = await slideRepository.getById(slideId);
+
+  if (!slide) {
+    const error = new Error("Slide not founde");
+    error.status = NotFound
+    throw error
+  }
+
+  return slide;
+}
+
 module.exports = {
   create,
-  getAll
+  getAll,
+  getById,
 };

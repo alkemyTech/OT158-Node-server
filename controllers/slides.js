@@ -18,6 +18,20 @@ const create = async (req, res, next) => {
 
 };
 
+const getById = async (req, res, next) => {
+  const {
+    id
+  } = req.params;
+  try {
+    const data = await service.getById(id);
+    res.status(OK).json({
+      data
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getAll = async (req, res, next) => {
 
   try {
@@ -33,5 +47,6 @@ const getAll = async (req, res, next) => {
 
 module.exports = {
   create,
+  getById,
   getAll,
 }

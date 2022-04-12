@@ -7,6 +7,10 @@ const create = async (slide) => {
   return result;
 }
 
+const getById = async (slideId) => {
+  return await Slides.findByPk(slideId);
+};
+
 const getAll = async () => {
   let result = await Slides.findAll({
     attributes: [
@@ -18,5 +22,6 @@ const getAll = async () => {
 
 module.exports = {
   create,
-  getAll
+  getAll,
+  getById,
 };
