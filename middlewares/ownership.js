@@ -1,11 +1,12 @@
 const { verifyToken } = require('../modules/auth');
 const { roleAdmin } = require('../config/config').development;
 const { Unauthorized, Forbidden } = require('../utils/status')
+const { throwError } = require('../utils/errorHandler')
 
 const ownershipValidator = (req, res, next) => {
   const authorization = req.get('authorization');
 
-  const token = authorization?.substring(7);
+  const token = tokenExtraction(authorization);
 
   const { id } = req.params;
 
@@ -33,12 +34,8 @@ const ownershipValidator = (req, res, next) => {
   };
 };
 
-const throwError = (message, status) => {
-  const error = new Error(message);
-
-  error.status = status;
-
-  throw error;
+const tokenExtraction = (auth) => {
+  return auth?.substring(7)
 };
 
 module.exports = { ownershipValidator };
