@@ -68,6 +68,7 @@ const getById = async (req, res, next) => {
     try {
       const id = req.params.id
       const result = await categoriesService.getById(id);
+      
       res.status(OK).json({
         meta:{
           status: OK,
