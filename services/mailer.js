@@ -12,7 +12,7 @@ const createMessage = (to, subject, text, html) => {
   };
 };
 
-const mailer = (message) => {
+const sendMail = (message) => {
   return sgMail.send(message);
 };
-module.exports = { mailer, createMessage };
+module.exports = { sendMail, createMessage };
