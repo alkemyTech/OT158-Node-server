@@ -1,10 +1,13 @@
-const {News} = require('../models')
+const { News } = require('../models');
 
-const create= async(body)=>{
-  const result = News.create(body);
-  return result
-}
+const getAll = () => {
+  return News.findAll();
+};
+const create = (body) => {
+  return News.create(body);
+};
 
-module.exports={
+module.exports = {
+  getAll,
   create
-}
+};
