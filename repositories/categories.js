@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const db = require('../models');
+=======
+const db = require ("../models")
+>>>>>>> dev
 
 const getAll = async () => {
 	const result = await db.Categories.findAll();
