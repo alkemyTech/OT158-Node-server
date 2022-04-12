@@ -1,7 +1,6 @@
 const contactsService = require("../services/contacts");
 const { OK, BadRequest } = require("../utils/status");
 
-
 const create = async (req, res, next) => {
   const newContact = req.body;
   try {
