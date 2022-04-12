@@ -13,7 +13,6 @@ const categoriesRouter = require("./routes/categories")
 const contactRouter = require('./routes/contacts');
 const membersRouter = require('./routes/members');
 const authRouter = require('./routes/auth');
-
 const activitiesRouter = require('./routes/activities');
 const backofficeRouter = require('./routes/backoffice');
 
