@@ -8,7 +8,11 @@ const create = async (slide) => {
 }
 
 const getAll = async () => {
-  let result = await Slides.findAll();
+  let result = await Slides.findAll({
+    attributes: [
+      'order', 'imageUrl',
+    ]
+  });
   return result;
 }
 
