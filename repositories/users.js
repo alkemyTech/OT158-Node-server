@@ -4,7 +4,6 @@ const getAll = async () => {
   return await Users.findAll();
 };
 
-
 const create = async (user) => {
   return await Users.create(user);
 };
