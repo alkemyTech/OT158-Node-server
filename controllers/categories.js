@@ -43,25 +43,28 @@ const create = async (req, res, next) => {
     }
 }
 
-const update = async(req,res,next)=>{
-  try{
-    const id = req.params.id
-    const body = req.body
-      const result = await categoriesService.update(id, body, res)
-      res.status(Created).json({
-        meta: {
-            status: Created,
-            url: ''
-        },
-        data: result
+const update = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const body = req.body;
+    const result = await categoriesService.update(
+      id,
+      body,
+      res
+    );
+    res.status(Created).json({
+      meta: {
+        status: Created,
+        url: ''
+      },
+      data: result
     });
-  }
-  catch (error){
+  } catch (error) {
     res.status(error.status).json({
       status: error.status,
       msg: error.message
-    })
+    });
   }
-}
+};
 
-module.exports = { getAll, create, update }
+module.exports = { getAll, create, update };
