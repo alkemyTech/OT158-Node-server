@@ -7,6 +7,10 @@ const { adminValidator } = require('../middlewares/adminValidator');
 const express = require ('express');
 const { create, getAll, update } = require ("../controllers/categories");
 const { creationValidation } = require ("../middlewares/categories")
+<<<<<<< HEAD
+>>>>>>> dev
+=======
+
 >>>>>>> dev
 const router = express.Router();
 

@@ -3,6 +3,7 @@ const { BadRequest, NotFound } = require ("../utils/status")
 
 const UPDATED_STATE_APPROVED = 1
 
+
 const getAll = async () => {
 	const allCategories = await categoriesRepository.getAll();
 	const result = allCategories.map((categorie) => {
@@ -19,7 +20,6 @@ const create = async (req) => {
 const update = async (id, data) => {
   const categories = await categoriesRepository.getById(id);
   if (categories) {
-
     const updatedCategorieState = await categoriesRepository.update(id, data);
 
     if (updatedCategorieState[0] === UPDATED_STATE_APPROVED) {
