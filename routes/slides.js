@@ -3,6 +3,8 @@ const controller = require('../controllers/slides');
 /* routes */
 router.post('/', controller.create)
 router.delete("/:id", controller.removeSlide)
+router.get('/', controller.getAll);
 router.get("/:id", controller.getById)
+
 
 module.exports = router;
