@@ -16,14 +16,19 @@ const create = async (req) => {
 };
 
 const remove = async (id) => {
-  const user = await slideRepository.getById(id);
+  try{
+    const user = await slideRepository.getById(id);
 
-  if (!user) {
-    const error = new Error('Slide not found');
-    error.status = NotFound;
-    throw error;
+    if (!user) {
+      const error = new Error('Slide not found');
+      error.status = NotFound;
+      throw error;
+    }
+    return await slideRepository.remove(id);
   }
-  return await slideRepository.remove(id);
+  catch(error){
+    throw(error)
+  }
 };
 
 const getById = async (slideId) => {
