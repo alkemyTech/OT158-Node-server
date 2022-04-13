@@ -7,4 +7,5 @@ router.post('/', controller.create);
 router.get("/:id", controller.getById)
 router.get('/', /* isUserAdmin, */ controller.getAll);
 
+
 module.exports = router;
