@@ -21,8 +21,9 @@ const update = async (id, data) => {
   try {
     const user = await usersRepository.getById(id);
 
+
     if (user) {
-      const updatedUser = await usersRepository.update(id,data);
+      const updatedUser = await usersRepository.update(id, data);
 
       if (!updatedUser) {
         const error = new Error('User not updated');
@@ -37,7 +38,7 @@ const update = async (id, data) => {
       throw error;
     }
   } catch (error) {
-    error;
+    throw new Error(error.message);
   }
 };
 
