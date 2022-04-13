@@ -20,16 +20,24 @@ const create = async (req) => {
 const update = async (id, data) => {
   const user = await usersRepository.getById(id);
 
-  if (user) {
-    const updatedUser = await usersRepository.update(id,data);
+  try {
+    if (user) {
+      const updatedUser = await usersRepository.update(id,data);
 
-    if (!updatedUser) {
-      const error = new Error('User not updated');
-      error.status = BadRequest;
+      if (!updatedUser) {
+        const error = new Error('User not updated');
+        error.status = BadRequest;
+        throw error;
+      }
+
+      return updatedUser;
+    } else {
+      const error = new Error('User not found');
+      error.status = NotFound;
       throw error;
     }
-
-    return updatedUser;
+  } catch (error) {
+    error;
   }
 };
 
