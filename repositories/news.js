@@ -7,18 +7,12 @@ const create = (body) => {
   return News.create(body);
 };
 
-<<<<<<< HEAD
 const remove = async id => {
   return await News.destroy({ where: { id }});
 };
 
 module.exports={
+  getAll,
   create,
   remove
 }
-=======
-module.exports = {
-  getAll,
-  create
-};
->>>>>>> dev
