@@ -13,6 +13,7 @@ const categoriesRouter = require('./routes/categories');
 const contactRouter = require('./routes/contacts');
 const membersRouter = require('./routes/members');
 const testimonialsRouter = require('./routes/testimonials');
+const newsRouter = require('./routes/news');
 const authRouter = require('./routes/auth');
 const activitiesRouter = require('./routes/activities');
 const backofficeRouter = require('./routes/backoffice');
@@ -40,6 +41,7 @@ app.use('/slides', slidesRouter);
 app.use("/categories", categoriesRouter)
 app.use("/contacts", contactRouter);
 app.use("/members", membersRouter);
+app.use("/news", newsRouter);
 app.use("/auth", authRouter);
 app.use("/actvities", activitiesRouter);
 app.use('/backoffice', backofficeRouter);
@@ -51,6 +53,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
+<<<<<<< HEAD
 app.use(function(err, req, res, next) {
 	// set locals, only providing error in development
 	res.locals.message = err.message;
@@ -59,6 +62,17 @@ app.use(function(err, req, res, next) {
 	// render the error page
 	res.status(err.status || 500);
 	res.render('error');
+=======
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error =
+    req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+>>>>>>> dev
 });
 
 module.exports = app;
