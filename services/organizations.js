@@ -14,7 +14,7 @@ const getDataOrganization = async () => {
     return organization;
 
   } catch (error) {
-    error;
+    throw new Error(error.message);
   }
 };
 
