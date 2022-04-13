@@ -1,5 +1,6 @@
 const slideRepository = require('../repositories/slides');
-const { NotFound } = require("../utils/status")
+const { NotFound, Forbidden } = require("../utils/status")
+const { throwError } = require('../utils/errorHandler');
 
 const create = async (req)  => {
 
@@ -24,8 +25,25 @@ const getById = async (slideId) => {
     error.status = NotFound
     throw error
   }
-  
+
   return slide;
 }
 
-module.exports = { create, getById };
+const updateSlide = async (id, body) => {
+  const slide = await slideRepository.getById({ where: { slideId : id } });
+
+  if (slide) {
+    const newSlide = await slideRepository.update(body);
+
+    if (!newSlide) {
+      throwError('Bad Request', Forbidden);
+    }
+
+    return newSlide;
+
+  } else {
+    throwError('Record not found', NotFound);
+  };
+}
+
+module.exports = { create, getById, updateSlide };

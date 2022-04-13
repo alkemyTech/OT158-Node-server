@@ -6,7 +6,11 @@ const create = async (slide) => {
 };
 
 const getById = async (slideId) => {
-  return await Slides.findByPk(slideId);
+  return await Slides.findOne(slideId);
 };
 
-module.exports = { create, getById };
+const update = async (id, body) => {
+  return await Slides.update(id, body);
+}
+
+module.exports = { create, getById, update };

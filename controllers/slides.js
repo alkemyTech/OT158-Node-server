@@ -24,4 +24,21 @@ const getById = async (req, res, next) => {
   }
 };
 
-module.exports = { create, getById };
+const update = async (req, res, next) => {
+  try {
+    const body = req.body;
+
+    const { id } = req.params;
+
+    const result = await service.updateSlide(id, body);
+
+    res.status(OK).json({
+      data: result
+    });
+
+  } catch (err) {
+    next(err)
+  }
+}
+
+module.exports = { create, getById, update };
