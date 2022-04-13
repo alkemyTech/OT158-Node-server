@@ -1,5 +1,6 @@
-const newsRepository = require('../repositories/news')
+const newsRepository = require('../repositories/news');
 
+<<<<<<< HEAD
 const create =async({body})=>{
   body.type="news"
   const result = await newsRepository.create(body)
@@ -17,3 +18,16 @@ module.exports={
   create,
   remove
 }
+=======
+const getAll = () => {
+  return newsRepository.getAll();
+};
+const create = ({ body }) => {
+  body.type = 'news';
+  return newsRepository.create(body);
+};
+module.exports = {
+  getAll,
+  create
+};
+>>>>>>> dev
