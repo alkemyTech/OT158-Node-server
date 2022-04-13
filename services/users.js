@@ -18,9 +18,9 @@ const create = async (req) => {
 };
 
 const update = async (id, data) => {
-  const user = await usersRepository.getById(id);
-
   try {
+    const user = await usersRepository.getById(id);
+
     if (user) {
       const updatedUser = await usersRepository.update(id,data);
 
