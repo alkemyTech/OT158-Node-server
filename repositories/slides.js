@@ -9,4 +9,22 @@ const getById = async (slideId) => {
   return await Slides.findByPk(slideId);
 };
 
-module.exports = { create, getById };
+const getAll = async () => {
+  const queryResult = await Slides.findAll({
+    attributes: ['order', 'imageUrl'],
+    // creo que asi se veria mejor la consulta
+    /* include: [{
+      association: 'organization'
+    }],
+    attributes: {
+      exclude: ['organizationId']
+    } */
+  });
+  return queryResult;
+}
+
+module.exports = {
+  create,
+  getById,
+  getAll,
+};
