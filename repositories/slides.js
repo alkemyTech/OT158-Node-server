@@ -10,10 +10,9 @@ const getById = async (slideId) => {
 };
 
 const getAll = async () => {
-  const queryResult = await Slides.findAll({
+  return await Slides.findAll({
     attributes: ['order', 'imageUrl'],
   });
-  return queryResult;
 }
 
 module.exports = {
