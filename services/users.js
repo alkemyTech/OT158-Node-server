@@ -55,7 +55,13 @@ const remove = async (id) => {
 };
 
 const getAuthenticatedUserData = async (req) => {
-  const auth = req.headers.authorization.split(' ')[1];
+  const auth = req.headers.authorization;
+  if (!auth) Promise.reject({
+    ok: false,
+    message: "Token no provided",
+    status: 500,
+  })
+  auth = auth.split(' ')[1] || "";
   const tokenDecoded = verifyToken(auth);
   return await usersRepository.getById(tokenDecoded.userId);
 }
