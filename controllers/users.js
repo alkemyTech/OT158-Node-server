@@ -46,10 +46,25 @@ const update = async (req, res, next) => {
       message: "User updated",
       data: result
     });
-  }
-  catch (err) {
+  } catch (err) {
     next(err);
   }
 }
 
-module.exports = { getAll, create, removeUser, update };
+const getAuthedUser = async (req, res, next) => {
+
+  try {
+    const user = await usersService.getAuthedUser(req);
+    res.status(OK).json(user);
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = {
+  getAll,
+  create,
+  removeUser,
+  update,
+  getAuthedUser
+};
