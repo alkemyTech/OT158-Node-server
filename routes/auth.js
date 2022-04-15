@@ -9,7 +9,6 @@ const registerValidator = require('../validations/registerValidator');
 const {
   loginValidation
 } = require('../middlewares/auth')
-// const { authenticathed } = require('../middlewares/authenticathed');
 
 /* routes */
 router.post('/register', registerValidator, create);
