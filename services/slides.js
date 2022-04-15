@@ -33,8 +33,7 @@ const getById = async (slideId) => {
 }
 
 const getAll = async (req) => {
-  const result = await slideRepository.getAll();
-  return result;
+  return await slideRepository.getAll();
 }
 
 module.exports = {

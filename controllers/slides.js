@@ -27,7 +27,7 @@ const getById = async (req, res, next) => {
 const getAll = async (req, res, next) => {
 
   try {
-    let data = await service.getAll(req);
+    const data = await service.getAll(req);
     return res.status(OK).json(data);
   } catch (error) {
     next(error);
