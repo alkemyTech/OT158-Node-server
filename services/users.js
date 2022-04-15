@@ -54,4 +54,16 @@ const remove = async (id) => {
   }
 };
 
-module.exports = { getAll, create, remove, update };
+const getAuthedUser = async (req) => {
+  const auth = req.headers.authorization.split(' ')[1];
+  const tokenDecoded = verifyToken(auth);
+  return await usersRepository.getById(tokenDecoded.userId);
+}
+
+module.exports = {
+  getAll,
+  create,
+  remove,
+  update,
+  getAuthedUser,
+};
