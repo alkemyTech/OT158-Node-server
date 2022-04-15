@@ -3,6 +3,10 @@
   "prettier.printWidth": 90,
   "editor.formatOnSave": true,
   "[javascript]": {
+<<<<<<< HEAD
     "editor.defaultFormatter": "remimarsal.prettier-now"
+=======
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+>>>>>>> dev
   }
 }
