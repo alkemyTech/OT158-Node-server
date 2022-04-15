@@ -1,9 +1,10 @@
-const { getAllService, createService, updateService } = require('../services/members');
+const { getAllService, createService, updateService, removeService } = require('../services/members');
+const { OK } = require("../utils/status")
 
 const getAll = async (req, res, next) => {
   try {
     const result = await getAllService()
-    res.status(200).json({
+    res.status(OK).json({
       data: result
     })
   } catch (err) {
@@ -17,7 +18,7 @@ const create = async (req, res, next) => {
 
     const memberCreationHandler = await createService(newMember);
 
-    res.status(200).json({
+    res.status(OK).json({
       ok: true,
       success: memberCreationHandler
     });
@@ -35,7 +36,7 @@ const update = async (req, res, next) => {
 
     const result = await updateService(id, body);
 
-    return res.status(200).json({
+    return res.status(OK).json({
       data: result
     })
   } catch (err) {
@@ -43,4 +44,17 @@ const update = async (req, res, next) => {
   }
 };
 
-module.exports = { create, update, getAll };
+const remove = async (req, res ,next) => {
+  try {
+    const { id } = req.params;
+    const result = await removeService(id)
+    return res.status(OK).json({
+      msg: "Deleted succesful"
+    })
+  }
+  catch (error){
+    next(error)
+  }
+}
+
+module.exports = { create, update, getAll, remove };
