@@ -51,10 +51,10 @@ const update = async (req, res, next) => {
   }
 }
 
-const getAuthedUser = async (req, res, next) => {
+const getAuthenticatedUserData = async (req, res, next) => {
 
   try {
-    const user = await usersService.getAuthedUser(req);
+    const user = await usersService.getAuthenticatedUserData(req);
     res.status(OK).json(user);
   } catch (error) {
     next(error);
@@ -66,5 +66,5 @@ module.exports = {
   create,
   removeUser,
   update,
-  getAuthedUser
+  getAuthenticatedUserData
 };

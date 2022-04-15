@@ -54,7 +54,7 @@ const remove = async (id) => {
   }
 };
 
-const getAuthedUser = async (req) => {
+const getAuthenticatedUserData = async (req) => {
   const auth = req.headers.authorization.split(' ')[1];
   const tokenDecoded = verifyToken(auth);
   return await usersRepository.getById(tokenDecoded.userId);
@@ -65,5 +65,5 @@ module.exports = {
   create,
   remove,
   update,
-  getAuthedUser,
+  getAuthenticatedUserData,
 };

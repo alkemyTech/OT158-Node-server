@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {
   create,
-  getAuthedUser,
+  getAuthenticatedUserData,
 } = require('../controllers/users');
 const registerValidator = require('../validations/registerValidator');
 const {
@@ -14,6 +14,6 @@ const {
 /* routes */
 router.post('/register', registerValidator, create);
 router.post('/login', loginValidation);
-router.get('/me', /* authenticathed, */ getAuthedUser);
+router.get('/me', /* authenticathed, */ getAuthenticatedUserData);
 
 module.exports = router;
