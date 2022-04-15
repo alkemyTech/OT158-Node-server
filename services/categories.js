@@ -41,7 +41,7 @@ const getById = async (id) => {
 
 	if (!category) {
 		const error = new Error('Category not found');
-		error.status = 404;
+		error.status = NotFound;
 		throw error;
 	}
 
