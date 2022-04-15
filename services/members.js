@@ -41,14 +41,14 @@ const updateService = async (id, body) => {
 
 const removeService = async (id)=>{
   try{
-  const user = await getById(id);
-  if(!user){
-    const error = new Error('Member not found');
-    error.status = NotFound;
-    throw error;
-  }
+    const user = await getById(id);
+    if(!user){
+      const error = new Error('Member not found');
+      error.status = NotFound;
+      throw error;
+    }
 
-  return await remove(id);
+    return await remove(id);
   }
   catch(error){
     throw error
