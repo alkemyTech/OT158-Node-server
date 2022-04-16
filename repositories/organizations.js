@@ -2,9 +2,7 @@ const { Organizations } = require('../models')
 
 const getOne = () => {
   return Organizations.findOne({
-    attributes: {
-      exclude: ['id', 'email', 'deletedAt', 'createdAt', 'updatedAt', 'welcomeText', 'aboutUsText']
-    }
+    attributes: ['name', 'image', 'phone', 'address', 'facebook', 'linkedin', 'instagram']
   });
 };
 

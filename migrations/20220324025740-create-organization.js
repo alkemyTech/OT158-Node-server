@@ -33,18 +33,6 @@ module.exports = {
       aboutUsText: {
         type: Sequelize.TEXT
       },
-      facebook: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      linkedin: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      instagram: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       deletedAt: {
         type: Sequelize.DATE
       },
