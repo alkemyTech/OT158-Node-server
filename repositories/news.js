@@ -6,8 +6,11 @@ const getAll = () => {
 const create = (body) => {
   return News.create(body);
 };
-
+const getById = (id)=>{
+  return News.findByPk(id);
+}
 module.exports = {
   getAll,
-  create
+  create,
+  getById
 };
