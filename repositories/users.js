@@ -16,4 +16,8 @@ const getById = async (id) => {
   return await Users.findByPk(id);
 };
 
-module.exports = { getAll, getById, create, remove };
+const update = (id, data) => {
+  return Users.update(data, { where: { id } });
+};
+
+module.exports = { getAll, getById, create, remove, update };
