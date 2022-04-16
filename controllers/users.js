@@ -1,9 +1,3 @@
-//getAll
-//getById
-//create
-//update
-//remove
-
 const usersService = require('../services/users');
 const {OK, Created} = require('../utils/status');
 
@@ -43,4 +37,19 @@ const removeUser = async (req,res,next)=>{
   }
 }
 
-module.exports = { getAll, create, removeUser };
+const update = async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const body = req.body
+    const result = await usersService.update(id, body, res)
+    res.status(OK).json({
+      message: "User updated",
+      data: result
+    });
+  }
+  catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { getAll, create, removeUser, update };
