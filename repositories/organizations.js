@@ -2,9 +2,10 @@ const { Organizations } = require('../models')
 
 const getOne = () => {
   return Organizations.findOne({
-    attributes: ['name', 'image', 'phone', 'address']
+    attributes: {
+      exclude: ['id', 'email', 'deletedAt', 'createdAt', 'updatedAt', 'welcomeText', 'aboutUsText']
+    }
   });
-
 };
 
 module.exports = { getOne };
