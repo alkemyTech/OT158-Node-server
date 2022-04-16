@@ -18,5 +18,8 @@ const updateActivity = async (id, body) => {
     throwError('Record not found', NotFound);
   };
 }
+const createActivity = (newActivity) => {
+  return createActivity(newActivity);
+}
 
-module.exports = { updateActivity };
+module.exports = { updateActivity, createActivity };
