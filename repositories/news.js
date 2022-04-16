@@ -7,7 +7,12 @@ const create = (body) => {
   return News.create(body);
 };
 
-module.exports = {
-  getAll,
-  create
+const remove = async id => {
+  return await News.destroy({ where: { id }});
 };
+
+module.exports={
+  getAll,
+  create,
+  remove
+}
