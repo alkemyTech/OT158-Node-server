@@ -51,4 +51,8 @@ const updateSlide = async (id, body) => {
   }
 };
 
-module.exports = { create, getById, updateSlide };
+const getAll = async (req) => {
+  return await slideRepository.getAll();
+}
+
+module.exports = { create, getById, updateSlide, getAll };

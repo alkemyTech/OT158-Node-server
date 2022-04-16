@@ -43,6 +43,16 @@ const update = async (req, res, next) => {
       msg: error.message
     });
   }
-}
+};
 
-module.exports = { create, getById, update };
+const getAll = async (req, res, next) => {
+
+  try {
+    const data = await service.getAll(req);
+    return res.status(OK).json(data);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { create, getById, update, getAll };
