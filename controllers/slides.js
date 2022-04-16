@@ -1,5 +1,5 @@
 const service = require('../services/slides');
-const { OK } = require('../utils/status');
+const { OK, Created } = require('../utils/status');
 
 const create = async (req, res, next) => {
   try {
@@ -32,12 +32,16 @@ const update = async (req, res, next) => {
 
     const result = await service.updateSlide(id, body);
 
-    res.status(OK).json({
+    res.status(Created).json({
+      status: Created,
       data: result
     });
 
-  } catch (err) {
-    next(err)
+  } catch (error) {
+    res.status(error.status).json({
+      status: error.status,
+      msg: error.message
+    });
   }
 }
 
