@@ -1,6 +1,6 @@
 const { createActivity } = require('../repositories/activities');
 const { updateActivity } = require('../services/activities');
-const { OK, Created } = require('../utils/status')
+const { OK, Created } = require('../utils/status');
 
 
 const update = async (req, res, next) => {
@@ -26,7 +26,7 @@ const create = async (req, res, next) => {
     const createdActivity = await createActivity(newActivity)
     res.status(Created).json({data:createdActivity});
   } catch (error) {
-    next(error)
+    next(error);
   }
 }
 
