@@ -12,10 +12,12 @@ const slidesRouter = require('./routes/slides');
 const categoriesRouter = require('./routes/categories');
 const contactRouter = require('./routes/contacts');
 const membersRouter = require('./routes/members');
+const testimonialsRouter = require('./routes/testimonials');
 const newsRouter = require('./routes/news');
 const authRouter = require('./routes/auth');
 const activitiesRouter = require('./routes/activities');
 const backofficeRouter = require('./routes/backoffice');
+const organizationRouter = require('./routes/organization');
 
 const app = express();
 app.use(cors());
@@ -26,9 +28,11 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: false
-}));
+app.use(
+	express.urlencoded({
+		extended: false
+	})
+);
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -42,10 +46,12 @@ app.use("/news", newsRouter);
 app.use("/auth", authRouter);
 app.use("/actvities", activitiesRouter);
 app.use('/backoffice', backofficeRouter);
+app.use('/testimonials', testimonialsRouter);
+app.use("/organization", organizationRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+app.use(function(req, res, next) {
+	next(createError(404));
 });
 
 // error handler
