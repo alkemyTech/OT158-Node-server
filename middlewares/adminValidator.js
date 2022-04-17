@@ -29,4 +29,4 @@ const adminValidator = (req, res, next) => {
   }
 };
 
-module.exports = adminValidator;
+module.exports = { adminValidator };
