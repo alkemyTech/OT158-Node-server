@@ -10,4 +10,11 @@ const remove = async (userId) => {
 const getById = async (id) => {
   return await Slides.findByPk(id);
 };
-module.exports = { create, remove, getById };
+
+const getAll = async () => {
+  return await Slides.findAll({
+    attributes: ['order', 'imageUrl'],
+  });
+}
+
+module.exports = { create, remove, getById, getAll };

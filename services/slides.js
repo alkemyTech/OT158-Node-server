@@ -35,7 +35,7 @@ const getById = async (slideId) => {
   const slide = await slideRepository.getById(slideId);
 
   if (!slide) {
-    const error = new Error('Slide not founde');
+    const error = new Error('Slide not found');
     error.status = NotFound;
     throw error;
   }
@@ -43,4 +43,9 @@ const getById = async (slideId) => {
   return slide;
 };
 
-module.exports = { create, getById, remove };
+
+const getAll = async (req) => {
+  return await slideRepository.getAll();
+}
+
+module.exports = { create, getById, remove, getAll };
