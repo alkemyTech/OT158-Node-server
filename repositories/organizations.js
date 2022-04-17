@@ -7,4 +7,13 @@ const getOne = () => {
 
 };
 
-module.exports = { getOne };
+const update = async (id, changes) => {
+  return await Organizations.update(changes, {
+    where: { id }
+  });
+}
+
+module.exports = {
+  getOne,
+  update,
+};

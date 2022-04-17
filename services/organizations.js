@@ -1,4 +1,7 @@
-const { getOne } = require('../repositories/organizations');
+const {
+  getOne,
+  update,
+} = require('../repositories/organizations');
 const { NotFound } = require('../utils/status');
 
 const getDataOrganization = async () => {
@@ -18,4 +21,23 @@ const getDataOrganization = async () => {
   }
 };
 
-module.exports = { getDataOrganization };
+const updateOrganization = async (req) => {
+  try {
+    const { id } = req.params;
+    const changes = {...req.body};
+    const organization = await getById(id);
+    if(!organization) return Promise.reject({
+      ok: false,
+      message: "id non exists",
+      status: NotFound,
+    })
+    return await update(id, changes);
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+module.exports = {
+  getDataOrganization,
+  updateOrganization,
+};
