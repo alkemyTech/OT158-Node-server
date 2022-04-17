@@ -1,8 +1,8 @@
-const { getAll, create, getById } = require('../repositories/members');
+const { getAll, create, getById, remove } = require('../repositories/members');
+const { NotFound, BadRequest } = require("../utils/status")
 
 const getAllService = async () => {
   const listAll = await getAll();
-
   return listAll
 };
 
@@ -13,9 +13,7 @@ const createService = async (newMember) => {
     return memberCreationService;
   } else {
     const error = new Error('Record not found');
-
-    error.status = 404;
-
+    error.status = NotFound;
     throw error
   }
 
@@ -31,18 +29,30 @@ const updateService = async (id, body) => {
       return memberUpdated
     } else {
       const error = new Error('Bad Request');
-
-      error.status = 400;
-
+      error.status = BadRequest;
       throw error
     }
   } else {
     const error = new Error('Record not found');
-
-    error.status = 404;
-
+    error.status = NotFound;
     throw error
   }
 }
 
-module.exports = { getAllService, createService, updateService };
+const removeService = async (id)=>{
+  try{
+    const user = await getById(id);
+    if(!user){
+      const error = new Error('Member not found');
+      error.status = NotFound;
+      throw error;
+    }
+
+    return await remove(id);
+  }
+  catch(error){
+    throw error
+  }
+}
+
+module.exports = { getAllService, createService, updateService, removeService };
