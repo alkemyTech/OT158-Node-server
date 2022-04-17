@@ -13,6 +13,6 @@ const {
 /* routes */
 router.post('/register', registerValidator, create);
 router.post('/login', loginValidation);
-router.get('/me', /* authenticathed, */ getAuthenticatedUserData);
+router.get('/me', getAuthenticatedUserData);
 
 module.exports = router;

@@ -56,7 +56,7 @@ const remove = async (id) => {
 
 const getAuthenticatedUserData = async (req) => {
   const auth = req.headers.authorization;
-  if (!auth) Promise.reject({
+  if (!auth) return Promise.reject({
     ok: false,
     message: "Token no provided",
     status: 500,
