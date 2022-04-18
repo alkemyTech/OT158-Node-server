@@ -50,7 +50,9 @@ const updateOrganization = async (req) => {
     status: NotFound,
   })
 
-  return await update(id, changes);
+  const isUpdated = await update(id, changes);
+
+  return isUpdated? await getById(id) : Promise.reject("unknow problems")
 }
 
 module.exports = {
