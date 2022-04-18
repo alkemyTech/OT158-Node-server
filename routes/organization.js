@@ -4,11 +4,10 @@ const {
   organizationData,
   update,
 } = require('../controllers/organizations');
-const {
-  updateForm
-} = require('../validations/organizationValidator');
+const { adminValidator } = require('../middlewares/adminValidator');
+const { updateForm } = require('../validations/organizationValidator');
 
 router.get('/public', organizationData);
-router.put('/public/:id', updateForm, update);
+router.put('/public/:id', adminValidator,updateForm, update);
 
 module.exports = router;
