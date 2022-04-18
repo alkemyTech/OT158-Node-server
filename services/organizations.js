@@ -1,6 +1,7 @@
 const {
   getOne,
   update,
+  getById,
 } = require('../repositories/organizations');
 const {
   NotFound,
