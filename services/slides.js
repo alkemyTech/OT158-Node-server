@@ -15,7 +15,7 @@ const create = async (req) => {
   return result;
 };
 
-const remove = async (id) => {
+const removeSlide = async (id) => {
   try{
     const user = await slideRepository.getById(id);
 
@@ -48,4 +48,4 @@ const getAll = async (req) => {
   return await slideRepository.getAll();
 }
 
-module.exports = { create, getById, remove, getAll };
+module.exports = { create, getById, removeSlide, getAll };

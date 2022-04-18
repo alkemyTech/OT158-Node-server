@@ -3,7 +3,7 @@ const { OK } = require('../utils/status');
 
 const create = async (req, res, next) => {
   try {
-    let data = await service.create(req);
+    const data = await service.create(req);
     res.status(OK).json({
       data
     });
@@ -15,7 +15,7 @@ const create = async (req, res, next) => {
 const removeSlide = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const result = await service.remove(id);
+    const result = await service.removeSlide(id);
     res.status(OK).json({
       msg: 'Deleted successful'
     });

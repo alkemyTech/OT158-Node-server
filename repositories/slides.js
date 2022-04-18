@@ -3,12 +3,12 @@ const { Slides } = require('../models');
 const create = async (slide) => {
   return await Slides.create(slide);
 };
-const remove = async (userId) => {
-  return await Slides.destroy({ where: { id: userId } });
+const remove = async (slideId) => {
+  return await Slides.destroy({ where: { id: slideId } });
 };
 
-const getById = async (id) => {
-  return await Slides.findByPk(id);
+const getById = async (slideId) => {
+  return await Slides.findByPk(slideId);
 };
 
 const getAll = async () => {
