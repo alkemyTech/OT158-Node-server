@@ -24,7 +24,7 @@ const getById = async (req, res, next) => {
   }
 };
 
-const update = async (req, res, next) => {
+const updateSlide = async (req, res, next) => {
   try {
     const body = req.body;
 
@@ -55,4 +55,4 @@ const getAll = async (req, res, next) => {
   }
 };
 
-module.exports = { create, getById, update, getAll };
+module.exports = { create, getById, updateSlide, getAll };
