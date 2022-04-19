@@ -21,6 +21,12 @@ npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
 ```
 
+Users test:
+
+Admin Users => 1, 2, 3, 4, 5, 6, 7, 8, 9, 10  
+Regular Users => 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 
+Password: 1234
+
 ## Start local server
 
 ``` bash
