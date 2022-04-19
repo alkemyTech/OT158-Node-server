@@ -10,18 +10,6 @@ const { throwError } = require('../utils/errorHandler');
 const ownershipValidator = async (req, res, next) => {
   const { id } = req.params;
 
-  const getTokenFromHeaders = () => {
-    const authorization = req.get('authorization');
-
-    if (!authorization) {
-      throwError('No token provided', Unauthorized);
-    }
-
-    const tokenFormatting = authorization.substring(7);
-
-    return tokenFormatting;
-  };
-
   try {
     const token = getTokenFromHeaders();
 
@@ -47,6 +35,18 @@ const ownershipValidator = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+const getTokenFromHeaders = (req) => {
+  const authorization = req.get('authorization');
+
+  if (!authorization) {
+    throwError('No token provided', Unauthorized);
+  }
+
+  const tokenFormatting = authorization.substring(7);
+
+  return tokenFormatting;
 };
 
 module.exports = { ownershipValidator };
