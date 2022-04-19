@@ -18,7 +18,18 @@ const create = async (req, res, next) => {
     next(error);
   }
 };
+
+const update = async (req, res, next) => {
+  try {
+    const result = await newsService.update(req);
+    return res.status(OK).json(result);
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   getAll,
-  create
+  create,
+  update,
 };
