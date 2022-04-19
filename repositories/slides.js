@@ -9,4 +9,14 @@ const getById = async (slideId) => {
   return await Slides.findByPk(slideId);
 };
 
-module.exports = { create, getById };
+const getAll = async () => {
+  return await Slides.findAll({
+    attributes: ['order', 'imageUrl'],
+  });
+};
+
+const update = async (id, body) => {
+  return await Slides.update(body, {where: {id:id}});
+}
+
+module.exports = { create, getById, getAll, update };
