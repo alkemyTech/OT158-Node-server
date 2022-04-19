@@ -9,12 +9,17 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             this.belongsTo(models.Users,
                 { as: 'user' }
-            )
+            ),
+            this.belongsTo(models.News,{
+              as: "new",
+              foreignKey:"newId"
+            })
         };
     };
     Comments.init({
         body: DataTypes.TEXT,
         userId: DataTypes.INTEGER,
+        newId: DataTypes.INTEGER,
         deletedAt: DataTypes.DATE
     }, {
         sequelize,
