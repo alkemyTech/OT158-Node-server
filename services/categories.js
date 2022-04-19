@@ -4,7 +4,6 @@ const { BadRequest, NotFound } = require('../utils/status');
 
 const UPDATED_STATE_APPROVED = 1;
 
-
 const getAll = async () => {
   const allCategories = await categoriesRepository.getAll();
   const result = allCategories.map((categorie) => {
@@ -21,9 +20,12 @@ const create = async (req) => {
 const update = async (id, data) => {
   const categories = await categoriesRepository.getById(id);
   if (categories) {
-    const updatedCategorieState = await categoriesRepository.update(id, data);
+    const updatedCategorieState =
+      await categoriesRepository.update(id, data);
 
-    if (updatedCategorieState[0] === UPDATED_STATE_APPROVED) {
+    if (
+      updatedCategorieState[0] === UPDATED_STATE_APPROVED
+    ) {
       return await categoriesRepository.getById(id);
     } else {
       throwError('Category not updated', BadRequest);
@@ -34,14 +36,19 @@ const update = async (id, data) => {
 };
 
 const removeCategory = async (id) => {
-  const category = await categoriesRepository.getById(id);
+  try {
+    const category = await categoriesRepository.getById(id);
 
-  if (!category) {
+    if (!category) {
+      throwError('Category not found', NotFound);
+    }
+
+    return await categoriesRepository.remove({
+      where: { id }
+    });
+  } catch (error) {
     throwError('Category not found', NotFound);
   }
-
-  return await categoriesRepository.remove({ where: { id } });
-
 };
 
 module.exports = { getAll, create, update, removeCategory };
