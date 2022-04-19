@@ -1,4 +1,7 @@
-const { getActivityById } = require('../repositories/activities');
+const {
+  getActivityById,
+  create
+} = require('../repositories/activities');
 const { throwError } = require('../utils/errorHandler');
 const { Forbidden, NotFound } = require('../utils/status');
 
@@ -13,13 +16,12 @@ const updateActivity = async (id, body) => {
     }
 
     return updateStatus;
-
   } else {
     throwError('Record not found', NotFound);
-  };
-}
+  }
+};
 const createActivity = (newActivity) => {
-  return createActivity(newActivity);
-}
+  return create(newActivity);
+};
 
 module.exports = { updateActivity, createActivity };

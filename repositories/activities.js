@@ -1,7 +1,9 @@
 const { Activities } = require('../models');
 
-const getActivityById = async (id) => await Activities.findOne(id);
+const getActivityById = async (id) =>
+  await Activities.findOne(id);
 
-const createActivity = async (newActivity) => await Activities.create(newActivity);
+const create = async (newActivity) =>
+  await Activities.create(newActivity);
 
-module.exports = { getActivityById , createActivity};
+module.exports = { getActivityById, create };
