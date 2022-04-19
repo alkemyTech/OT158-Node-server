@@ -12,7 +12,7 @@ module.exports = {
       body: {
         type: Sequelize.TEXT
       },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
@@ -21,7 +21,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-      newId:{
+      post_id:{
         type: Sequelize.INTEGER,
         references: {
           model: "News",

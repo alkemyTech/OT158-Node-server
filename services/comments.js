@@ -5,7 +5,7 @@ const { getById } = require('../repositories/news');
 
 const getAllComments = async (req) => {
   const { id } = req.params
-  const condition = {where: {newid: id}}
+  const condition = {where: {post_id: id}}
   try{
     const news = await getById(id)
     if(!news){

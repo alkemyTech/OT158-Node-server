@@ -7,19 +7,20 @@ const {
 module.exports = (sequelize, DataTypes) => {
     class Comments extends Model {
         static associate(models) {
-            this.belongsTo(models.Users,
-                { as: 'user' }
-            ),
+            this.belongsTo(models.Users,{
+              as: 'user',
+              foreignKey:"user_id"
+            }),
             this.belongsTo(models.News,{
               as: "new",
-              foreignKey:"newId"
+              foreignKey:"post_Id"
             })
         };
     };
     Comments.init({
         body: DataTypes.TEXT,
-        userId: DataTypes.INTEGER,
-        newId: DataTypes.INTEGER,
+        user_id: DataTypes.INTEGER,
+        post_id: DataTypes.INTEGER,
         deletedAt: DataTypes.DATE
     }, {
         sequelize,
