@@ -2,6 +2,7 @@ const usersRepository = require('../repositories/users');
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const { NotFound, BadRequest } = require('../utils/status');
+const { createToken } = require('../modules/auth');
 
 const getAll = async () => {
   return await usersRepository.getAll();
@@ -13,7 +14,14 @@ const create = async (req) => {
   let user = { ...req.body };
   user.password = await bcrypt.hash(req.body.password, 12);
 
-  const result = await usersRepository.create(user);
+  const newUser = await usersRepository.create(user);
+  const token = createToken(newUser)
+
+  const result ={
+    data: newUser,
+    token:token
+  }
+
   return result;
 };
 
