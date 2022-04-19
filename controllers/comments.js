@@ -1,14 +1,13 @@
-const { getAllComments } = require('../services/comments');
-const { BadRequest, OK } = require('../utils/status');
+const commentsService = require('../services/comments');
+const { OK } = require('../utils/status');
 
-const getAll = async (req, res, next) => {
+const getCommentsByNew = async (req, res, next) => {
   try {
-    const result = await getAllComments(req);
+    const result = await commentsService.getCommentsByNew(req);
     res.status(OK).json({
       meta: {
         status: OK,
         total: result.length,
-        url: ''
       },
       data: result
     });
@@ -17,4 +16,4 @@ const getAll = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll };
+module.exports = { getCommentsByNew };

@@ -1,21 +1,21 @@
-const { getAll } = require('../repositories/comments');
+const commentsRepository  = require('../repositories/comments');
 const { NotFound } = require('../utils/status');
 const { throwError } = require('../utils/errorHandler');
-const { getById } = require('../repositories/news');
+const newsRepository = require('../repositories/news');
 
-const getAllComments = async (req) => {
-  const { id } = req.params
-  const condition = {where: {post_id: id}}
+const getCommentsByNew = async (req) => {
+  const newId = req.params.id
+  const condition = {where: {post_id: newId}}
   try{
-    const news = await getById(id)
+    const news = await newsRepository.getById(newId)
     if(!news){
       throwError("New not Found", NotFound)
     }
-    return await getAll(condition);
+    return await commentsRepository.getAll(condition);
   }
   catch(error){
     throw error
   }
 };
 
-module.exports = { getAllComments };
+module.exports = { getCommentsByNew };
