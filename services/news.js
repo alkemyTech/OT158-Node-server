@@ -1,5 +1,6 @@
 const newsRepository = require('../repositories/news');
 const { NotFound, BadRequest } = require('../utils/status');
+const { validationResult } = require('express-validator');
 
 const getAll = () => {
   return newsRepository.getAll();
@@ -10,6 +11,11 @@ const create = ({ body }) => {
 };
 
 const update = async (req) => {
+
+  if(!validationResult(req).isEmpty()) return Promise.reject({
+    status: BadRequest,
+    message: "errores en el formulario"
+  })
 
   const {id} = req.params;
   const changes = {...req.body};
