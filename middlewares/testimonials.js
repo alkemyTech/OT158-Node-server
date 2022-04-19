@@ -1,4 +1,4 @@
-const { check, validationResult } = require('express-validator');
+const { check, validationResult, body } = require('express-validator');
 const { BadRequest } = require('../utils/status');
 
 const testimonialsValidator = async (req, res, next) => {
@@ -25,4 +25,17 @@ const testimonialsValidator = async (req, res, next) => {
 	}
 };
 
-module.exports = { testimonialsValidator };
+const validateUpdateForm = [
+
+    body('name')
+    .custom( value => (value || value == "")? value.trim().match(/^[A-Za-z ]+$/) : true),
+    
+    body('image')
+    .custom( value => (value || value == "")? value.trim().length>3 : true),
+    
+    body('content')
+    .custom( value => (value || value == "")? value.trim().match(/^[A-Za-z 0-9]+$/) : true),
+
+]
+
+module.exports = { testimonialsValidator, validateUpdateForm };
