@@ -1,57 +1,28 @@
 const categoriesService = require('../services/categories');
-const { OK, BadRequest, Created } = require ("../utils/status")
+const { NoContent, OK, Created } = require('../utils/status');
 
 const getAll = async (req, res, next) => {
-    try {
+  try {
+    const result = await categoriesService.getAll();
 
-
-        const result = await categoriesService.getAll();
-        res.status(OK).json({
-            meta: {
-                status: OK,
-                total: result.length,
-                url: ''
-            },
-            data: result
-        });
-    }
-    catch (error) {
-        return res.status(BadRequest).json({
-            status: BadRequest,
-            message: error
-        })
-    }
-}
-
+    res.status(OK).json({
+      meta: {
+        status: OK,
+        total: result.length,
+        url: ''
+      },
+      data: result
+    });
+  }
+  catch (error) {
+    next(error);
+  }
+};
 
 const create = async (req, res, next) => {
-    try {
-        const result = await categoriesService.create(req.body)
-        res.status(Created).json({
-            meta: {
-                status: Created,
-                url: ''
-            },
-            data: result
-        });
-    }
-    catch (error) {
-        return res.status(BadRequest).json({
-            status: BadRequest,
-            message: error
-        })
-    }
-}
-
-const update = async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const body = req.body;
-    const result = await categoriesService.update(
-      id,
-      body,
-      res
-    );
+    const result = await categoriesService.create(req.body);
+
     res.status(Created).json({
       meta: {
         status: Created,
@@ -59,12 +30,45 @@ const update = async (req, res, next) => {
       },
       data: result
     });
-  } catch (error) {
-    res.status(error.status).json({
-      status: error.status,
-      msg: error.message
-    });
+  }
+  catch (error) {
+    next(error);
   }
 };
 
-module.exports = { getAll, create, update };
+const update = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const body = req.body;
+
+    const result = await categoriesService.update(id, body, res);
+
+    res.status(Created).json({
+      meta: {
+        status: Created,
+        url: ''
+      },
+      data: result
+    });
+  }
+  catch (error) {
+    next(error);
+  }
+};
+
+const remove = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    await categoriesService.removeCategory(id);
+
+    res.status(NoContent).json({
+      data: null
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getAll, create, update, remove }
