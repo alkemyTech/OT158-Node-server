@@ -33,13 +33,13 @@ module.exports = {
       aboutUsText: {
         type: Sequelize.TEXT
       },
-      facebook: {
+      facebookUrl: {
         type: Sequelize.STRING
       },
-      linkedin: {
+      linkedinUrl: {
         type: Sequelize.STRING
       },
-      instagram: {
+      instagramUrl: {
         type: Sequelize.STRING
       },
       deletedAt: {
