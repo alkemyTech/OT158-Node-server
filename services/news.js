@@ -10,6 +10,10 @@ const create = ({ body }) => {
   return newsRepository.create(body);
 };
 
+const getById = (id)=>{
+  return newsRepository.getById(id);
+}
+
 const update = async (req) => {
 
   if(!validationResult(req).isEmpty()) return Promise.reject({
@@ -34,4 +38,5 @@ module.exports = {
   getAll,
   create,
   update,
+  getById,
 };

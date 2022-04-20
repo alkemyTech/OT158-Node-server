@@ -1,5 +1,10 @@
 const newsService = require('../services/news');
-const { OK, Created } = require('../utils/status');
+const {
+  OK,
+  Created,
+  NotFound
+} = require('../utils/status');
+const { throwError } = require('../utils/errorHandler');
 
 const getAll = async (req, res, next) => {
   try {
@@ -28,8 +33,22 @@ const update = async (req, res, next) => {
   }
 }
 
+const getById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const newFinded = await newsService.getById(id);
+
+    if (!newFinded) throwError('Inexistent new!', NotFound);
+
+    res.status(OK).json({ data: newFinded });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAll,
   create,
+  getById,
   update,
 };
