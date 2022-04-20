@@ -44,7 +44,7 @@ app.use("/contacts", contactRouter);
 app.use("/members", membersRouter);
 app.use("/news", newsRouter);
 app.use("/auth", authRouter);
-app.use("/actvities", activitiesRouter);
+app.use("/activities", activitiesRouter);
 app.use('/backoffice', backofficeRouter);
 app.use('/testimonials', testimonialsRouter);
 app.use("/organization", organizationRouter);
