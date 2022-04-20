@@ -3,7 +3,7 @@ const { OK } = require("../utils/status")
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await getAllService()
+    const result = await getAllService(req)
     res.status(OK).json({
       data: result
     })

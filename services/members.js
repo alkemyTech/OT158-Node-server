@@ -1,9 +1,16 @@
 const { getAll, create, getById, remove } = require('../repositories/members');
 const { NotFound, BadRequest } = require("../utils/status")
 
-const getAllService = async () => {
-  const listAll = await getAll();
-  return listAll
+const getAllService = async (req) => {
+  const { page } = req.query;
+  const limit = 10;
+  const offset = page? page*LIMIT : 0;
+
+  //
+  const { count , rows } = await getAll({limit, offset});
+  const response = {  }
+
+  return (options);
 };
 
 const createService = async (newMember) => {
