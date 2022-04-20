@@ -16,11 +16,27 @@ const create = async (req) => {
   return result;
 };
 
+const removeSlide = async (id) => {
+  try{
+    const user = await slideRepository.getById(id);
+
+    if (!user) {
+      const error = new Error('Slide not found');
+      error.status = NotFound;
+      throw error;
+    }
+    return await slideRepository.remove(id);
+  }
+  catch(error){
+    throw(error)
+  }
+};
+
 const getById = async (slideId) => {
   const slide = await slideRepository.getById(slideId);
 
   if (!slide) {
-    const error = new Error('Slide not founde');
+    const error = new Error('Slide not found');
     error.status = NotFound;
     throw error;
   }
@@ -55,4 +71,4 @@ const getAll = async (req) => {
   return await slideRepository.getAll();
 }
 
-module.exports = { create, getById, updateSlide, getAll };
+module.exports = { create, getById, updateSlide, getAll, removeSlide };

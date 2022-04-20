@@ -10,4 +10,16 @@ const create = async (req, res, next) => {
 	}
 };
 
-module.exports = { create };
+const update = async (req, res, next) => {
+	try {
+		const data = await testimonialsService.update(req);
+		return res.status(OK).json(data);
+	} catch (error) {
+		next(error);
+	}
+};
+
+module.exports = {
+	create,
+	update,
+};
