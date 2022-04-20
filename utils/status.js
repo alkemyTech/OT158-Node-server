@@ -10,10 +10,14 @@ const statusCodes = {
   Created: 201,
 
   /*
-  For Prefligh 
+  For Prefligh
   */
   Accepted: 202,
 
+  /*
+  Este código significa que el servidor ha procesado con éxito la solicitud, pero no va a devolver ningún contenido
+  */
+  NoContent: 204,
   /*
   Esta respuesta significa que el servidor no pudo interpretar la solicitud dada una sintaxis inválida.
    */
