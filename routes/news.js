@@ -6,5 +6,6 @@ const { validData } = require('../middlewares/news');
 
 router.post('/',adminValidator, validData, newsController.create);
 router.get('/', newsController.getAll);
+router.get('/:id', adminValidator, newsController.getById);
 
 module.exports = router;

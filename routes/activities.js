@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { update } = require('../controllers/activities');
-const { updateValidator } = require('../middlewares/activities');
+const { update, create } = require('../controllers/activities');
+const { updateValidator, createValidator } = require('../middlewares/activities');
 const { adminValidator } = require('../middlewares/adminValidator');
 
-router.put('/:id', adminValidator, updateValidator, update);
+router.put('/:id', updateValidator, update);
+router.post('/',adminValidator, createValidator, create);
 
 module.exports = router;

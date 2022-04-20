@@ -7,7 +7,11 @@ const create = ({ body }) => {
   body.type = 'news';
   return newsRepository.create(body);
 };
+const getById = (id)=>{
+  return newsRepository.getById(id);
+}
 module.exports = {
   getAll,
-  create
+  create,
+  getById
 };

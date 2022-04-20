@@ -12,6 +12,18 @@ const create = async (req, res, next) => {
   }
 };
 
+const removeSlide = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const result = await service.removeSlide(id);
+    res.status(OK).json({
+      msg: 'Deleted successful'
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const getById = async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -55,4 +67,4 @@ const getAll = async (req, res, next) => {
   }
 };
 
-module.exports = { create, getById, updateSlide, getAll };
+module.exports = { create, getById, updateSlide, getAll, removeSlide };
