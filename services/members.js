@@ -3,14 +3,22 @@ const { NotFound, BadRequest } = require("../utils/status")
 
 const getAllService = async (req) => {
   const { page } = req.query;
-  const limit = 10;
-  const offset = page? page*LIMIT : 0;
+  const LIMIT = 10;
+  const offset = page? (+page*LIMIT) - LIMIT : 0;
+  const { count , rows } = await getAll({limit: LIMIT, offset});
 
-  //
-  const { count , rows } = await getAll({limit, offset});
-  const response = {  }
+  const { nextPage, currentPage, prevPage, totalPages } = getPagination(req, count, page, LIMIT)
 
-  return (options);
+  return { 
+    data: rows,
+    total: count,
+    pagination: {
+      pages: totalPages,
+      current: currentPage,
+      next: nextPage,
+      prev: prevPage
+    }
+   }
 };
 
 const createService = async (newMember) => {
@@ -63,3 +71,22 @@ const removeService = async (id)=>{
 }
 
 module.exports = { getAllService, createService, updateService, removeService };
+
+// funciones auxiliares
+function getPagination(req, count, page, limit) {
+    
+  const totalPages =  Math.ceil(count/limit);
+  const currentPage = (page? +page : 1);
+  
+  const nextPage =  currentPage<totalPages ?
+    `${req.protocol}://${req.get('host')}${req.baseUrl}/?page=${currentPage+1}` : null;
+  const prevPage =  currentPage>1 ?
+    `${req.protocol}://${req.get('host')}${req.baseUrl}/?page=${currentPage-1}` : null; 
+
+  return { 
+    totalPages,
+    currentPage,
+    nextPage,
+    prevPage,
+  };
+}
