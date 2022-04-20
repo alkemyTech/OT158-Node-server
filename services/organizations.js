@@ -39,18 +39,10 @@ const updateOrganization = async (req) => {
     const { id } = req.params;
     const changes = {...req.body};
 
-    const organization = await getById(id);
-    if (!organization) return Promise.reject({
-      message: "id non exists",
-      status: NotFound,
-    })
-
-    const isUpdated = await update(id, changes);
-
-    return isUpdated? await getById(id) : Promise.reject("unknow problems");
-
+    await update(id, changes);
+    return await getById(id);
   } catch (error) {
-    Promise.reject("unknow problems");
+    Promise.reject(error);
   }
 }
 
