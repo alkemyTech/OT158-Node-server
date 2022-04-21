@@ -1,13 +1,14 @@
 const { verifyToken } = require('../modules/auth');
 const { roleAdmin } = require('../config/config').development;
-const { Unauthorized, Forbidden } = require('../utils/status');
+const { Forbidden } = require('../utils/status');
 const { throwError } = require('../utils/errorHandler');
+const { getTokenFromHeaders } = require('../utils/getTokenFromHeaders')
 
 const ownershipValidator = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const token = getTokenFromHeaders();
+    const token = getTokenFromHeaders(req);
 
     const decoded = verifyToken(token);
 
@@ -18,7 +19,7 @@ const ownershipValidator = async (req, res, next) => {
 
     if (
       req.userData.roleId &&
-      req.userData.roleId === roleAdmin?.toString()
+      req.userData.roleId === roleAdmin
     ) {
       return next();
     }
@@ -31,18 +32,6 @@ const ownershipValidator = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
-
-const getTokenFromHeaders = (req) => {
-  const authorization = req.get('authorization');
-
-  if (!authorization) {
-    throwError('No token provided', Unauthorized);
-  }
-
-  const tokenFormatting = authorization.substring(7);
-
-  return tokenFormatting;
 };
 
 module.exports = { ownershipValidator };
