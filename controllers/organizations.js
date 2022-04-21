@@ -12,5 +12,17 @@ const organizationData = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
 
-module.exports = { organizationData };
+  try {
+    const result = await organizationService.updateOrganization(req);
+    return res.status(OK).json(result);
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = {
+  organizationData,
+  update,
+};
