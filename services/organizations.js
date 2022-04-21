@@ -1,5 +1,13 @@
-const { getOne } = require('../repositories/organizations');
-const { NotFound } = require('../utils/status');
+const { validationResult } = require('express-validator');
+const {
+  getOne,
+  update,
+  getById,
+} = require('../repositories/organizations');
+const {
+  NotFound,
+  BadRequest,
+} = require('../utils/status');
 
 const getDataOrganization = async () => {
   try {
@@ -18,4 +26,27 @@ const getDataOrganization = async () => {
   }
 };
 
-module.exports = { getDataOrganization };
+const updateOrganization = async (req) => {
+  try {
+    
+    if (!validationResult(req).isEmpty()) {
+      return Promise.reject({
+        status: BadRequest,
+        message: "errores de formulario",
+      });
+    }
+
+    const { id } = req.params;
+    const changes = {...req.body};
+
+    await update(id, changes);
+    return await getById(id);
+  } catch (error) {
+    Promise.reject(error);
+  }
+}
+
+module.exports = {
+  getDataOrganization,
+  updateOrganization,
+};
