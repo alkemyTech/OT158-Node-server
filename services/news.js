@@ -15,23 +15,26 @@ const getById = (id)=>{
 }
 
 const update = async (req) => {
-
-  if(!validationResult(req).isEmpty()) return Promise.reject({
-    status: BadRequest,
-    message: "errores en el formulario"
-  })
-
-  const {id} = req.params;
-  const changes = {...req.body};
-  let news = await newsRepository.getById(id);
-
-  if(!news) return Promise.reject({
-    status: NotFound,
-    message: "id non exists",
-  })
-
-  const isUpdated = await newsRepository.update(id, changes);
-  return isUpdated? await newsRepository.getById(id) : Promise.reject("Unknow problem");
+  try {
+    if(!validationResult(req).isEmpty()) return Promise.reject({
+      status: BadRequest,
+      message: "errores en el formulario"
+    })
+  
+    const {id} = req.params;
+    const changes = {...req.body};
+    let news = await newsRepository.getById(id);
+  
+    if(!news) return Promise.reject({
+      status: NotFound,
+      message: "id non exists",
+    })
+  
+    const isUpdated = await newsRepository.update(id, changes);
+    return isUpdated? await newsRepository.getById(id) : Promise.reject("Unknow problem");
+  } catch(error) {
+    Promise.reject(error);
+  }
 }
 
 module.exports = {
