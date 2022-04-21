@@ -1,18 +1,15 @@
 const fs = require('fs');
 const { ISError } = require('../utils/status');
 const { throwError } = require('../utils/errorHandler');
-const { storage, bucketName } = require('../services/setupAmazonS3');
+const { storage, bucketName } = require('./setupAmazonS3');
 
 const uploadImageAndReturnLocation = async (file) => {
   try {
     const uploaded = await uploadingImageToAWS(file);
 
-    const gettingLocationImage = uploaded.Location;
-
-    return gettingLocationImage;
-
+    return uploaded.Location;
   } catch (error) {
-    throwError((error.message || 'Internal Server Error'), ISError);
+    throwError(error.message || 'Internal Server Error', ISError);
   }
 };
 
