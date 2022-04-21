@@ -9,20 +9,25 @@ const getAll = async () => {
 };
 
 const create = async (req) => {
-  validationResult(req).throw();
+  try{
+    validationResult(req).throw();
 
-  let user = { ...req.body };
-  user.password = await bcrypt.hash(req.body.password, 12);
+    let user = { ...req.body };
+    user.password = await bcrypt.hash(req.body.password, 12);
 
-  const newUser = await usersRepository.create(user);
-  const token = createToken(newUser)
+    const newUser = await usersRepository.create(user);
+    const token = createToken(newUser)
 
-  const result ={
-    data: newUser,
-    token:token
+    const result ={
+      data: newUser,
+      token:token
+    }
+
+    return result;
   }
-
-  return result;
+  catch(error){
+    throw error
+  }
 };
 
 const update = async (id, data) => {
