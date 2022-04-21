@@ -1,11 +1,11 @@
-const { getAll, create, getById, remove } = require('../repositories/members');
+const repository = require('../repositories/members');
 const { NotFound, BadRequest } = require("../utils/status")
 
-const getAllService = async (req) => {
+const getAll = async (req) => {
   const { page } = req.query;
 
   const queryOptions = getPageSizeAndReadingStart(page);
-  const { count , rows } = await getAll(queryOptions);
+  const { count , rows } = await repository.getAll(queryOptions);
   const { nextPage, currentPage, prevPage, totalPages } = getPagination(req, count, page, queryOptions['limit'])
 
   return { 
@@ -20,8 +20,8 @@ const getAllService = async (req) => {
    }
 };
 
-const createService = async (newMember) => {
-  const memberCreationService = await create(newMember);
+const create = async (newMember) => {
+  const memberCreationService = await repository.create(newMember);
 
   if (memberCreationService) {
     return memberCreationService;
@@ -33,8 +33,8 @@ const createService = async (newMember) => {
 
 };
 
-const updateService = async (id, body) => {
-  const member = await getById({ where: { id: id } });
+const update = async (id, body) => {
+  const member = await repository.getById(id);
 
   if (member) {
     const memberUpdated = await member.update(body);
@@ -53,29 +53,27 @@ const updateService = async (id, body) => {
   }
 }
 
-const removeService = async (id)=>{
+const remove = async (id)=>{
   try{
-    const user = await getById(id);
+    const user = await repository.getById(id);
     if(!user){
       const error = new Error('Member not found');
       error.status = NotFound;
       throw error;
     }
 
-    return await remove(id);
+    return await repository.remove(id);
   }
   catch(error){
     throw error
   }
 }
 
-module.exports = { getAllService, createService, updateService, removeService };
+module.exports = { getAll, create, update, remove };
 
 // funciones auxiliares
 function getPageSizeAndReadingStart(page) {
-
   const limit = 10;//cantidad de registros por pagina
-
   return {
     limit,
     offset: page? (+page*limit) - limit : 0
