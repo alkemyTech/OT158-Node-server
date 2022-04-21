@@ -1,8 +1,12 @@
 const { News } = require('../models');
 
-const getAll = () => {
-  return News.findAll();
+const getAll = (options) => {
+  return News.findAndCountAll({
+    limit: options.limit,
+    offset: options.offset
+  });
 };
+
 const create = (body) => {
   return News.create(body);
 };
