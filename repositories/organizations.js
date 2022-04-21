@@ -7,4 +7,20 @@ const getOne = () => {
 
 };
 
-module.exports = { getOne };
+const update = async (id, changes) => {
+  return await Organizations.update(changes, {
+    where: {
+      id
+    }
+  });
+}
+
+const getById = async (id) => {
+  return await Organizations.findByPk(id);
+}
+
+module.exports = {
+  getOne,
+  update,
+  getById,
+};
