@@ -13,24 +13,24 @@ module.exports = (sequelize, DataTypes) => {
   }
   Organizations.init(
     {
-      name: { 
+      name: {
         type: DataTypes.STRING,
-        allowNull: false 
+        allowNull: false
       },
-      image: { 
+      image: {
         type: DataTypes.STRING,
-        allowNull: false 
+        allowNull: false
       },
       address: DataTypes.STRING,
       phone: DataTypes.INTEGER,
-      email: { 
+      email: {
         type: DataTypes.STRING,
-        allowNull: false 
+        allowNull: false
       },
       deletedAt: DataTypes.DATE,
-      welcomeText: { 
+      welcomeText: {
         type: DataTypes.TEXT,
-        allowNull: false 
+        allowNull: false
       },
       aboutUsText: DataTypes.TEXT,
       facebookUrl: DataTypes.STRING,
