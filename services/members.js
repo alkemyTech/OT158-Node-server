@@ -3,11 +3,10 @@ const { NotFound, BadRequest } = require("../utils/status")
 
 const getAllService = async (req) => {
   const { page } = req.query;
-  const LIMIT = 10;
-  const offset = page? (+page*LIMIT) - LIMIT : 0;
-  const { count , rows } = await getAll({limit: LIMIT, offset});
 
-  const { nextPage, currentPage, prevPage, totalPages } = getPagination(req, count, page, LIMIT)
+  const queryOptions = getPageSizeAndReadingStart(page);
+  const { count , rows } = await getAll(queryOptions);
+  const { nextPage, currentPage, prevPage, totalPages } = getPagination(req, count, page, queryOptions['limit'])
 
   return { 
     data: rows,
@@ -73,6 +72,16 @@ const removeService = async (id)=>{
 module.exports = { getAllService, createService, updateService, removeService };
 
 // funciones auxiliares
+function getPageSizeAndReadingStart(page) {
+
+  const limit = 10;//cantidad de registros por pagina
+
+  return {
+    limit,
+    offset: page? (+page*limit) - limit : 0
+  }
+}
+
 function getPagination(req, count, page, limit) {
     
   const totalPages =  Math.ceil(count/limit);
