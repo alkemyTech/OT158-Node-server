@@ -1,5 +1,5 @@
 const { check, body, validationResult } = require("express-validator");
-const { getByEmail } = require('../repositories');
+const { getByEmail } = require('../repositories/users');
 const bcrypt = require('bcryptjs');
 
 const loginValidation = async (req, res, next) => {
