@@ -1,5 +1,5 @@
 const { check, body, validationResult } = require("express-validator");
-const { getByEmail } = require('../repositories/users');
+const { getUserByEmail } = require('../repositories/users');
 const bcrypt = require('bcryptjs');
 
 const loginValidation = async (req, res, next) => {
@@ -15,7 +15,7 @@ const loginValidation = async (req, res, next) => {
     .withMessage('This field password cannot be empty')
     .run(req);
   await body('email').custom(async (value) => {
-    const getUser = await getByEmail({ where: { email: value } });
+    const getUser = await getUserByEmail({ where: { email: value } });
 
     if (!getUser) {
       return Promise.reject("Invalid credentials");
