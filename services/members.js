@@ -2,22 +2,26 @@ const repository = require('../repositories/members');
 const { NotFound, BadRequest } = require("../utils/status")
 
 const getAll = async (req) => {
-  const { page } = req.query;
+  try {
+    const { page } = req.query;
 
-  const queryOptions = getPageSizeAndReadingStart(page);
-  const { count , rows } = await repository.getAll(queryOptions);
-  const { nextPage, currentPage, prevPage, totalPages } = getPagination(req, count, page, queryOptions['limit'])
+    const queryOptions = getPageSizeAndReadingStart(page);
+    const { count , rows } = await repository.getAll(queryOptions);
+    const { nextPage, currentPage, prevPage, totalPages } = getPagination(req, count, page, queryOptions['limit'])
 
-  return { 
-    data: rows,
-    total: count,
-    pagination: {
-      pages: totalPages,
-      current: currentPage,
-      next: nextPage,
-      prev: prevPage
+    return { 
+      data: rows,
+      total: count,
+      pagination: {
+        pages: totalPages,
+        current: currentPage,
+        next: nextPage,
+        prev: prevPage
+      }
     }
-   }
+  } catch (error) {
+    Promise.reject(error);
+  }
 };
 
 const create = async (newMember) => {
@@ -73,9 +77,9 @@ module.exports = { getAll, create, update, remove };
 
 // funciones auxiliares
 function getPageSizeAndReadingStart(page) {
-  const limit = 10;//cantidad de registros por pagina
+  const recordsByPage = 10;
   return {
-    limit,
+    limit: recordsByPage,
     offset: page? (+page*limit) - limit : 0
   }
 }
@@ -83,12 +87,11 @@ function getPageSizeAndReadingStart(page) {
 function getPagination(req, count, page, limit) {
     
   const totalPages =  Math.ceil(count/limit);
-  const currentPage = (page? +page : 1);
+  const currentPage = page? +page : 1;
+  const path = `${req.protocol}://${req.get('host')}${req.baseUrl}/?page=`;
   
-  const nextPage =  currentPage<totalPages ?
-    `${req.protocol}://${req.get('host')}${req.baseUrl}/?page=${currentPage+1}` : null;
-  const prevPage =  currentPage>1 ?
-    `${req.protocol}://${req.get('host')}${req.baseUrl}/?page=${currentPage-1}` : null; 
+  const nextPage =  currentPage<totalPages ? path.concat(currentPage+1): null;
+  const prevPage =  currentPage>1 ? path.concat(currentPage-1) : null; 
 
   return { 
     totalPages,
