@@ -5,6 +5,7 @@ const { NotFound, BadRequest } = require('../utils/status');
 const fs = require("fs");
 const { createMessage, sendMail } = require('./mail.service');
 const htmlTemplate = fs.readFileSync('./utils/templateEmail.html', 'utf-8')
+const { throwError } = require('../utils/errorHandler');
 
 const getAll = async () => {
   return await usersRepository.getAll();
@@ -40,16 +41,12 @@ const update = async (id, data) => {
       const updatedUser = await usersRepository.update(id, data);
 
       if (!updatedUser) {
-        const error = new Error('User not updated');
-        error.status = BadRequest;
-        throw error;
+        throwError('User not updated', BadRequest);
       }
 
       return updatedUser;
     } else {
-      const error = new Error('User not found');
-      error.status = NotFound;
-      throw error;
+      throwError('User not found', NotFound);
     }
   } catch (error) {
     throw new Error(error.message);
@@ -62,10 +59,23 @@ const remove = async (id) => {
   if (user) {
     return await usersRepository.remove(id);
   } else {
-    const error = new Error('User not found');
-    error.status = NotFound;
-    throw error;
+    throwError('User not found', NotFound);
   }
 };
 
-module.exports = { getAll, create, remove, update };
+const getUserByEmail = async (email) => {
+  try {
+    const user = await usersRepository.getUserByEmail({ where: { email } });
+
+    if(!user){
+      throwError('User not found', NotFound);
+    }
+
+    return user
+
+  } catch (error) {
+    throwError(error.message, ISError);
+  }
+};
+
+module.exports = { getAll, create, remove, update, getUserByEmail };
