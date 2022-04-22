@@ -20,9 +20,7 @@ const authRouter = require('./routes/auth');
 const activitiesRouter = require('./routes/activities');
 const backofficeRouter = require('./routes/backoffice');
 const organizationRouter = require('./routes/organization');
-const {
-  swaggerDefinitions
-} = require('./helpers/swaggerDefinitions');
+const { swaggerDefinitions } = require('./helpers/swaggerDefinitions');
 
 const app = express();
 app.use(cors());
@@ -49,11 +47,7 @@ app.use(
 );
 
 app.use('/', indexRouter);
-app.use(
-  '/api/docs',
-  swaggerUI.serve,
-  swaggerUI.setup(swaggerJsDoc(swaggerDefinitions))
-);
+app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerDefinitions)));
 app.use('/users', usersRouter);
 app.use('/slides', slidesRouter);
 app.use('/categories', categoriesRouter);
