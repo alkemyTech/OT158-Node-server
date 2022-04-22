@@ -23,7 +23,7 @@ const update = async (req) => {
   
     const {id} = req.params;
     const changes = {...req.body};
-    let news = await newsRepository.getById(id);
+    const news = await newsRepository.getById(id);
   
     if(!news) return Promise.reject({
       status: NotFound,
@@ -31,7 +31,10 @@ const update = async (req) => {
     })
   
     const isUpdated = await newsRepository.update(id, changes);
-    return isUpdated? await newsRepository.getById(id) : Promise.reject("Unknow problem");
+
+    return (isUpdated) 
+      ? await newsRepository.getById(id)
+      : Promise.reject("Unknow problem");
   } catch(error) {
     Promise.reject(error);
   }
