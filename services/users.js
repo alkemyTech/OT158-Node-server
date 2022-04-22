@@ -2,21 +2,35 @@ const usersRepository = require('../repositories/users');
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const { NotFound, BadRequest } = require('../utils/status');
+const fs = require("fs");
+const { createMessage, sendMail } = require('./mail.service');
+const htmlTemplate = fs.readFileSync('./utils/templateEmail.html', 'utf-8')
 
 const getAll = async () => {
   return await usersRepository.getAll();
 };
 
 const create = async (req) => {
-  validationResult(req).throw();
+  try{
+    validationResult(req).throw();
 
-  let user = { ...req.body };
-  user.password = await bcrypt.hash(req.body.password, 12);
+    let user = { ...req.body };
+    user.password = await bcrypt.hash(req.body.password, 12);
 
-  const result = await usersRepository.create(user);
-  return result;
-};
+    const result = await usersRepository.create(user);
+    const to = result.email
+    const subject = "Bienvenido"
+    const text = "test"
+    const message = createMessage(to,subject,text,htmlTemplate);
 
+    sendMail(message);
+
+    return result;
+  }
+  catch(error){
+    throw error
+  }
+}
 const update = async (id, data) => {
   try {
     const user = await usersRepository.getById(id);
