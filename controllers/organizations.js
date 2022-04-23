@@ -3,7 +3,8 @@ const { OK } = require('../utils/status');
 
 const organizationData = async (req, res, next) => {
   try {
-    const organization = await organizationService.getDataOrganization();
+    const { id } = req.params;
+    const organization = await organizationService.getDataOrganization(id);
     res.status(OK).json({
       organization: organization
     })
