@@ -1,9 +1,8 @@
-const { verifyToken } = require('../modules/auth');
+const { verifyToken, getTokenFromHeaders } = require('../modules/auth');
 const { throwError } = require('../utils/errorHandler');
 const { roleAdmin } = require('../config/config').development;
 const { getCommentById } = require('../repositories/comments');
 const { NotFound, Unauthorized } = require('../utils/status');
-const { getTokenFromHeaders } = require('../utils/getTokenFromHeaders');
 
 const updateCommentsValidator = async (req, res, next) => {
   try {
