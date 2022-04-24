@@ -4,7 +4,7 @@ const {
   update,
   getById,
 } = require('../repositories/organizations');
-const { slidesForOrg } = require('../repositories/slides');
+const { getAllSlidesById } = require('../repositories/slides');
 const {
   NotFound,
   BadRequest,
@@ -20,7 +20,7 @@ const getDataOrganization = async () => {
       throw error;
     }
 
-    organization.slides = await slidesForOrg();
+    organization.slides = await getAllSlidesById();
 
     return organization;
 
