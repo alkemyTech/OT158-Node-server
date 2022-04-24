@@ -1,10 +1,11 @@
 const usersRepository = require('../repositories/users');
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
-const { NotFound, BadRequest } = require('../utils/status');
 const fs = require("fs");
 const { createMessage, sendMail } = require('./mail.service');
 const htmlTemplate = fs.readFileSync('./utils/templateEmail.html', 'utf-8')
+const { createToken } = require('../modules/auth');
+const { NotFound, BadRequest, ISError } = require('../utils/status');
 const { throwError } = require('../utils/errorHandler');
 
 const getAll = async () => {
@@ -18,20 +19,27 @@ const create = async (req) => {
     let user = { ...req.body };
     user.password = await bcrypt.hash(req.body.password, 12);
 
-    const result = await usersRepository.create(user);
-    const to = result.email
+    const newUser = await usersRepository.create(user);
+    const to = newUser.email
     const subject = "Bienvenido"
     const text = "test"
     const message = createMessage(to,subject,text,htmlTemplate);
 
     sendMail(message);
+    const token = createToken(newUser)
+
+    const result ={
+      data: newUser,
+      token:token
+    }
 
     return result;
   }
   catch(error){
     throw error
   }
-}
+};
+
 const update = async (id, data) => {
   try {
     const user = await usersRepository.getById(id);

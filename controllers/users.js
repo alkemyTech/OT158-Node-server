@@ -19,7 +19,8 @@ const create = async (req, res, next) => {
 
     res.status(Created).json({
       message: 'User created',
-      data: result
+      data: result.data,
+      token: result.token
     });
   } catch (error) {
       next(error);
