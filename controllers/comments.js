@@ -1,5 +1,5 @@
 const commentsService = require('../services/comments');
-const { OK } = require('../utils/status');
+const { OK, Created } = require('../utils/status');
 
 const getCommentsByNew = async (req, res, next) => {
   try {
@@ -26,5 +26,5 @@ const create = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-
+}
 module.exports = { getCommentsByNew, create }
