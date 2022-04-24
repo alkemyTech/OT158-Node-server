@@ -1,5 +1,5 @@
 const commentsRepository  = require('../repositories/comments');
-const { NotFound } = require('../utils/status');
+const { NotFound, Forbidden } = require('../utils/status');
 const { throwError } = require('../utils/errorHandler');
 const newsRepository = require('../repositories/news');
 
@@ -18,4 +18,14 @@ const getCommentsByNew = async (req) => {
   }
 };
 
-module.exports = { getCommentsByNew };
+const removeComment = async (req) => {
+  const { id } = req.params;
+  const comment = await commentsRepository.getById(id);
+
+  if (comment.user_id === req.user.userId)
+    throwError('Not allowed to perform this action', Forbidden);
+
+  return await commentsRepository.remove(id);
+} 
+
+module.exports = { getCommentsByNew, removeComment};

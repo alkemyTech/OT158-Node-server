@@ -16,4 +16,16 @@ const getCommentsByNew = async (req, res, next) => {
   }
 };
 
-module.exports = { getCommentsByNew };
+const removeComment = async (req, res, next) => {
+  try {
+    const result = await commentsService.removeComment(req);
+    
+    res.status(OK).json({
+      data: result
+    });
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { getCommentsByNew, removeComment };
