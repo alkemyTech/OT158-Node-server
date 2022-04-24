@@ -20,11 +20,7 @@ const create = async (req) => {
     user.password = await bcrypt.hash(req.body.password, 12);
 
     const newUser = await usersRepository.create(user);
-    const to = newUser.email
-    const subject = "Bienvenido"
-    const text = "test"
-    const message = createMessage(to,subject,text,htmlTemplate);
-
+    const message = createMessage(newUser.email,"Bienvenido","test",htmlTemplate);
     sendMail(message);
     const token = createToken(newUser)
 
