@@ -1,8 +1,7 @@
-const { verifyToken } = require('../modules/auth');
+const { verifyToken, getTokenFromHeaders } = require('../modules/auth');
 const { roleAdmin } = require('../config/config').development;
 const { Forbidden } = require('../utils/status');
 const { throwError } = require('../utils/errorHandler');
-const { getTokenFromHeaders } = require('../modules/auth');
 
 const ownershipValidator = async (req, res, next) => {
   const { id } = req.params;
