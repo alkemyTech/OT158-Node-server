@@ -20,4 +20,6 @@ const update = (id, data) => {
   return Users.update(data, { where: { id } });
 };
 
-module.exports = { getAll, getById, create, remove, update };
+const getUserByEmail = async (email) => await Users.findOne(email);
+
+module.exports = { getAll, getById, create, remove, update, getUserByEmail };
