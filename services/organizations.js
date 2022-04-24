@@ -4,22 +4,21 @@ const {
   update,
   getById,
 } = require('../repositories/organizations');
-const { slidesForOrganization } = require('../repositories/slides');
 const {
   NotFound,
   BadRequest,
 } = require('../utils/status');
 
-const getDataOrganization = async (id) => {
+const getDataOrganization = async () => {
   try {
-    const organization = await getOne(id);
+    const organization = await getOne();
 
     if (!organization) {
       const error = new Error('Organization not found');
       error.status = NotFound;
       throw error;
     }
-    organization.slides = await slidesForOrganization(id);
+
     return organization;
 
   } catch (error) {
