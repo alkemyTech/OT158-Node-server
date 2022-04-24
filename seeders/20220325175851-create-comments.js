@@ -5,6 +5,7 @@ module.exports = {
     await queryInterface.bulkInsert('Comments', [{
       body: 'esto es un comentario',
       user_id: 1,
+      post_id:1,
       createdAt: new Date,
       updatedAt: new Date
     }], {});
