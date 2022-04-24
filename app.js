@@ -3,6 +3,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
 const fileUpload = require('express-fileupload');
 require('dotenv').config();
 
@@ -18,6 +20,7 @@ const authRouter = require('./routes/auth');
 const activitiesRouter = require('./routes/activities');
 const backofficeRouter = require('./routes/backoffice');
 const organizationRouter = require('./routes/organization');
+const { swaggerDefinitions } = require('./helpers/swaggerDefinitions');
 
 const app = express();
 app.use(cors());
@@ -44,6 +47,7 @@ app.use(
 );
 
 app.use('/', indexRouter);
+app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerDefinitions)));
 app.use('/users', usersRouter);
 app.use('/slides', slidesRouter);
 app.use('/categories', categoriesRouter);
