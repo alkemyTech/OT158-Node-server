@@ -7,7 +7,12 @@ const getAll = async (req) => {
 
     const queryOptions = getPageSizeAndReadingStart(page);
     const { count , rows } = await repository.getAll(queryOptions);
-    const { nextPage, currentPage, prevPage, totalPages } = getPagination(req, count, page, queryOptions['limit'])
+    const {
+      nextPage,
+      currentPage,
+      prevPage,
+      totalPages,
+    } = getPagination(req, count, page, queryOptions['limit']);
 
     return { 
       data: rows,
@@ -16,7 +21,7 @@ const getAll = async (req) => {
         pages: totalPages,
         current: currentPage,
         next: nextPage,
-        prev: prevPage
+        prev: prevPage,
       }
     }
   } catch (error) {
@@ -80,7 +85,7 @@ function getPageSizeAndReadingStart(page) {
   const recordsByPage = 10;
   return {
     limit: recordsByPage,
-    offset: page? (+page*limit) - limit : 0
+    offset: page? (+page*recordsByPage) - recordsByPage : 0
   }
 }
 
