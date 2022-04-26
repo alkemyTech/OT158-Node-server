@@ -5,6 +5,11 @@ const getAll = async () => {
   return result
 
 }
+const getPage = async (conditions) => {
+  const result = await db.Categories.findAndCountAll(conditions);
+  return result;
+
+}
 
 const create = async (categories) => {
   const result = await db.Categories.create(categories)
@@ -23,4 +28,4 @@ const getById = async (id) => {
 
 const remove = async (id) => await db.Categories.destroy(id);
 
-module.exports = { getAll, create, update, getById, remove }
+module.exports = { getAll, create, update, getById, remove, getPage }
