@@ -11,6 +11,16 @@ const getAll = async () => {
   });
   return result;
 };
+const getById = async (req) => {
+  const {id} = req.params;
+
+  const category = await categoriesRepository.getById(id);
+
+  if(!category)
+    throwError('Category not found', NotFound);
+
+  return category;
+};
 
 const create = async (req) => {
   const result = await categoriesRepository.create(req);
@@ -51,4 +61,4 @@ const removeCategory = async (id) => {
   }
 };
 
-module.exports = { getAll, create, update, removeCategory };
+module.exports = { getAll, create, update, removeCategory, getById };
