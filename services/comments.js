@@ -20,19 +20,23 @@ const getCommentsByNew = async (req) => {
 };
 
 const create = async(newComment)=>{
-  const existingUser = await usersRepository.getById(newComment.user_id);
-
-  if (!existingUser)
-    throwError('User not valid', NotFound);
-
-  const existingNew = await newsRepository.getById(newComment.news_id);
-
-  if (!existingNew)
-    throwError('New not valid', NotFound);
-
-  newComment.post_id = newComment.news_id;
-
-  return await commentsRepository.create(newComment);
+  try {
+    const existingUser = await usersRepository.getById(newComment.user_id);
+  
+    if (!existingUser)
+      throwError('User not valid', NotFound);
+  
+    const existingNew = await newsRepository.getById(newComment.news_id);
+  
+    if (!existingNew)
+      throwError('New not valid', NotFound);
+  
+    newComment.post_id = newComment.news_id;
+  
+    return await commentsRepository.create(newComment);
+  } catch (error) {
+    throw error 
+  }
   
 }
 
