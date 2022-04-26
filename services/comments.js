@@ -13,22 +13,29 @@ const getCommentsByNew = async (req) => {
     if(!news){
       throwError("News not Found", NotFound);
     }
-    return await commentsRepository.getAllCommnets(condition);
+    return await commentsRepository.getAllComments(condition);
   }
   catch(error){
     throwError(error.message, ISError);
   }
 };
 
-const getAllCommentsByCreationDate = async () => {
+const getAllComments = async (query) => {
   try {
-    return await commentsRepository.getAllCommnets({
-      order: [['createdAt', 'ASC']],
-      attributes: ['body']
-    });
+    return await commentsRepository.getAllComments(CONDITIONS[query] ? CONDITIONS[query]() : null);
   } catch (error) {
     throwError(error.message, ISError);
   }
 };
 
-module.exports = { getCommentsByNew, getAllCommentsByCreationDate };
+const CONDITIONS = {
+  'order': (query) => {
+    return {
+      order: [['createdAt', query]],
+      attributes: ['body']
+    }
+  }
+
+}
+
+module.exports = { getCommentsByNew, getAllComments };
