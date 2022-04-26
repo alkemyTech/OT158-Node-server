@@ -9,6 +9,7 @@ module.exports = {
     port: process.env.DB_PORT,
     dialect: 'mysql',
     secretToken: process.env.SECRET_TOKEN,
+    roleAdmin: process.env.ROLE_ADMIN,
     sendgridApiKey: process.env.SENDGRID_API_KEY,
     sendgridMailAccount: process.env.SENDGRID_MAIL_ACCOUNT
   },
@@ -19,6 +20,7 @@ module.exports = {
     host: process.env.DB_HOST,
     dialect: 'mysql',
     secretToken: process.env.SECRET_TOKEN,
+    roleAdmin: process.env.ROLE_ADMIN,
     sendgridApiKey: process.env.SENDGRID_API_KEY,
     sendgridMailAccount: process.env.SENDGRID_MAIL_ACCOUNT
   },
@@ -29,6 +31,7 @@ module.exports = {
     host: process.env.DB_HOST,
     dialect: 'mysql',
     secretToken: process.env.SECRET_TOKEN,
+    roleAdmin: process.env.ROLE_ADMIN,
     sendgridApiKey: process.env.SENDGRID_API_KEY,
     sendgridMailAccount: process.env.SENDGRID_MAIL_ACCOUNT
   }
