@@ -98,6 +98,21 @@ describe("Task ONG", ()=>{
           response.body.should.have.property("message").eq("No token provided")
           done()
         })
+    });
+
+    it("It should NOT PUT a new organization if the ID does not exist ", (done)=>{
+      const ongId = 2;
+      const dataUpdate ={
+        name: "Ong test",
+      };
+      chai.request(server)
+        .put("/organization/public/" + ongId)
+        .set("authorization",  token)
+        .send(dataUpdate)
+        .end((err,response)=>{
+          response.should.have.status(200);
+          done()
+        })
     })
 
   })
