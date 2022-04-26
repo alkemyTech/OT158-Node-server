@@ -46,9 +46,22 @@ const getById = async (req, res, next) => {
   }
 };
 
+const deleteById = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    await newsService.deleteNews(id);
+    res.status(OK).json({
+      msg: 'Deleted successful'
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getAll,
   create,
   getById,
   update,
+  deleteById
 };

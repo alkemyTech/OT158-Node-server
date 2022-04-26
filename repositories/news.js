@@ -18,9 +18,12 @@ const getById = async (id) => {
   return await News.findByPk(id);
 };
 
+const remove = async (id) => await News.destroy(id);
+
 module.exports = {
   getAll,
   create,
   update,
   getById,
+  remove
 };

@@ -1,6 +1,7 @@
 const newsRepository = require('../repositories/news');
 const { NotFound, BadRequest } = require('../utils/status');
 const { validationResult } = require('express-validator');
+const { throwError } = require('../utils/errorHandler');
 
 const getAll = () => {
   return newsRepository.getAll();
@@ -40,9 +41,26 @@ const update = async (req) => {
   }
 }
 
+const deleteNews = async (id) => {
+  try {
+    const news = await newsRepository.getById(id);
+
+    if (!news) {
+      throwError('News not found', NotFound);
+    }
+
+    return await newsRepository.remove({
+      where: { id }
+    });
+  } catch (error) {
+    throwError('News not found', NotFound);
+  }
+};
+
 module.exports = {
   getAll,
   create,
   update,
   getById,
+  deleteNews
 };
