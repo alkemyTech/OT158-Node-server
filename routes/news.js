@@ -9,5 +9,6 @@ router.post('/', validData, newsController.create);
 router.get('/', newsController.getAll);
 router.get("/:id/comments",getCommentsByNew)
 router.get('/:id', adminValidator, newsController.getById);
+router.delete('/:id', adminValidator, newsController.deleteById);
 
 module.exports = router;

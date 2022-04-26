@@ -8,9 +8,13 @@ const create = (body) => {
 };
 const getById = (id)=>{
   return News.findByPk(id);
-}
+};
+
+const remove = async (id) => await News.destroy(id);
+
 module.exports = {
   getAll,
   create,
-  getById
+  getById,
+  remove
 };
