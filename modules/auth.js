@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { secretToken } = require('../config/config').development;
-const { Unauthorized } = require('./status');
-const { throwError } = require('./errorHandler');
+const { Unauthorized } = require('../utils/status');
+const { throwError } = require('../utils/errorHandler');
 
 const createToken = (userInfo) => {
   const payload = {
