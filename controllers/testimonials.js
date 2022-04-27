@@ -19,7 +19,18 @@ const update = async (req, res, next) => {
 	}
 };
 
+const getAll = async (req, res, next) =>{
+  try{
+    const data = await testimonialsService.getAll(req)
+    return res.status(OK).json(data)
+  }
+  catch(error){
+    next(error)
+  }
+}
+
 module.exports = {
 	create,
 	update,
+  getAll
 };

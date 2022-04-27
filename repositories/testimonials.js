@@ -1,5 +1,9 @@
 const { Testimonials } = require('../models');
 
+const getAll = async (conditions) =>{
+  return await Testimonials.findAll(conditions);
+}
+
 const create = async (body) => {
 	return await Testimonials.create(body);
 };
@@ -18,4 +22,5 @@ module.exports = {
 	create,
 	getById,
 	update,
+  	getAll
 };

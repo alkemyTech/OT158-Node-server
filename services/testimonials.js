@@ -7,7 +7,7 @@ const create = async (body) => {
 };
 
 const update = async (req) => {
-	
+
 	try {
 		if(!validationResult(req).isEmpty()) {
 			return Promise.reject({
@@ -15,7 +15,7 @@ const update = async (req) => {
 				message: "errores en el formulario",
 			})
 		}
-		
+
 		const { id } = req.params;
 		const changes = {...req.body};
 
@@ -24,7 +24,7 @@ const update = async (req) => {
 			status: NotFound,
 			message: "id non exists",
 		})
-	
+
 		const isUpdated = await testimonialsRepo.update(id, changes);
 		return isUpdated ? await testimonialsRepo.getById(id) : Promise.reject("unknow problems");
 	} catch (error) {
@@ -32,7 +32,56 @@ const update = async (req) => {
 	}
 }
 
+const getAll = async (req) =>{
+  const sizeOfPage= 10
+  const { page } = req.query
+  const count = await testimonialsRepo.getAll()
+  const totalOfPage = totalPage(count.length, sizeOfPage)
+
+  if(page && page<=totalOfPage){
+    const condition = getPageCondition(page,sizeOfPage)
+    const result = await testimonialsRepo.getAll(condition)
+    return {
+      total:count.length,
+      count: result.length,
+      totalOfPage,
+      currentPage: +page,
+      data: result,
+      nextPage: page <totalOfPage?`/testimonials?=${+page+1}`:null,
+      previousPage: page !=1 && page<=totalOfPage ?`/testimonials?=${+page-1}`:null
+    }
+  }
+  else{
+    const condition = getPageCondition()
+    const result = await testimonialsRepo.getAll(condition);
+    return {
+      total:count.length,
+      count: result.length,
+      totalOfPage,
+      currentPage: 1,
+      data: result,
+      nextPage: `/testimonials?=2`
+    }
+  }
+
+}
+
+
+
+//funciones auxiliares
+const getPageCondition = (page,size) => {
+  const limit = size ? size : 10
+  const offset = page?(page-1) * limit : 0
+  return {limit:limit, offset:offset}
+}
+
+const totalPage = (count,limit) => {
+    const totalPage = Math.ceil(count/limit)
+  return totalPage
+}
+
 module.exports = {
 	create,
 	update,
+  getAll
 };
