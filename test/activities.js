@@ -1,30 +1,100 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app');
-chai.use(chaiHttp);
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI1LCJyb2xlSWQiOjEsImlhdCI6MTY1MDkyMjIyNCwiZXhwIjoxNjUxMDA4NjI0fQ.cXzKVKxt2DXPkfy9KTjSBcuBLDH8MktEEhF1bYi2YpM"
 
+chai.use(chaiHttp);
 chai.should();
+
+describe("Test ONG Somos", () => {
+
 
   describe('POST /activities' , () => {
 
   it('It should POST a new activities', (done) => {
-    let newActivity = {
+    const newActivity = {
       name: "actividad",
-      content: "activividad numero 1"
+      content: "activividad numero 1",
+      image:"imagen1.jpg",
     }
 
     chai.request(server)
     .post('/activities')
+    .set('authorization', token)
     .send(newActivity)
     .end((error, res) => {
       res.should.have.status(201);
       res.should.be.a('object');
       newActivity.should.have.property('name');
       newActivity.should.have.property('content');
+      newActivity.should.have.property('image');
     done();
 
     });
   });
+
+  it('It should NOT POST a new activitie', (done) => {
+    const newActivity = {
+      name: 1
+    };
+    chai
+      .request(server)
+      .post('/activities')
+      .set('authorization', token)
+      .send(newActivity)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.a('object');
+        res.should.have.property('ok', false);
+        done();
+      });
+  });
+});
+
+describe('PUT /activities/:id' , () => {
+
+  it('It should PUT a new activities', (done) => {
+    const activitiId = 1;
+    const newActivity = {
+      name: "actividad actualizada",
+      content: "activividad numero 2",
+      image:"imagen1.jpg",
+    }
+
+    chai.request(server)
+    .put('/activities' + activitiId)
+    .set('authorization', token)
+    .send(newActivity)
+    .end((error, res) => {
+      res.should.have.status(201);
+      res.should.be.a('object');
+      newActivity.should.have.property('name');
+      newActivity.should.have.property('content');
+      newActivity.should.have.property('image');
+    done();
+
+    });
+  });
+
+  it('It should NOT PUT a new activitie', (done) => {
+    const activitiId = 1;
+    const newActivity = {
+      name: 2
+    };
+    chai
+      .request(server)
+      .put('/activities' + activitiId)
+      .set('authorization', token)
+      .send(newActivity)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.a('object');
+        res.should.have.property('ok', false);
+        done();
+      });
+  });
+});
+
 });
 
 
