@@ -6,9 +6,7 @@ const getAll = async () => {
 
 }
 const getPage = async (conditions) => {
-  const result = await db.Categories.findAndCountAll(conditions);
-  return result;
-
+  return await db.Categories.findAndCountAll(conditions);
 }
 
 const create = async (categories) => {

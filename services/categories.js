@@ -9,22 +9,15 @@ const getAll = async (req) => {
   try {
     
     const {page} = req.query;
-  
-    if (page){
-      const conditions = getPageCondition(page);
-  
-      const rawPaginated = await categoriesRepository.getPage(conditions);
-  
-      const paginated = parsePageResponse(rawPaginated,page,conditions.limit);
-  
-      return paginated
-    }else{
-      const allCategories = await categoriesRepository.getAll();
-      const result = allCategories.map((categorie) => {
-        return categorie.name;
-      });
-      return result;
-    }
+
+    const conditions = getPageCondition(page);
+
+    const rawPaginated = await categoriesRepository.getPage(conditions);
+
+    const paginated = parsePageResponse(rawPaginated,page,conditions.limit,'categories');
+
+    return paginated;
+    
   } catch (error) {
     throw error;
   }
