@@ -12,14 +12,18 @@ const getAll = async () => {
   return result;
 };
 const getById = async (req) => {
-  const {id} = req.params;
-
-  const category = await categoriesRepository.getById(id);
-
-  if(!category)
-    throwError('Category not found', NotFound);
-
-  return category;
+  try {
+    const {id} = req.params;
+  
+    const category = await categoriesRepository.getById(id);
+  
+    if(!category)
+      throwError('Category not found', NotFound);
+  
+    return category;
+  } catch (error) {
+    throw error;    
+  }
 };
 
 const create = async (req) => {
