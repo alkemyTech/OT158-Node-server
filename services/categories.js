@@ -6,22 +6,27 @@ const { BadRequest, NotFound } = require('../utils/status');
 const UPDATED_STATE_APPROVED = 1;
 
 const getAll = async (req) => {
-  const {page} = req.query;
-
-  if (page){
-    const conditions = getPageCondition(page);
-
-    const rawPaginated = await categoriesRepository.getPage(conditions);
-
-    const paginated = parsePageResponse(rawPaginated,page,conditions.limit);
-
-    return paginated
-  }else{
-    const allCategories = await categoriesRepository.getAll();
-    const result = allCategories.map((categorie) => {
-      return categorie.name;
-    });
-    return result;
+  try {
+    
+    const {page} = req.query;
+  
+    if (page){
+      const conditions = getPageCondition(page);
+  
+      const rawPaginated = await categoriesRepository.getPage(conditions);
+  
+      const paginated = parsePageResponse(rawPaginated,page,conditions.limit);
+  
+      return paginated
+    }else{
+      const allCategories = await categoriesRepository.getAll();
+      const result = allCategories.map((categorie) => {
+        return categorie.name;
+      });
+      return result;
+    }
+  } catch (error) {
+    throw error;
   }
 };
 
