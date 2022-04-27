@@ -1,5 +1,5 @@
 const sgMail = require('@sendgrid/mail');
-const { sendgridApiKey, sendgridMailAccount } = require('../config/config');
+const { sendgridApiKey, sendgridMailAccount } = require('../config/config').development;
 sgMail.setApiKey(sendgridApiKey);
 
 const createMessage = (to, subject, text, html) => {

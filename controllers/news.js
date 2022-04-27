@@ -24,6 +24,15 @@ const create = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  try {
+    const result = await newsService.update(req);
+    return res.status(OK).json(result);
+  } catch (error) {
+    next(error);
+  }
+}
+
 const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -53,5 +62,6 @@ module.exports = {
   getAll,
   create,
   getById,
+  update,
   deleteById
 };
