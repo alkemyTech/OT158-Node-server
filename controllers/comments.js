@@ -1,5 +1,5 @@
 const commentsService = require('../services/comments');
-const { OK } = require('../utils/status');
+const { OK, Created } = require('../utils/status');
 
 const getCommentsByNew = async (req, res, next) => {
   try {
@@ -16,6 +16,18 @@ const getCommentsByNew = async (req, res, next) => {
   }
 };
 
+const create = async (req, res, next) => {
+  try {
+    const createdComment = await commentsService.create(req.body);
+
+    res.status(Created).json({
+      data: createdComment
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
 const removeComment = async (req, res, next) => {
   try {
     const result = await commentsService.removeComment(req);
@@ -23,9 +35,9 @@ const removeComment = async (req, res, next) => {
     res.status(OK).json({
       data: result
     });
-  } catch (error) {
-    next(error)
+  } catch(error){
+    next(error);
   }
 }
 
-module.exports = { getCommentsByNew, removeComment };
+module.exports = { getCommentsByNew, create, removeComment };

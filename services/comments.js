@@ -1,7 +1,8 @@
 const commentsRepository  = require('../repositories/comments');
+const usersRepository = require('../repositories/users');
+const newsRepository = require('../repositories/news');
 const { NotFound, Forbidden } = require('../utils/status');
 const { throwError } = require('../utils/errorHandler');
-const newsRepository = require('../repositories/news');
 
 const getCommentsByNew = async (req) => {
   const newId = req.params.id
@@ -18,14 +19,40 @@ const getCommentsByNew = async (req) => {
   }
 };
 
+const create = async(newComment)=>{
+  try {
+    const existingUser = await usersRepository.getById(newComment.user_id);
+  
+    if (!existingUser)
+      throwError('User not valid', NotFound);
+  
+    const existingNew = await newsRepository.getById(newComment.news_id);
+  
+    if (!existingNew)
+      throwError('New not valid', NotFound);
+  
+    newComment.post_id = newComment.news_id;
+  
+    return await commentsRepository.create(newComment);
+  } catch (error) {
+    throw error 
+  }
+  
+}
+
 const removeComment = async (req) => {
-  const { id } = req.params;
-  const comment = await commentsRepository.getById(id);
-
-  if (comment.user_id === req.user.userId)
-    throwError('Not allowed to perform this action', Forbidden);
-
-  return await commentsRepository.remove(id);
+  try {
+    const { id } = req.params;
+    const comment = await commentsRepository.getById(id);
+  
+    if (comment.user_id === req.user.userId)
+      throwError('Not allowed to perform this action', Forbidden);
+  
+    return await commentsRepository.remove(id);
+  } catch (error) {
+    throw error;    
+  }
 } 
 
-module.exports = { getCommentsByNew, removeComment};
+
+module.exports={ create, getCommentsByNew, removeComment };
