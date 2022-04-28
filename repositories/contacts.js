@@ -1,11 +1,11 @@
 const { Contacts } = require('../models');
 
-const create = (newContact) => {
-  return Contacts.create(newContact);
+const create = async (newContact) => {
+  return await Contacts.create(newContact);
 }
 
-const getAll = () => {
-  return Contacts.findAll();
+const getAll = async () => {
+  return await Contacts.findAll();
 }
 
 module.exports = { create, getAll };
