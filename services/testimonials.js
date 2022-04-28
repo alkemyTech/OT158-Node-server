@@ -33,7 +33,7 @@ const update = async (req) => {
 	}
 }
 
-const removeTestimonials = async (id) => {
+const removeTestminonyById = async (id) => {
   try {
     const testimonial = await testimonialsRepo.getById(id);
 
@@ -41,7 +41,9 @@ const removeTestimonials = async (id) => {
       throwError('Testimonial not found', NotFound)
     }
 
-    return testimonial
+    return await testimonialsRepo.remove({
+      where: { id }
+    });
   } catch (error) {
     throwError(error.message, ISError)
   }
@@ -50,5 +52,5 @@ const removeTestimonials = async (id) => {
 module.exports = {
 	create,
 	update,
-  removeTestimonials
+  removeTestminonyById
 };

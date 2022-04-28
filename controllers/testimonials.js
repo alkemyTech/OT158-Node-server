@@ -23,7 +23,7 @@ const remove = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    await testimonialsService.removeTestimonials(id);
+    await testimonialsService.removeTestminonyById(id);
 
     res.status(NoContent).json({
       message: 'Testimonial removed successfully',
