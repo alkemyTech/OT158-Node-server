@@ -1,9 +1,9 @@
-const { getAllService, createService, updateService, removeService } = require('../services/members');
+const service = require('../services/members');
 const { OK } = require("../utils/status")
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await getAllService()
+    const result = await service.getAll(req)
     res.status(OK).json({
       data: result
     })
@@ -16,7 +16,7 @@ const create = async (req, res, next) => {
   try {
     const newMember = req.body;
 
-    const memberCreationHandler = await createService(newMember);
+    const memberCreationHandler = await service.create(newMember);
 
     res.status(OK).json({
       ok: true,
@@ -34,7 +34,7 @@ const update = async (req, res, next) => {
 
     const body = req.body;
 
-    const result = await updateService(id, body);
+    const result = await service.update(id, body);
 
     return res.status(OK).json({
       data: result
@@ -47,7 +47,7 @@ const update = async (req, res, next) => {
 const remove = async (req, res ,next) => {
   try {
     const { id } = req.params;
-    const result = await removeService(id)
+    const result = await service.remove(id)
     return res.status(OK).json({
       msg: "Deleted succesful"
     })

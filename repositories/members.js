@@ -1,8 +1,10 @@
 const { Members } = require("../models");
 
-const getAll = async () => {
-  const GetAll = await Members.findAll();
-  return GetAll
+const getAll = async (options) => {
+  return await Members.findAndCountAll({
+    limit: options.limit,
+    offset: options.offset,
+  });
 };
 
 const create = async newMember => {
