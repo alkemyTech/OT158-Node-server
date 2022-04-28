@@ -2,11 +2,13 @@ const contactsRepository = require('../repositories/contacts');
 const { throwError } = require('../utils/errorHandler');
 const { BadRequest } = require('../utils/status');
 const { createMessage, sendMail } = require('./mail.service');
+
+
 const create = async (newContact) => {
   try{
     const contact = await contactsRepository.create(newContact)
     const {email, name} = contact
-    const message = createMessage(
+    const message = await createMessage(
       email,
       "Gracias por su consulta",
       "Gracias por contactarnos",
