@@ -1,5 +1,5 @@
 const commentsService = require('../services/comments');
-const { OK } = require('../utils/status');
+const { OK, Created } = require('../utils/status');
 
 const getCommentsByNew = async (req, res, next) => {
   try {
@@ -32,4 +32,15 @@ const updateComments = async (req, res, next) => {
   }
 };
 
-module.exports = { getCommentsByNew, updateComments };
+const create = async (req, res, next) => {
+  try {
+    const createdComment = await commentsService.create(req.body);
+
+    res.status(Created).json({
+      data: createdComment
+    });
+  } catch (error) {
+    next(error)
+  }
+}
+module.exports = { getCommentsByNew, create, updateComments }

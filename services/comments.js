@@ -2,6 +2,7 @@ const commentsRepository = require('../repositories/comments');
 const { throwError } = require('../utils/errorHandler');
 const { Forbidden, NotFound, ISError } = require('../utils/status');
 const newsRepository = require('../repositories/news');
+const usersRepository = require('../repositories/users');
 
 const updateCommentById = async (id, body) => {
   try {
@@ -39,4 +40,25 @@ const getCommentsByNew = async (req) => {
   }
 };
 
-module.exports = { getCommentsByNew, updateCommentById };
+const create = async(newComment)=>{
+  try {
+    const existingUser = await usersRepository.getById(newComment.user_id);
+
+    if (!existingUser)
+      throwError('User not valid', NotFound);
+
+    const existingNew = await newsRepository.getById(newComment.news_id);
+
+    if (!existingNew)
+      throwError('New not valid', NotFound);
+
+    newComment.post_id = newComment.news_id;
+
+    return await commentsRepository.create(newComment);
+  } catch (error) {
+    throw error
+  }
+
+}
+
+module.exports={ create, getCommentsByNew, updateCommentById };

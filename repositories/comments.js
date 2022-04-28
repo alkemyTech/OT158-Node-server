@@ -6,4 +6,8 @@ const getAll = async (command) => {
 
 const getCommentById = async (id) => await Comments.findOne(id);
 
-module.exports = { getAll, getCommentById };
+const create = async(newComment)=>{
+  return Comments.create(newComment);
+}
+
+module.exports = { getAll, create, getCommentById };
