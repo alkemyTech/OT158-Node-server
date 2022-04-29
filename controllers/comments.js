@@ -1,5 +1,5 @@
 const commentsService = require('../services/comments');
-const { OK } = require('../utils/status');
+const { OK, Created } = require('../utils/status');
 
 const getCommentsByNew = async (req, res, next) => {
   try {
@@ -19,6 +19,21 @@ const getCommentsByNew = async (req, res, next) => {
 const getAllCommnets = async (req,res, next) => {
   try {
     const result = await commentsService.getAllCommentsByCreationDate();
+    res.status(OK).json({
+      data: result
+    })
+  } catch (error) {
+    next(error)
+  }
+};
+
+const updateComments = async (req, res, next) => {
+  try {
+    const body = req.body;
+
+    const { id } = req.params;
+
+    const result = await commentsService.updateCommentById(id, body);
 
     res.status(OK).json({
       data: result
@@ -27,4 +42,16 @@ const getAllCommnets = async (req,res, next) => {
     next(error)
   }
 };
-module.exports = { getCommentsByNew, getAllCommnets };
+
+const create = async (req, res, next) => {
+  try {
+    const createdComment = await commentsService.create(req.body);
+
+    res.status(Created).json({
+      data: createdComment
+    });
+  } catch (error) {
+    next(error)
+  }
+}
+module.exports = { getCommentsByNew, create, updateComments, getAllCommnets }
