@@ -7,6 +7,7 @@ const getPageCondition = (page=1, size)=>{
 const parsePageResponse = (data, page, limit, model)=>{
   const { count, rows } = data;
   const totalPages = Math.ceil(count / limit);
+  if (page > totalPages) return false;
   const previousPage = page > 1 ? `/${model}?page=${page-1}` : null;
   const nextPage = page < totalPages ? `/${model}?page=${page+1}` : null;
   return {

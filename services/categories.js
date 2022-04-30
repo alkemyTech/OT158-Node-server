@@ -6,22 +6,27 @@ const { BadRequest, NotFound } = require('../utils/status');
 const UPDATED_STATE_APPROVED = 1;
 
 const getAll = async (req) => {
-  try {
     
     const {page} = req.query;
 
-    const conditions = getPageCondition(page);
-
-    const rawPaginated = await categoriesRepository.getPage(conditions);
-
-    const paginated = parsePageResponse(rawPaginated,page,conditions.limit,'categories');
+    const paginated = getPage(page);
 
     return paginated;
-    
-  } catch (error) {
-    throw error;
-  }
+
 };
+
+const getPage = async (page)=>{
+  const conditions = getPageCondition(page);
+
+  const rawPaginated = await categoriesRepository.getPage(conditions);
+
+  const paginated = parsePageResponse(rawPaginated,page,conditions.limit,'categories');
+
+  if (!paginated) return getPage(1);
+
+  return paginated;
+}
+
 
 const create = async (req) => {
   const result = await categoriesRepository.create(req);
