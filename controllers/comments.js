@@ -43,7 +43,6 @@ const create = async (req, res, next) => {
     next(error);
   }
 }
-<<<<<<< HEAD
 
 const removeComment = async (req, res, next) => {
   try {
@@ -57,7 +56,4 @@ const removeComment = async (req, res, next) => {
   }
 }
 
-module.exports = { getCommentsByNew, create, removeComment };
-=======
-module.exports = { getCommentsByNew, create, updateComments }
->>>>>>> 7aa7a4ba895f39df97bcdc129a39b9fe20d3b0f4
+module.exports = { getCommentsByNew, create, updateComments, removeComment }
