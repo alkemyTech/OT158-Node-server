@@ -28,7 +28,7 @@ const getPage = async (model,repository,page)=>{
   
     const paginated = parsePageResponse(rawPaginated,page,conditions.limit,model);
   
-    if (!paginated) return getPage(1);
+    if (!paginated) return getPage(model,repository,1);
   
     return paginated;
   } catch (error) {
