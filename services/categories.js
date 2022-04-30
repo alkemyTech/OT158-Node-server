@@ -19,7 +19,6 @@ const getAll = async (req) => {
 };
 
 const getPage = async (page)=>{
-
   try {
     const conditions = getPageCondition(page);
   
