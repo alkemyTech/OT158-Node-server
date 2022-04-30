@@ -16,6 +16,22 @@ const getCommentsByNew = async (req, res, next) => {
   }
 };
 
+const updateComments = async (req, res, next) => {
+  try {
+    const body = req.body;
+
+    const { id } = req.params;
+
+    const result = await commentsService.updateCommentById(id, body);
+
+    res.status(OK).json({
+      data: result
+    })
+  } catch (error) {
+    next(error);
+  }
+};
+
 const create = async (req, res, next) => {
   try {
     const createdComment = await commentsService.create(req.body);
@@ -27,6 +43,7 @@ const create = async (req, res, next) => {
     next(error);
   }
 }
+<<<<<<< HEAD
 
 const removeComment = async (req, res, next) => {
   try {
@@ -41,3 +58,6 @@ const removeComment = async (req, res, next) => {
 }
 
 module.exports = { getCommentsByNew, create, removeComment };
+=======
+module.exports = { getCommentsByNew, create, updateComments }
+>>>>>>> 7aa7a4ba895f39df97bcdc129a39b9fe20d3b0f4

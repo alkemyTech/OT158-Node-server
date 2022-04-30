@@ -1,8 +1,10 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const { contactValidation } = require("../middlewares/contacts");
-const { create } = require("../controllers/contacts");
+const { contactValidation } = require('../middlewares/contacts');
+const { create, getAll } = require('../controllers/contacts');
+const { adminValidator } = require('../middlewares/adminValidator')
 
-router.post("/", contactValidation, create);
+router.get('/', adminValidator, getAll);
+router.post('/', contactValidation, create);
 
 module.exports = router;
