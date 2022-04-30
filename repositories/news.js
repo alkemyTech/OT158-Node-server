@@ -1,10 +1,7 @@
 const { News } = require('../models');
 
-const getAll = (options) => {
-  return News.findAndCountAll({
-    limit: options.limit,
-    offset: options.offset
-  });
+const getAll = () => {
+  return News.findAll();
 };
 
 const create = (body) => {
@@ -23,10 +20,16 @@ const getById = async (id) => {
 
 const remove = async (id) => await News.destroy(id);
 
+const getPage = async (conditions) => {
+  return await News.findAndCountAll(conditions);
+}
+
+
 module.exports = {
   getAll,
   create,
   update,
   getById,
-  remove
+  remove,
+  getPage
 };

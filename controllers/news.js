@@ -8,9 +8,13 @@ const { throwError } = require('../utils/errorHandler');
 
 const getAll = async (req, res, next) => {
   try {
-    const allNews = await newsService.getAll(req);
-    res.status(OK).json({ data: allNews });
-  } catch (error) {
+    const paginatedCategoriesList = await newsService.getAll(req);
+
+    res.status(OK).json({
+      data: paginatedCategoriesList
+    });
+  }
+  catch (error) {
     next(error);
   }
 };

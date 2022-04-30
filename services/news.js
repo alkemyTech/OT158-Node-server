@@ -2,30 +2,20 @@ const newsRepository = require('../repositories/news');
 const { NotFound, BadRequest } = require('../utils/status');
 const { validationResult } = require('express-validator');
 const { throwError } = require('../utils/errorHandler');
+const { getPage } = require('./pagination.service');
 
 const getAll = async (req) => {
   try {
+    const {page} = req.query;
 
-  const {page} = req.query;
-  const {LIMIT} = 10;
-  const {offset} = page? (+page*LIMIT) - LIMIT : 0;
-  const {count, rows} = await newsRepository.getAll({limit: LIMIT, offset});
+    const paginated = getPage('news',newsRepository,page);
 
-  const { nextPage, currentPage, prevPage, totalPages } = getPagination(req, count, page, LIMIT);
+    return paginated;
 
-   return {
-    data:rows,
-    total:count,
-    pagination: {
-      pages:totalPages,
-      current:currentPage,
-      next:nextPage,
-      prev:prevPage,
-    }
+  } catch (error) {
+    throw error;
   }
-} catch (error) {
 
-  }
 };
 
 
@@ -44,19 +34,19 @@ const update = async (req) => {
       status: BadRequest,
       message: "errores en el formulario"
     })
-  
+
     const {id} = req.params;
     const changes = {...req.body};
     const news = await newsRepository.getById(id);
-  
+
     if(!news) return Promise.reject({
       status: NotFound,
       message: "id non exists",
     })
-  
+
     const isUpdated = await newsRepository.update(id, changes);
 
-    return (isUpdated) 
+    return (isUpdated)
       ? await newsRepository.getById(id)
       : Promise.reject("Unknow problem");
   } catch(error) {
