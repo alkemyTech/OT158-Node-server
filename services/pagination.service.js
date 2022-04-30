@@ -20,4 +20,20 @@ const parsePageResponse = (data, page, limit, model)=>{
   };
 }
 
-module.exports = { getPageCondition, parsePageResponse};
+const getPage = async (model,repository,page)=>{
+  try {
+    const conditions = getPageCondition(page);
+  
+    const rawPaginated = await repository.getPage(conditions);
+  
+    const paginated = parsePageResponse(rawPaginated,page,conditions.limit,model);
+  
+    if (!paginated) return getPage(1);
+  
+    return paginated;
+  } catch (error) {
+    throw error;    
+  }
+}
+
+module.exports = { getPageCondition, parsePageResponse, getPage};

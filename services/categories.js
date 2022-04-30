@@ -1,4 +1,4 @@
-const { getPageCondition, parsePageResponse } = require('../modules/paginator');
+const { getPage } = require('./pagination.service');
 const categoriesRepository = require('../repositories/categories');
 const { throwError } = require('../utils/errorHandler');
 const { BadRequest, NotFound } = require('../utils/status');
@@ -6,33 +6,20 @@ const { BadRequest, NotFound } = require('../utils/status');
 const UPDATED_STATE_APPROVED = 1;
 
 const getAll = async (req) => {
-    try {
-      const {page} = req.query;
-  
-      const paginated = getPage(page);
-  
-      return paginated;
-    } catch (error) {
-      throw error;      
-    }
+  try {
+    const {page} = req.query;
+
+    const paginated = getPage('categories',categoriesRepository,page);
+
+    return paginated;
+    
+  } catch (error) {
+    throw error;
+  }
 
 };
 
-const getPage = async (page)=>{
-  try {
-    const conditions = getPageCondition(page);
-  
-    const rawPaginated = await categoriesRepository.getPage(conditions);
-  
-    const paginated = parsePageResponse(rawPaginated,page,conditions.limit,'categories');
-  
-    if (!paginated) return getPage(1);
-  
-    return paginated;
-  } catch (error) {
-    throw error;    
-  }
-}
+
 
 
 const create = async (req) => {
