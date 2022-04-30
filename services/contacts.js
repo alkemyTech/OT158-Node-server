@@ -1,6 +1,6 @@
 const contactsRepository = require('../repositories/contacts');
 const { throwError } = require('../utils/errorHandler');
-const { BadRequest } = require('../utils/status');
+const { BadRequest, ISError, NotFound } = require('../utils/status');
 const { createMessage, sendMail } = require('./mail.service');
 
 
@@ -24,7 +24,17 @@ const create = async (newContact) => {
 
 
 const getAll = async () => {
-  return await contactsRepository.getAll();
+  try {
+    const contacts = await contactsRepository.getAll();
+
+    if(!contacts){
+      throwError('Contacts not found', NotFound);
+    }
+
+    return contacts
+  } catch (error) {
+    throwError(error.message, ISError);
+  }
 }
 
 
