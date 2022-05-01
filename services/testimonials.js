@@ -2,6 +2,7 @@ const { validationResult } = require('express-validator');
 const testimonialsRepo = require('../repositories/testimonials');
 const { BadRequest, NotFound, ISError } = require('../utils/status');
 const { throwError } = require('../utils/errorHandler')
+const { getPage } = require('./pagination.service')
 
 const create = async (body) => {
 	return await testimonialsRepo.create(body);
@@ -33,53 +34,19 @@ const update = async (req) => {
 	}
 }
 
-const getAll = async (req) =>{
-  const sizeOfPage= 10
-  const { page } = req.query
-  const count = await testimonialsRepo.getAll()
-  const totalOfPage = totalPage(count.length, sizeOfPage)
+const getAll = async (req) => {
+  try {
+    const { page } = req.query;
 
-  if(page && page<=totalOfPage){
-    const condition = getPageCondition(page,sizeOfPage)
-    const result = await testimonialsRepo.getAll(condition)
-    return {
-      total:count.length,
-      count: result.length,
-      totalOfPage,
-      currentPage: +page,
-      data: result,
-      nextPage: page <totalOfPage?`/testimonials?=${+page+1}`:null,
-      previousPage: page !=1 && page<=totalOfPage ?`/testimonials?=${+page-1}`:null
-    }
+    const paginated = getPage('testimonials',testimonialsRepo,page);
+
+    return paginated;
+
+  } catch (error) {
+    throw error;
   }
-  else{
-    const condition = getPageCondition()
-    const result = await testimonialsRepo.getAll(condition);
-    return {
-      total:count.length,
-      count: result.length,
-      totalOfPage,
-      currentPage: 1,
-      data: result,
-      nextPage: `/testimonials?=2`
-    }
-  }
-
 }
 
-
-
-//funciones auxiliares
-const getPageCondition = (page,size) => {
-  const limit = size ? size : 10
-  const offset = page?(page-1) * limit : 0
-  return {limit:limit, offset:offset}
-}
-
-const totalPage = (count,limit) => {
-    const totalPage = Math.ceil(count/limit)
-  return totalPage
-}
 const removeTestminonyById = async (id) => {
   try {
     const testimonial = await testimonialsRepo.getById(id);
