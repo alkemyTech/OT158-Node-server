@@ -10,4 +10,9 @@ const create = async(newComment)=>{
   return Comments.create(newComment);
 }
 
-module.exports = { getAll, create, getCommentById };
+const remove = async (id) => {
+  return await Comments.destroy(id)
+};
+
+
+module.exports = { getAll, create, getCommentById, remove };
