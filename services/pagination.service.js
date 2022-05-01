@@ -1,13 +1,13 @@
 const getPageCondition = (page, size)=>{
   const limit = size || 10;
-  const offset = page ? (page-1) * limit : 0;
+  const offset = page && page > 0 ? (page-1) * limit : 0;
   return {limit,offset};
 }
 
 const parsePageResponse = (rawData,paginatedData, page, limit, model)=>{
   const count = rawData.length;
   const totalPages = Math.ceil(count / limit);
-  if (!page  || page > totalPages) return false;
+  if (!page  || page > totalPages || page < 1) return false;
   const previousPage = page > 1 ? `/${model}?page=${page - 1}` : null;
   const nextPage = page < totalPages ? `/${model}?page=${+page + 1}` : null;
   return {
@@ -38,3 +38,4 @@ const getPage = async (model,repository,page)=>{
 }
 
 module.exports = { getPageCondition, parsePageResponse, getPage};
+
