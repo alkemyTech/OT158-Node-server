@@ -15,7 +15,7 @@ const parsePageResponse = (rawData,paginatedData, page, limit, model)=>{
     totalPages,
     totalItems: count.length,
     itemsPerPage: limit,
-    paginatedData,
+    data:paginatedData,
     previousPage,
     nextPage,
   };
