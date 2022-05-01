@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const testimonialsRepo = require('../repositories/testimonials');
-const { BadRequest, NotFound } = require('../utils/status');
+const { BadRequest, NotFound, ISError } = require('../utils/status');
+const { throwError } = require('../utils/errorHandler')
 
 const create = async (body) => {
 	return await testimonialsRepo.create(body);
@@ -79,9 +80,25 @@ const totalPage = (count,limit) => {
     const totalPage = Math.ceil(count/limit)
   return totalPage
 }
+const removeTestminonyById = async (id) => {
+  try {
+    const testimonial = await testimonialsRepo.getById(id);
+
+    if(!testimonial){
+      throwError('Testimonial not found', NotFound)
+    }
+
+    return await testimonialsRepo.remove({
+      where: { id }
+    });
+  } catch (error) {
+    throwError(error.message, ISError)
+  }
+};
 
 module.exports = {
 	create,
 	update,
-  getAll
+  getAll,
+  removeTestminonyById
 };
