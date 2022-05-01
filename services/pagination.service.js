@@ -44,6 +44,7 @@ const getPage = async (model,repository,page)=>{
     if (!paginated) return getPage(model,repository,1);
 
     return paginated;
+
   } catch (error) {
     throw error;
   }
