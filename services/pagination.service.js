@@ -5,15 +5,15 @@ const getPageCondition = (page, size)=>{
 }
 
 const parsePageResponse = (rawData,paginatedData, page, limit, model)=>{
-  const count = rawData;
-  const totalPages = Math.ceil(count.length / limit);
+  const count = rawData.length;
+  const totalPages = Math.ceil(count / limit);
   if (!page  || page > totalPages) return false;
   const previousPage = page > 1 ? `/${model}?page=${page - 1}` : null;
   const nextPage = page < totalPages ? `/${model}?page=${+page + 1}` : null;
   return {
     currentPage:page,
     totalPages,
-    totalItems: count.length,
+    totalItems: count,
     itemsPerPage: limit,
     data:paginatedData,
     previousPage,
