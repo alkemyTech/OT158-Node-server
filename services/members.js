@@ -20,7 +20,7 @@ const createService = async (newMember) => {
 };
 
 const updateService = async (id, body) => {
-  const member = await getById({ where: { id: id } });
+  const member = await getById(id);
 
   if (member) {
     const memberUpdated = await member.update(body);
