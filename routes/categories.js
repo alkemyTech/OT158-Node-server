@@ -9,6 +9,6 @@ router.get('/', getAll);
 router.post('/', adminValidator, creationValidation, create);
 router.put("/:id", adminValidator, update)
 router.delete("/:id", adminValidator, remove)
-router.get("/:id",adminValidator, getById)
+router.get("/:id", adminValidator, getById)
 
 module.exports = router;

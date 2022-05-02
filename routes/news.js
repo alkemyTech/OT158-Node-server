@@ -6,7 +6,7 @@ const { adminValidator } = require('../middlewares/adminValidator');
 const { validData } = require('../middlewares/news');
 const { updateForm } = require('../validations/newsValidator');
 
-router.post('/',adminValidator, validData, newsController.create);
+router.post('/', adminValidator, validData, newsController.create);
 router.get('/', newsController.getAll);
 router.put('/:id', adminValidator, updateForm, newsController.update);
 router.get("/:id/comments",getCommentsByNew)
