@@ -1,4 +1,5 @@
 const express = require('express');
+<<<<<<< HEAD
 const { getCommentsByNew } = require('../controllers/comments');
 const router = express.Router();
 const newsController = require('../controllers/news');
@@ -14,3 +15,13 @@ router.get('/:id', adminValidator, newsController.getById);
 router.delete('/:id', adminValidator, newsController.deleteById);
 
 module.exports = router;
+=======
+const router = express.Router();
+const newsController = require('../controllers/news');
+const { validData } = require('../middlewares/news');
+const { adminValidator } = require('../middlewares/adminValidator');
+
+router.post('/',adminValidator,validData,newsController.create)
+
+module.exports = router
+>>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865

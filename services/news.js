@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const newsRepository = require('../repositories/news');
 const { NotFound, BadRequest } = require('../utils/status');
 const { validationResult } = require('express-validator');
@@ -64,3 +65,15 @@ module.exports = {
   getById,
   deleteNews
 };
+=======
+const newsRepository = require('../repositories/news')
+
+const create =async({body})=>{
+  body.type="news"
+  const result = await newsRepository.create(body)
+  return result
+}
+module.exports={
+  create
+}
+>>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865

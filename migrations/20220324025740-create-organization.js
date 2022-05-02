@@ -33,6 +33,7 @@ module.exports = {
       aboutUsText: {
         type: Sequelize.TEXT
       },
+<<<<<<< HEAD
       facebookUrl: {
         type: Sequelize.STRING
       },
@@ -42,6 +43,8 @@ module.exports = {
       instagramUrl: {
         type: Sequelize.STRING
       },
+=======
+>>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
       deletedAt: {
         type: Sequelize.DATE
       },
@@ -58,4 +61,8 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Organizations');
   }
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865

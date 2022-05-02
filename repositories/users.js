@@ -1,8 +1,18 @@
+<<<<<<< HEAD
 const { Users } = require('../models');
 
 const getAll = async () => {
   return await Users.findAll();
 };
+=======
+const model = require('../models/users')
+
+
+const getAll = async () => {
+  const result = [];
+  return result;
+}
+>>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
 
 const create = async (user) => {
   return await Users.create(user);

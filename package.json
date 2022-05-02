@@ -3,10 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+<<<<<<< HEAD
     "database" : "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "lint": "eslint"
+=======
+    "start": "node ./bin/www",
+
+    "dev": "nodemon ./bin/www",
+    "lint": "eslint"
+
+>>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
   },
   "dependencies": {
     "@sendgrid/mail": "^7.6.2",
@@ -18,7 +26,10 @@
     "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+<<<<<<< HEAD
     "express-fileupload": "^1.3.1",
+=======
+>>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
     "express-validator": "^6.14.0",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
@@ -30,9 +41,15 @@
   },
   "devDependencies": {
     "eslint": "^8.12.0",
+<<<<<<< HEAD
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "nodemon": "^2.0.15",
+=======
+    "nodemon": "^2.0.15",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+>>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
     "prettier": "^2.6.1",
     "sequelize-cli": "^6.2.0"
   }

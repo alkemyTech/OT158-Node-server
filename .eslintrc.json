@@ -1,6 +1,10 @@
 {
   "parserOptions": {
+<<<<<<< HEAD
     "ecmaVersion": 2020
+=======
+    "ecmaVersion": 2018
+>>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
   },
   "extends": ["eslint:recommended", "prettier"],
   "env": {

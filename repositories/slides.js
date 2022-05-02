@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const { Slides } = require('../models');
 
 const create = async (slide) => {
@@ -33,3 +34,13 @@ const update = async (id, body) => {
 }
 
 module.exports = { create, getById, getAll, update, remove , getAllSlidesById };
+=======
+const { Slides } = require('../models')
+
+const create = async (slide) => {
+    let result = await Slides.create(slide);
+    return result;
+}
+
+module.exports = { create };
+>>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865

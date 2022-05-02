@@ -1,4 +1,5 @@
 const service = require('../services/slides');
+<<<<<<< HEAD
 const { OK, Created } = require('../utils/status');
 
 const create = async (req, res, next) => {
@@ -68,3 +69,20 @@ const getAll = async (req, res, next) => {
 };
 
 module.exports = { create, getById, updateSlide, getAll, removeSlide };
+=======
+
+module.exports = {
+
+    create: async (req, res, next) => {
+        try {
+            let data = await service.create(req);
+            res.status(200).json({
+                data,
+            });
+        } catch (error) {
+            next(error);
+        }
+    },
+
+}
+>>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865

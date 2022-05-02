@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const contactsRepository = require('../repositories/contacts');
 const { throwError } = require('../utils/errorHandler');
 const { BadRequest, ISError, NotFound } = require('../utils/status');
@@ -40,3 +41,13 @@ const getAll = async () => {
 
 module.exports = { create, getAll };
 
+=======
+const contactsRepository = require("../repositories/contacts");
+
+const create = async (newContact) => {
+  const result = await contactsRepository.create(newContact);
+  return result;
+};
+
+module.exports = { create };
+>>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
