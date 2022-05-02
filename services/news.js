@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const newsRepository = require('../repositories/news');
 const { NotFound, BadRequest } = require('../utils/status');
 const { validationResult } = require('express-validator');
@@ -22,19 +21,19 @@ const update = async (req) => {
       status: BadRequest,
       message: "errores en el formulario"
     })
-  
+
     const {id} = req.params;
     const changes = {...req.body};
     const news = await newsRepository.getById(id);
-  
+
     if(!news) return Promise.reject({
       status: NotFound,
       message: "id non exists",
     })
-  
+
     const isUpdated = await newsRepository.update(id, changes);
 
-    return (isUpdated) 
+    return (isUpdated)
       ? await newsRepository.getById(id)
       : Promise.reject("Unknow problem");
   } catch(error) {
@@ -65,15 +64,3 @@ module.exports = {
   getById,
   deleteNews
 };
-=======
-const newsRepository = require('../repositories/news')
-
-const create =async({body})=>{
-  body.type="news"
-  const result = await newsRepository.create(body)
-  return result
-}
-module.exports={
-  create
-}
->>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865

@@ -31,11 +31,7 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false
 			},
-<<<<<<< HEAD
 			image: {
-=======
-			photo: {
->>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
 				type: DataTypes.STRING,
 				allowNull: true
 			},
@@ -50,8 +46,4 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	);
 	return Users;
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865

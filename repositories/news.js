@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const { News } = require('../models');
 
 const getAll = () => {
@@ -28,15 +27,3 @@ module.exports = {
   getById,
   remove
 };
-=======
-const {News} = require('../models')
-
-const create= async(body)=>{
-  const result = News.create(body);
-  return result
-}
-
-module.exports={
-  create
-}
->>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865

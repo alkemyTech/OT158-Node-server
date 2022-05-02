@@ -11,7 +11,6 @@ require('dotenv').config();
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const slidesRouter = require('./routes/slides');
-<<<<<<< HEAD
 const categoriesRouter = require('./routes/categories');
 const contactRouter = require('./routes/contacts');
 const commentsRouter = require('./routes/comments');
@@ -25,12 +24,6 @@ const organizationRouter = require('./routes/organization');
 const commentRouter = require('./routes/comments');
 const { swaggerDefinitions } = require('./helpers/swaggerDefinitions');
 
-=======
-const categoriesRouter = require("./routes/categories")
-const contactRouter = require('./routes/contacts');
-const membersRouter = require('./routes/members');
-const authRouter = require('./routes/auth');
->>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
 
 const app = express();
 app.use(cors());
@@ -60,7 +53,6 @@ app.use('/', indexRouter);
 app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerDefinitions)));
 app.use('/users', usersRouter);
 app.use('/slides', slidesRouter);
-<<<<<<< HEAD
 app.use('/categories', categoriesRouter);
 app.use('/contacts', contactRouter);
 app.use('/comments', commentsRouter);
@@ -86,20 +78,6 @@ app.use((req, res) => {
 
 // error handler
 app.use((err, req, res) => {
-=======
-app.use("/categories", categoriesRouter)
-app.use("/contacts", contactRouter);
-app.use("/members", membersRouter);
-app.use("/auth", authRouter);
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function (err, req, res, next) {
->>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error =

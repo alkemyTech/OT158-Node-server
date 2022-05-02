@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Organizations.init(
     {
-<<<<<<< HEAD
       name: {
         type: DataTypes.STRING,
         allowNull: false
@@ -37,28 +36,6 @@ module.exports = (sequelize, DataTypes) => {
       facebookUrl: DataTypes.STRING,
       linkedinUrl: DataTypes.STRING,
       instagramUrl: DataTypes.STRING,
-=======
-      name: { 
-        type: DataTypes.STRING,
-        allowNull: false 
-      },
-      image: { 
-        type: DataTypes.STRING,
-        allowNull: false 
-      },
-      address: DataTypes.STRING,
-      phone: DataTypes.INTEGER,
-      email: { 
-        type: DataTypes.STRING,
-        allowNull: false 
-      },
-      deletedAt: DataTypes.DATE,
-      welcomeText: { 
-        type: DataTypes.TEXT,
-        allowNull: false 
-      },
-      aboutUsText: DataTypes.TEXT,
->>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
     },
     {
       sequelize,

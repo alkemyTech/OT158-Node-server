@@ -1,12 +1,8 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.printWidth": 90,
-<<<<<<< HEAD
   "editor.formatOnSave": true,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
-=======
-  "editor.formatOnSave": true
->>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
 }

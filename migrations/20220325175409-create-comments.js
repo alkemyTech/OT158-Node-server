@@ -12,14 +12,8 @@ module.exports = {
       body: {
         type: Sequelize.TEXT
       },
-<<<<<<< HEAD
       user_id: {
         type: Sequelize.INTEGER,
-=======
-      userId: {
-        type: Sequelize.INTEGER,
-        field: 'user_id',
->>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
         references: {
           model: 'Users',
           key: 'id',
@@ -27,7 +21,6 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-<<<<<<< HEAD
       post_id:{
         type: Sequelize.INTEGER,
         references: {
@@ -37,8 +30,6 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-=======
->>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
       deletedAt: {
         type: Sequelize.DATE
       },

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const newsService = require('../services/news');
 const {
   OK,
@@ -65,18 +64,4 @@ module.exports = {
   getById,
   update,
   deleteById
-=======
-const newsService = require('../services/news')
-
-const create = async (req, res, next) => {
-  try {
-    const result = await newsService.create(req);
-    res.status(200).json({ data: result });
-  } catch (error) {
-    next(error);
-  }
-};
-module.exports = {
-  create
->>>>>>> 15d598eb5683e0f900e3a23f568abfa5d7d74865
 };
