@@ -40,7 +40,20 @@ const create = async (req, res, next) => {
       data: createdComment
     });
   } catch (error) {
-    next(error)
+    next(error);
   }
 }
-module.exports = { getCommentsByNew, create, updateComments }
+
+const removeComment = async (req, res, next) => {
+  try {
+    const result = await commentsService.removeComment(req);
+    
+    res.status(OK).json({
+      data: result
+    });
+  } catch(error){
+    next(error);
+  }
+}
+
+module.exports = { getCommentsByNew, create, updateComments, removeComment }
