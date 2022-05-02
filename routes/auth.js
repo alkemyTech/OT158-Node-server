@@ -4,15 +4,13 @@ const router = express.Router();
 const {
   create,
   getAuthenticatedUserData,
+  login,
 } = require('../controllers/users');
 const registerValidator = require('../validations/registerValidator');
-const {
-  loginValidation
-} = require('../middlewares/auth')
+const { loginValidation } = require('../middlewares/auth');
 
-/* routes */
 router.post('/register', registerValidator, create);
-router.post('/login', loginValidation);
 router.get('/me', getAuthenticatedUserData);
+router.post('/login', loginValidation, login);
 
 module.exports = router;

@@ -1,20 +1,39 @@
 const usersRepository = require('../repositories/users');
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
-const { NotFound, BadRequest } = require('../utils/status');
+const fs = require("fs");
+const { createMessage, sendMail } = require('./mail.service');
+const htmlTemplate = fs.readFileSync('./utils/templateEmail.html', 'utf-8')
+const { createToken } = require('../modules/auth');
+const { NotFound, BadRequest, ISError } = require('../utils/status');
+const { throwError } = require('../utils/errorHandler');
 
 const getAll = async () => {
   return await usersRepository.getAll();
 };
 
 const create = async (req) => {
-  validationResult(req).throw();
+  try{
+    validationResult(req).throw();
 
-  let user = { ...req.body };
-  user.password = await bcrypt.hash(req.body.password, 12);
+    let user = { ...req.body };
+    user.password = await bcrypt.hash(req.body.password, 12);
 
-  const result = await usersRepository.create(user);
-  return result;
+    const newUser = await usersRepository.create(user);
+    const message = await createMessage(newUser.email,"Bienvenido","Bienvenido a nuestra ONG",htmlTemplate);
+    await sendMail(message);
+    const token = createToken(newUser)
+
+    const result ={
+      data: newUser,
+      token:token
+    }
+
+    return result;
+  }
+  catch(error){
+    throw error
+  }
 };
 
 const update = async (id, data) => {
@@ -26,16 +45,12 @@ const update = async (id, data) => {
       const updatedUser = await usersRepository.update(id, data);
 
       if (!updatedUser) {
-        const error = new Error('User not updated');
-        error.status = BadRequest;
-        throw error;
+        throwError('User not updated', BadRequest);
       }
 
       return updatedUser;
     } else {
-      const error = new Error('User not found');
-      error.status = NotFound;
-      throw error;
+      throwError('User not found', NotFound);
     }
   } catch (error) {
     throw new Error(error.message);
@@ -48,9 +63,22 @@ const remove = async (id) => {
   if (user) {
     return await usersRepository.remove(id);
   } else {
-    const error = new Error('User not found');
-    error.status = NotFound;
-    throw error;
+    throwError('User not found', NotFound);
+  }
+};
+
+const getUserByEmail = async (email) => {
+  try {
+    const user = await usersRepository.getUserByEmail({ where: { email } });
+
+    if(!user){
+      throwError('User not found', NotFound);
+    }
+
+    return user
+
+  } catch (error) {
+    throwError(error.message, ISError);
   }
 };
 
@@ -72,4 +100,5 @@ module.exports = {
   remove,
   update,
   getAuthenticatedUserData,
+  getUserByEmail,
 };

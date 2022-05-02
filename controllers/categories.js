@@ -18,6 +18,18 @@ const getAll = async (req, res, next) => {
     next(error);
   }
 };
+const getById = async (req, res, next) => {
+  try {
+    const category = await categoriesService.getById(req);
+
+    res.status(OK).json({
+      data: category
+    });
+  }
+  catch (error) {
+    next(error);
+  }
+};
 
 const create = async (req, res, next) => {
   try {
@@ -71,4 +83,4 @@ const remove = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll, create, update, remove }
+module.exports = { getAll, create, update, remove, getById }

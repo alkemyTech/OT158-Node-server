@@ -1,17 +1,17 @@
 'use strict';
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Comments', [{
-      body: 'esto es un comentario',
-      user_id: 1,
-      post_id:1,
+  async up (queryInterface, Sequelize) {
+    await queryInterface.bulkInsert("Categories", [{
+      name:"category 1",
+      description:"test category",
+      image:"image.jpg",
       createdAt: new Date,
       updatedAt: new Date
     }], {});
   },
 
-  async down(queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
