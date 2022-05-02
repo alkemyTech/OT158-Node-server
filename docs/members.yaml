@@ -1,0 +1,117 @@
+paths:
+  /members:
+    get:
+      tags:
+      - "members"
+      summary: "List of all members"
+      description: "Endpoint returning a list of all members"
+      operationId: "getAll"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "All members' information was obtained correctly"
+          schema:
+            type: "object"
+    post:
+      tags:
+      - "members"
+      summary: "Create a new member"
+      description: "Endpoint for members creation"
+      operationId: "create"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Name of the new member"
+        required: true
+        schema:
+          $ref: "#/definitions/Members"
+      responses:
+        "200":
+          description: "Create successful"
+        "400":
+          description: "Bad Request"
+  /members/{id}:
+    put:
+      tags:
+      - "members"
+      summary: "Updates a Member by ID"
+      description: ""
+      operationId: "update"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of member to update"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Name of the new member"
+        required: true
+        schema:
+          $ref: "#/definitions/Members"
+      responses:
+        "200":
+          description: "Create successful"
+        "400":
+          description: "Bad Request"
+        "404":
+          description: "Member not found"
+    delete:
+      tags:
+      - "members"
+      summary: "Delete a member"
+      description: ""
+      operationId: "remove"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of member to delete"
+        require: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "delete successful"
+        "404":
+          description: "member not found"
+definitions:
+  Members:
+      type: "object"
+      requires:
+        -"name"
+      properties:
+        name:
+          type: "string"
+          example: "Jhon"
+        facebookUrl:
+          type: "string"
+        instagramUrl:
+          type: "string"
+        linkedinUrl:
+          type: "string"
+        image:
+          type: "string"
+        description:
+          type: "string"
+      xml:
+        name: "Members"
+
