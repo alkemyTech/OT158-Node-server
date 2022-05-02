@@ -1,6 +1,10 @@
 const usersRepository = require('../repositories/users');
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
+const fs = require("fs");
+const { createMessage, sendMail } = require('./mail.service');
+const htmlTemplate = fs.readFileSync('./utils/templateEmail.html', 'utf-8')
+const { createToken } = require('../modules/auth');
 const { NotFound, BadRequest, ISError } = require('../utils/status');
 const { throwError } = require('../utils/errorHandler');
 
@@ -9,13 +13,27 @@ const getAll = async () => {
 };
 
 const create = async (req) => {
-  validationResult(req).throw();
+  try{
+    validationResult(req).throw();
 
-  let user = { ...req.body };
-  user.password = await bcrypt.hash(req.body.password, 12);
+    let user = { ...req.body };
+    user.password = await bcrypt.hash(req.body.password, 12);
 
-  const result = await usersRepository.create(user);
-  return result;
+    const newUser = await usersRepository.create(user);
+    const message = await createMessage(newUser.email,"Bienvenido","Bienvenido a nuestra ONG",htmlTemplate);
+    await sendMail(message);
+    const token = createToken(newUser)
+
+    const result ={
+      data: newUser,
+      token:token
+    }
+
+    return result;
+  }
+  catch(error){
+    throw error
+  }
 };
 
 const update = async (id, data) => {

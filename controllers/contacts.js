@@ -1,11 +1,13 @@
 const contactsService = require("../services/contacts");
-const { OK, BadRequest } = require("../utils/status");
+const { OK } = require("../utils/status");
 
 const create = async (req, res, next) => {
   const newContact = req.body;
   try {
     const result = await contactsService.create(newContact);
+
     res.status(200).json({
+      message: 'contact created successfully',
       data: result,
     });
   } catch (error) {
@@ -13,19 +15,16 @@ const create = async (req, res, next) => {
   }
 };
 
-const getAll = async (req, res) => {
+const getAll = async (req, res, next) => {
   try {
     const getContacts = await contactsService.getAll();
+
     res.status(OK).json({
-      status: 'success',
       message: 'contacts returned successfully',
       data: getContacts
     });
   } catch (error) {
-    return res.status(BadRequest).json({
-      error,
-      message: 'error returning contacts',
-    });
+    next(error)
   }
 };
 

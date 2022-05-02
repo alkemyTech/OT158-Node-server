@@ -24,6 +24,15 @@ const create = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  try {
+    const result = await newsService.update(req);
+    return res.status(OK).json(result);
+  } catch (error) {
+    next(error);
+  }
+}
+
 const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -36,8 +45,23 @@ const getById = async (req, res, next) => {
     next(error);
   }
 };
+
+const deleteById = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    await newsService.deleteNews(id);
+    res.status(OK).json({
+      msg: 'Deleted successful'
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getAll,
   create,
-  getById
+  getById,
+  update,
+  deleteById
 };

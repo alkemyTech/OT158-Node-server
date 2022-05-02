@@ -17,8 +17,19 @@ const getAll = async () => {
   });
 };
 
+const getAllSlidesById= async (organizationId =1) => {
+  return Slides.findAll({
+    order:[
+      ['order','DESC']
+    ],
+    where:{
+      organizationId
+    }
+  });
+}
+
 const update = async (id, body) => {
   return await Slides.update(body, {where: {id:id}});
 }
 
-module.exports = { create, getById, getAll, update, remove };
+module.exports = { create, getById, getAll, update, remove , getAllSlidesById };
