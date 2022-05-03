@@ -16,7 +16,7 @@ const getCommentsByNew = async (req, res, next) => {
   }
 };
 
-const getAllCommnets = async (req,res, next) => {
+const getAllComments = async (req,res, next) => {
   try {
     const query = req.query;
 
@@ -70,4 +70,4 @@ const removeComment = async (req, res, next) => {
   }
 }
 
-module.exports = { getCommentsByNew, create, updateComments, removeComment, getAllCommnets }
+module.exports = { getCommentsByNew, create, updateComments, removeComment, getAllComments }
