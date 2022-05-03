@@ -6,9 +6,9 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get('/', getAll);
-router.post('/', creationValidation, create);
-router.put("/:id", update)
-router.get("/:id",adminValidator, getById)
-router.delete("/:id", remove)
+router.post('/', adminValidator, creationValidation, create);
+router.put("/:id", adminValidator, update)
+router.delete("/:id", adminValidator, remove)
+router.get("/:id", adminValidator, getById)
 
 module.exports = router;

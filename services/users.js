@@ -4,7 +4,7 @@ const { validationResult } = require('express-validator');
 const fs = require("fs");
 const { createMessage, sendMail } = require('./mail.service');
 const htmlTemplate = fs.readFileSync('./utils/templateEmail.html', 'utf-8')
-const { createToken } = require('../modules/auth');
+const { createToken, getTokenFromHeaders, verifyToken } = require('../modules/auth');
 const { NotFound, BadRequest, ISError } = require('../utils/status');
 const { throwError } = require('../utils/errorHandler');
 
@@ -82,4 +82,17 @@ const getUserByEmail = async (email) => {
   }
 };
 
-module.exports = { getAll, create, remove, update, getUserByEmail };
+const getAuthenticatedUserData = async (req) => {
+  let auth = getTokenFromHeaders(req);
+  const tokenDecoded = verifyToken(auth);
+  return await usersRepository.getById(tokenDecoded.userId);
+}
+
+module.exports = {
+  getAll,
+  create,
+  remove,
+  update,
+  getAuthenticatedUserData,
+  getUserByEmail,
+};
