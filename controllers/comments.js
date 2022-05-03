@@ -18,7 +18,9 @@ const getCommentsByNew = async (req, res, next) => {
 
 const getAllCommnets = async (req,res, next) => {
   try {
-    const result = await commentsService.getAllCommentsByCreationDate();
+    const query = req.query;
+
+    const result = await commentsService.getAllComments(query);
 
     res.status(OK).json({
       data: result

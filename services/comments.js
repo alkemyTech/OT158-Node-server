@@ -48,18 +48,20 @@ const getCommentsByNew = async (req) => {
 
 const getAllComments = async (query) => {
   try {
-    return await commentsRepository.getAllComments(CONDITIONS[query] ? CONDITIONS[query]() : null);
+    const condition = query;
+
+    const comments = await commentsRepository.getAllComments(CONDITIONS[condition] || CONDITIONS['defaultCondition']);
+
+    return comments
   } catch (error) {
     throwError(error.message, ISError);
   }
 };
 
 const CONDITIONS = {
-  'order': (query) => {
-    return {
-      order: [['createdAt', query]],
-      attributes: ['body']
-    }
+  'defaultCondition': {
+    order: [['createdAt', 'ASC']],
+    attributes: ['body']
   }
 };
 
