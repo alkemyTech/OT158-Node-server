@@ -25,6 +25,10 @@ const updateCommentById = async (id, body) => {
   }
 };
 
+const checkOwnershipUser = (user, id)=>{
+  return user.id === id;
+}
+
 const getCommentsByNew = async (req) => {
   const newId = req.params.id;
 
@@ -81,3 +85,18 @@ const create = async(newComment)=>{
 }
 
 module.exports={ create, getCommentsByNew, updateCommentById, getAllComments };
+const removeComment = async (req) => {
+  try {
+    const { id } = req.params;
+    const comment = await commentsRepository.getById(id);
+
+    if(!checkOwnershipUser(req.user, comment.user_id))
+      throwError("User not allowed to perform this action",Forbidden);
+
+    return await commentsRepository.remove(id);
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports={ create, getCommentsByNew, updateCommentById, removeComment, getAllComments };

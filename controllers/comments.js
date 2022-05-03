@@ -19,11 +19,12 @@ const getCommentsByNew = async (req, res, next) => {
 const getAllCommnets = async (req,res, next) => {
   try {
     const result = await commentsService.getAllCommentsByCreationDate();
+
     res.status(OK).json({
       data: result
-    })
+    });
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
@@ -51,7 +52,20 @@ const create = async (req, res, next) => {
       data: createdComment
     });
   } catch (error) {
-    next(error)
+    next(error);
+  }
+};
+
+const removeComment = async (req, res, next) => {
+  try {
+    const result = await commentsService.removeComment(req);
+
+    res.status(OK).json({
+      data: result
+    });
+  } catch(error){
+    next(error);
   }
 }
-module.exports = { getCommentsByNew, create, updateComments, getAllCommnets }
+
+module.exports = { getCommentsByNew, create, updateComments, removeComment, getAllCommnets }
