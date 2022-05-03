@@ -6,10 +6,10 @@ const { creationValidation } = require("../middlewares/categories")
 const router = express.Router();
 
 /* GET users listing. */
-router.get('/', authenticathed, getAll);
-router.post('/', creationValidation, create);
-router.put("/:id", update)
-router.get("/:id",adminValidator, getById)
-router.delete("/:id", remove)
+router.get('/',authenticathed, getAll);
+router.post('/', adminValidator, creationValidation, create);
+router.put("/:id", adminValidator, update)
+router.delete("/:id", adminValidator, remove)
+router.get("/:id", adminValidator, getById)
 
 module.exports = router;
