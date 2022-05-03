@@ -20,10 +20,16 @@ const getById = async (id) => {
 
 const remove = async (id) => await News.destroy(id);
 
+const getPage = async (conditions) => {
+  return await News.findAndCountAll(conditions);
+}
+
+
 module.exports = {
   getAll,
   create,
   update,
   getById,
-  remove
+  remove,
+  getPage
 };
