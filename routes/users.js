@@ -6,7 +6,7 @@ const router = express.Router();
 /* GET users listing. */
 router.get('/', adminValidator, usersController.getAll);
 router.get('/', usersController.getAll);
-router.patch('/:id', usersController.update);
-router.delete("/:id", usersController.removeUser)
+router.patch('/:id',adminValidator, usersController.update);
+router.delete("/:id",adminValidator, usersController.removeUser)
 
 module.exports = router;
