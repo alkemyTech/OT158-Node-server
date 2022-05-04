@@ -19,6 +19,16 @@ const update = async (req, res, next) => {
 	}
 };
 
+const getAll = async (req, res, next) =>{
+  try{
+    const data = await testimonialsService.getAll(req)
+    return res.status(OK).json(data)
+  }
+  catch(error){
+    next(error)
+  }
+}
+
 const remove = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -34,4 +44,4 @@ const remove = async (req, res, next) => {
   }
 };
 
-module.exports = { create, update, remove };
+module.exports = { create, update, remove, getAll };

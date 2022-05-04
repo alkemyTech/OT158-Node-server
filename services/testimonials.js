@@ -2,6 +2,7 @@ const { validationResult } = require('express-validator');
 const testimonialsRepo = require('../repositories/testimonials');
 const { BadRequest, NotFound, ISError } = require('../utils/status');
 const { throwError } = require('../utils/errorHandler')
+const { getPage } = require('./pagination.service')
 
 const create = async (body) => {
 	return await testimonialsRepo.create(body);
@@ -33,6 +34,19 @@ const update = async (req) => {
 	}
 }
 
+const getAll = async (req) => {
+  try {
+    const { page } = req.query;
+
+    const paginated = getPage('testimonials',testimonialsRepo,page);
+
+    return paginated;
+
+  } catch (error) {
+    throw error;
+  }
+}
+
 const removeTestminonyById = async (id) => {
   try {
     const testimonial = await testimonialsRepo.getById(id);
@@ -52,5 +66,6 @@ const removeTestminonyById = async (id) => {
 module.exports = {
 	create,
 	update,
+  getAll,
   removeTestminonyById
 };
