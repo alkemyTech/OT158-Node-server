@@ -27,18 +27,20 @@ paths:
       produces:
       - "application/xml"
       - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Name of the new member"
+      requestBody:
+        description: "Body to create member"
         required: true
-        schema:
-          $ref: "#/definitions/Members"
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/Members"
       responses:
         "200":
           description: "Create successful"
         "400":
           description: "Bad Request"
+        "401":
+          description: "No token provided"
   /members/{id}:
     put:
       tags:
@@ -59,17 +61,20 @@ paths:
         required: true
         type: "integer"
         format: "int64"
-      - in: "body"
-        name: "body"
-        description: "Name of the new member"
+      requestBody:
+        description: "Body to update member"
         required: true
-        schema:
-          $ref: "#/definitions/Members"
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/Members"
       responses:
         "200":
           description: "Create successful"
         "400":
           description: "Bad Request"
+        "401":
+          description: "No token provided"
         "404":
           description: "Member not found"
     delete:
@@ -96,8 +101,8 @@ paths:
 definitions:
   Members:
       type: "object"
-      requires:
-        -"name"
+      required:
+      - "name"
       properties:
         name:
           type: "string"
