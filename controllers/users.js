@@ -55,9 +55,18 @@ const update = async (req, res, next) => {
       message: "User updated",
       data: result
     });
-  }
-  catch (err) {
+  } catch (err) {
     next(err);
+  }
+}
+
+const getAuthenticatedUserData = async (req, res, next) => {
+
+  try {
+    const user = await usersService.getAuthenticatedUserData(req);
+    res.status(OK).json(user);
+  } catch (error) {
+    next(error);
   }
 }
 
@@ -76,4 +85,11 @@ const login = async (req, res, next) => {
   }
 }
 
-module.exports = { getAll, create, removeUser, update, login };
+module.exports = {
+  getAll,
+  create,
+  removeUser,
+  update,
+  getAuthenticatedUserData,
+  login,
+};

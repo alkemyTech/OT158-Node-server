@@ -1,22 +1,15 @@
-const { verifyToken } = require('../modules/auth');
-const { Unauthorized, Forbidden  } = require('../utils/status');
+const { verifyToken, getTokenFromHeaders } = require('../modules/auth');
+const { Forbidden } = require('../utils/status');
 
 const adminValidator = (req, res, next) => {
-  const token = req.headers['Authorization'];
-
-  if (!token) {
-    return res.status(Unauthorized).json({
-      auth: false,
-      message: 'No token provided'
-    });
-  }
-
   try {
+    const token = getTokenFromHeaders(req);
+
     const decoded = verifyToken(token);
 
     req.roleId = decoded.roleId;
 
-    if (req.roleId === process.env.ROLE_ADMIN) {
+    if (req.roleId.toString() === process.env.ROLE_ADMIN) {
       return next();
     } else {
       return res.status(Forbidden).json({

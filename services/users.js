@@ -1,7 +1,10 @@
 const usersRepository = require('../repositories/users');
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
-const { createToken } = require('../modules/auth');
+const fs = require("fs");
+const { createMessage, sendMail } = require('./mail.service');
+const htmlTemplate = fs.readFileSync('./utils/templateEmail.html', 'utf-8')
+const { createToken, getTokenFromHeaders, verifyToken } = require('../modules/auth');
 const { NotFound, BadRequest, ISError } = require('../utils/status');
 const { throwError } = require('../utils/errorHandler');
 
@@ -17,6 +20,8 @@ const create = async (req) => {
     user.password = await bcrypt.hash(req.body.password, 12);
 
     const newUser = await usersRepository.create(user);
+    const message = await createMessage(newUser.email,"Bienvenido","Bienvenido a nuestra ONG",htmlTemplate);
+    await sendMail(message);
     const token = createToken(newUser)
 
     const result ={
@@ -77,4 +82,17 @@ const getUserByEmail = async (email) => {
   }
 };
 
-module.exports = { getAll, create, remove, update, getUserByEmail };
+const getAuthenticatedUserData = async (req) => {
+  let auth = getTokenFromHeaders(req);
+  const tokenDecoded = verifyToken(auth);
+  return await usersRepository.getById(tokenDecoded.userId);
+}
+
+module.exports = {
+  getAll,
+  create,
+  remove,
+  update,
+  getAuthenticatedUserData,
+  getUserByEmail,
+};

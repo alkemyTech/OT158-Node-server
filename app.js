@@ -13,6 +13,7 @@ const usersRouter = require('./routes/users');
 const slidesRouter = require('./routes/slides');
 const categoriesRouter = require('./routes/categories');
 const contactRouter = require('./routes/contacts');
+const commentsRouter = require('./routes/comments');
 const membersRouter = require('./routes/members');
 const testimonialsRouter = require('./routes/testimonials');
 const newsRouter = require('./routes/news');
@@ -20,7 +21,9 @@ const authRouter = require('./routes/auth');
 const activitiesRouter = require('./routes/activities');
 const backofficeRouter = require('./routes/backoffice');
 const organizationRouter = require('./routes/organization');
+const commentRouter = require('./routes/comments');
 const { swaggerDefinitions } = require('./helpers/swaggerDefinitions');
+
 
 const app = express();
 app.use(cors());
@@ -52,13 +55,15 @@ app.use('/users', usersRouter);
 app.use('/slides', slidesRouter);
 app.use('/categories', categoriesRouter);
 app.use('/contacts', contactRouter);
+app.use('/comments', commentsRouter);
 app.use('/members', membersRouter);
 app.use('/news', newsRouter);
 app.use('/auth', authRouter);
-app.use('/actvities', activitiesRouter);
+app.use('/activities', activitiesRouter);
 app.use('/backoffice', backofficeRouter);
 app.use('/testimonials', testimonialsRouter);
 app.use('/organization', organizationRouter);
+app.use('/comments', commentRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res) => {
