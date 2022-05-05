@@ -30,17 +30,38 @@ const checkOwnershipUser = (user, id)=>{
 }
 
 const getCommentsByNew = async (req) => {
-  const newId = req.params.id
-  const condition = {where: {post_id: newId}}
+  const newId = req.params.id;
+
+  const condition = {where: {post_id: newId}};
+
   try{
     const news = await newsRepository.getById(newId)
     if(!news){
-      throwError("New not Found", NotFound)
+      throwError("News not Found", NotFound);
     }
-    return await commentsRepository.getAll(condition);
+    return await commentsRepository.getAllComments(condition);
   }
   catch(error){
     throwError(error.message, ISError);
+  }
+};
+
+const getAllComments = async (query) => {
+  try {
+    const condition = query;
+
+    const comments = await commentsRepository.getAllComments(CONDITIONS[condition] || CONDITIONS['defaultCondition']);
+
+    return comments
+  } catch (error) {
+    throwError(error.message, ISError);
+  }
+};
+
+const CONDITIONS = {
+  'defaultCondition': {
+    order: [['createdAt', 'ASC']],
+    attributes: ['body']
   }
 };
 
@@ -65,18 +86,19 @@ const create = async(newComment)=>{
 
 }
 
+module.exports={ create, getCommentsByNew, updateCommentById, getAllComments };
 const removeComment = async (req) => {
   try {
     const { id } = req.params;
     const comment = await commentsRepository.getById(id);
-  
+
     if(!checkOwnershipUser(req.user, comment.user_id))
       throwError("User not allowed to perform this action",Forbidden);
-  
+
     return await commentsRepository.remove(id);
   } catch (error) {
-    throw error;    
+    throw error;
   }
-} 
+}
 
-module.exports={ create, getCommentsByNew, updateCommentById, removeComment};
+module.exports={ create, getCommentsByNew, updateCommentById, removeComment, getAllComments };
