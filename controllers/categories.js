@@ -3,15 +3,22 @@ const { NoContent, OK, Created } = require('../utils/status');
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await categoriesService.getAll();
+    const paginatedCategoriesList = await categoriesService.getAll(req);
 
     res.status(OK).json({
-      meta: {
-        status: OK,
-        total: result.length,
-        url: ''
-      },
-      data: result
+      data: paginatedCategoriesList
+    });
+  }
+  catch (error) {
+    next(error);
+  }
+};
+const getById = async (req, res, next) => {
+  try {
+    const category = await categoriesService.getById(req);
+
+    res.status(OK).json({
+      data: category
     });
   }
   catch (error) {
@@ -71,4 +78,4 @@ const remove = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll, create, update, remove }
+module.exports = { getAll, create, update, remove, getById }

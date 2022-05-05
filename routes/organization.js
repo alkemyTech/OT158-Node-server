@@ -8,6 +8,6 @@ const { adminValidator } = require('../middlewares/adminValidator');
 const { updateForm } = require('../validations/organizationValidator');
 
 router.get('/public', organizationData);
-router.put('/public/:id', adminValidator,updateForm, update);
+router.put('/public/:id', adminValidator, updateForm, update);
 
 module.exports = router;
