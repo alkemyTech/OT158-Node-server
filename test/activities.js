@@ -6,7 +6,7 @@ const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI1LCJyb2xlSWQi
 chai.use(chaiHttp);
 chai.should();
 
-describe('Test ONG Somos', () => {
+describe('Test endpoint Activities', () => {
   describe('POST /activities', () => {
     it('It should POST a new activities', (done) => {
       const newActivity = {
