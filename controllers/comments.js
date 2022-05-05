@@ -16,6 +16,20 @@ const getCommentsByNew = async (req, res, next) => {
   }
 };
 
+const getAllComments = async (req,res, next) => {
+  try {
+    const query = req.query;
+
+    const result = await commentsService.getAllComments(query);
+
+    res.status(OK).json({
+      data: result
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const updateComments = async (req, res, next) => {
   try {
     const body = req.body;
@@ -28,7 +42,7 @@ const updateComments = async (req, res, next) => {
       data: result
     })
   } catch (error) {
-    next(error);
+    next(error)
   }
 };
 
@@ -42,12 +56,12 @@ const create = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 const removeComment = async (req, res, next) => {
   try {
     const result = await commentsService.removeComment(req);
-    
+
     res.status(OK).json({
       data: result
     });
@@ -56,4 +70,4 @@ const removeComment = async (req, res, next) => {
   }
 }
 
-module.exports = { getCommentsByNew, create, updateComments, removeComment }
+module.exports = { getCommentsByNew, create, updateComments, removeComment, getAllComments }
