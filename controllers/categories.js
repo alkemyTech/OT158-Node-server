@@ -3,15 +3,10 @@ const { NoContent, OK, Created } = require('../utils/status');
 
 const getAll = async (req, res, next) => {
   try {
-    const result = await categoriesService.getAll();
+    const paginatedCategoriesList = await categoriesService.getAll(req);
 
     res.status(OK).json({
-      meta: {
-        status: OK,
-        total: result.length,
-        url: ''
-      },
-      data: result
+      data: paginatedCategoriesList
     });
   }
   catch (error) {

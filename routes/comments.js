@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { updateComments, create, removeComment } = require('../controllers/comments');
+const { adminValidator } = require('../middlewares/adminValidator');
+const { updateComments, create, getAllComments, removeComment } = require('../controllers/comments');
 const { updateCommentsValidator, creationValidation } = require('../middlewares/comments');
-const { authenticathed } =  require('../middlewares/authenticathed')
+const { authenticathed } =  require('../middlewares/authenticathed');
 
+router.get('/', adminValidator, getAllComments);
 router.post("/",authenticathed, creationValidation, create);
 router.put('/:id', updateCommentsValidator, updateComments);
 router.delete("/:id",authenticathed, removeComment);
