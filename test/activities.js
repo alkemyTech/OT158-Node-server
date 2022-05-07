@@ -1,12 +1,12 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../app');
+const server = "http://localhost:3000";
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI1LCJyb2xlSWQiOjEsImlhdCI6MTY1MDkyMjIyNCwiZXhwIjoxNjUxMDA4NjI0fQ.cXzKVKxt2DXPkfy9KTjSBcuBLDH8MktEEhF1bYi2YpM"
 
 chai.use(chaiHttp);
 chai.should();
 
-describe('Test endpoint Activities', () => {
+describe('Test Activities endpoint', () => {
   describe('POST /activities', () => {
     it('It should POST a new activities', (done) => {
       const newActivity = {
@@ -30,7 +30,7 @@ describe('Test endpoint Activities', () => {
         });
     });
 
-    it('It should NOT POST a new activitie', (done) => {
+    it('It should NOT POST a new activitie if the required fields are not completed', (done) => {
       const newActivity = {
         name: 1
       };
@@ -40,7 +40,7 @@ describe('Test endpoint Activities', () => {
         .set('authorization', token)
         .send(newActivity)
         .end((err, res) => {
-          res.should.have.status(404);
+          res.should.have.status(400);
           res.body.should.be.a('object');
           res.should.have.property('ok', false);
           done();
@@ -92,7 +92,7 @@ describe('Test endpoint Activities', () => {
         });
     });
 
-    it('It should NOT PUT a new activitie', (done) => {
+    it('It should NOT PUT a new activitie if it is about updating incorrect or non-existent fields', (done) => {
       const activitiId = 1;
       const newActivity = {
         name: 2
@@ -141,7 +141,7 @@ describe('Test endpoint Activities', () => {
         .set('authorization', token)
         .send(newActivity)
         .end((err, res) => {
-          res.should.have.status(200);
+          res.should.have.status(404);
           done();
         });
     });
