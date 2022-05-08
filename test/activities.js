@@ -30,7 +30,7 @@ describe('Test Activities endpoint', () => {
         });
     });
 
-    it('It should NOT POST a new activitie if the required fields are not completed', (done) => {
+    it('You should not create an activity without the name, content and image properties because they are required', (done) => {
       const newActivity = {
         name: 1
       };
@@ -92,10 +92,10 @@ describe('Test Activities endpoint', () => {
         });
     });
 
-    it('It should NOT PUT a new activitie if it is about updating incorrect or non-existent fields', (done) => {
+    it('It should activity should not be updated if the property name is invalid', (done) => {
       const activitiId = 1;
       const newActivity = {
-        name: 2
+        nameActivity: "activitie general"
       };
       chai
         .request(server)
