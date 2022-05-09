@@ -8,7 +8,7 @@ chai.should();
 
 describe('Test Activities endpoint', () => {
   describe('POST /activities', () => {
-    it('It should POST a new activities', (done) => {
+    it('Should POST a new activities', (done) => {
       const newActivity = {
         name: 'actividad',
         content: 'activividad numero 1',
@@ -30,7 +30,7 @@ describe('Test Activities endpoint', () => {
         });
     });
 
-    it('You should not create an activity without the name, content and image properties because they are required', (done) => {
+    it('Should not create an activity without the name, content and image properties because they are required', (done) => {
       const newActivity = {
         name: 1
       };
@@ -47,7 +47,7 @@ describe('Test Activities endpoint', () => {
         });
     });
 
-    it('It should NOT POST a new activitie without token authorization', (done) => {
+    it('Should NOT POST a new activitie without token authorization', (done) => {
       const newActivity = {
         name: 1
       };
@@ -69,7 +69,7 @@ describe('Test Activities endpoint', () => {
   });
 
   describe('PUT /activities/:id', () => {
-    it('It should PUT a new activities', (done) => {
+    it('Should PUT a new activities', (done) => {
       const activitiId = 1;
       const newActivity = {
         name: 'actividad actualizada',
@@ -92,7 +92,7 @@ describe('Test Activities endpoint', () => {
         });
     });
 
-    it('It should activity should not be updated if the property name is invalid', (done) => {
+    it('Should activity not be updated if the property name is invalid', (done) => {
       const activitiId = 1;
       const newActivity = {
         nameActivity: "activitie general"
@@ -110,7 +110,7 @@ describe('Test Activities endpoint', () => {
         });
     });
 
-    it('It should NOT PUT a new activities without token authorization', (done) => {
+    it('Should NOT PUT a new activities without token authorization', (done) => {
       const activitiId = 1;
       const newActivity = {
         name: 'Activitie test'
@@ -130,7 +130,7 @@ describe('Test Activities endpoint', () => {
         });
     });
 
-    it('It should NOT PUT a new activitie if the ID does not exist', (done) => {
+    it('Should NOT PUT a new activitie if the ID does not exist', (done) => {
       const activitiId = 2;
       const newActivity = {
         name: 'Activitie test'
