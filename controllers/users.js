@@ -1,5 +1,6 @@
 const usersService = require('../services/users');
 const { OK, Created, NoContent, Accepted } = require('../utils/status');
+const { createToken } = require('../modules/auth');
 
 const getAll = async (req, res, next) => {
   try {
@@ -74,11 +75,12 @@ const login = async (req, res, next) => {
   try {
     const { email } = req.body;
 
-    const result = await usersService.getUserByEmail(email);
+    const user = await usersService.getUserByEmail(email);
 
     res.status(Accepted).json({
       message: "User authenticated",
-      data: result
+      data: user,
+      token: createToken(user)
     })
   } catch (error) {
     next(error)
