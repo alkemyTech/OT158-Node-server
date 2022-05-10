@@ -2,17 +2,17 @@ const { expect } = require("chai");
 const chai = require("chai");
 const chaiHttp = require("chai-http")
 const server = "http://localhost:3000"
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI1LCJyb2xlSWQiOjEsImlhdCI6MTY1MDkyMjIyNCwiZXhwIjoxNjUxMDA4NjI0fQ.cXzKVKxt2DXPkfy9KTjSBcuBLDH8MktEEhF1bYi2YpM"
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI5LCJyb2xlSWQiOiIxIiwiaWF0IjoxNjUyMTQzNDExLCJleHAiOjE2NTIyMjk4MTF9.u7IxDhu70zRPVWGlZah8kxjdBe6ctAtOuCpXxRN-Iq8"
 
 chai.should()
 chai.use(chaiHttp);
 
 
-describe("Task ONG", ()=>{
+describe("Task endpoints /organization", ()=>{
 
   describe("Get /organization/public", ()=>{
 
-    it("It should GET organization data", (done)=>{
+    it("Should GET organization data", (done)=>{
       chai.request(server)
         .get("/organization/public")
         .end((err, response) => {
@@ -26,7 +26,7 @@ describe("Task ONG", ()=>{
 
   describe("PUT /organization/public/:id",()=>{
 
-    it("It should PUT a new organization data", (done)=>{
+    it("Should PUT a new organization data", (done)=>{
       const ongId = 1;
       const dataUpdate ={
         name: "test 85",
@@ -38,7 +38,7 @@ describe("Task ONG", ()=>{
       };
       chai.request(server)
         .put("/organization/public/" + ongId)
-        .set("authorization",  token)
+        .set("Authorization",  "bearer "+token)
         .send(dataUpdate)
         .end((err,response)=>{
           response.should.have.status(200);
@@ -63,14 +63,14 @@ describe("Task ONG", ()=>{
 
     });
 
-    it("It should NOT PUT a new organization data", (done)=>{
+    it("Should NOT PUT a new organization data without parametres required", (done)=>{
       const ongId = 1;
       const dataUpdate ={
         name: 1,
       };
       chai.request(server)
         .put("/organization/public/" + ongId)
-        .set("authorization",  token)
+        .set("Authorization",  "bearer "+token)
         .send(dataUpdate)
         .end((err,response)=>{
           response.should.have.status(400);
@@ -83,7 +83,7 @@ describe("Task ONG", ()=>{
 
     });
 
-    it("It should NOT PUT a new organization data without token authorization", (done)=>{
+    it("Should NOT PUT a new organization data without token authorization", (done)=>{
       const ongId = 1;
       const dataUpdate ={
         name: "Ong test",
@@ -100,14 +100,14 @@ describe("Task ONG", ()=>{
         })
     });
 
-    it("It should NOT PUT a new organization if the ID does not exist ", (done)=>{
+    it("Should NOT PUT a new organization if the ID does not exist ", (done)=>{
       const ongId = 2;
       const dataUpdate ={
         name: "Ong test",
       };
       chai.request(server)
         .put("/organization/public/" + ongId)
-        .set("authorization",  token)
+        .set("Authorization",  "bearer "+token)
         .send(dataUpdate)
         .end((err,response)=>{
           response.should.have.status(200);
