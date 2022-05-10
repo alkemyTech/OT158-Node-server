@@ -27,6 +27,8 @@ paths:
       produces:
       - "application/xml"
       - "application/json"
+      security:
+      - bearerAuth: []
       requestBody:
         description: "Body to create member"
         required: true
@@ -61,6 +63,8 @@ paths:
         required: true
         type: "integer"
         format: "int64"
+      security:
+      - bearerAuth: []
       requestBody:
         description: "Body to update member"
         required: true
@@ -86,6 +90,8 @@ paths:
       produces:
       - "application/xml"
       - "application/json"
+      security:
+      - bearerAuth: []
       parameters:
       - name: "id"
         in: "path"

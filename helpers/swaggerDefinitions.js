@@ -11,7 +11,17 @@ const swaggerDefinitions = {
       {
         url: 'http://localhost:3000'
       }
-    ]
+    ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          in: "header",
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT"
+        }
+      }
+    }
   },
   apis: [`${path.join(__dirname, '../docs/*.yaml')}`]
 };
