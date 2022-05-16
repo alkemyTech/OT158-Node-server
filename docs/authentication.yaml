@@ -31,18 +31,12 @@ paths:
       produces:
       - "application/xml"
       - "application/json"
-      parameters:
-      - name: "email"
-        in: "body"
+      requestBody:
         required: true
-        type: "string"
-      - name: "password"
-        in: "body"
-        required: true
-        type: "string"
-        description: "Enter your email and password to log in"
-        schema:
-          $ref: "#/definitions/login"
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/Login"
       responses:
         "200":
           description: "successful operation"
@@ -85,3 +79,15 @@ definitions:
         type: "integer"
         format: "int32"
         example: 1
+  Login:
+    type: "object"
+    required:
+    - "email"
+    - "password"
+    properties:
+      email:
+        type: "string"
+        example: "juan.silva.0270@gmail.com"
+      password:
+        type : "string"
+        example: "123abc"
