@@ -1,37 +1,28 @@
 paths:
-  auth/register:
+  /auth/register:
     post:
       tags:
       - "register"
       summary: "User register"
       description: "Endpoint for user registration"
+      consumes:
+      - "application/json"
+      - "application/xml"
       produces:
       - "application/xml"
       - "application/json"
-      parameters:
-      - name: "firstName"
-        in: "body"
+      requestBody:
         required: true
-        type: "string"
-      - name: "lastName"
-        in: "body"
-        required: true
-        type: "string"
-      - name: "email"
-        in: "body"
-        required: true
-        type: "string"
-      - name: "password"
-        in: "body"
-        required: true
-        type: "string"
-        description: "Checking in"
-        schema:
-          $ref: "#/definitions/register"
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/Users"
       responses:
-        default:
-          description: "successful operation"
-  auth/login:
+        "201":
+          description: "Register successful"
+        "400":
+          description: "Bad Request"
+  /auth/login:
     post:
       tags:
       - "login"
@@ -40,18 +31,12 @@ paths:
       produces:
       - "application/xml"
       - "application/json"
-      parameters:
-      - name: "email"
-        in: "body"
+      requestBody:
         required: true
-        type: "string"
-      - name: "password"
-        in: "body"
-        required: true
-        type: "string"
-        description: "Enter your email and password to log in"
-        schema:
-          $ref: "#/definitions/login"
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/Login"
       responses:
         "200":
           description: "successful operation"
@@ -68,3 +53,41 @@ paths:
               description: "date in UTC when token expires"
         "400":
           description: "Invalid username/password supplied"
+definitions:
+  Users:
+    type: "object"
+    required:
+    - "firstName"
+    - "lastName"
+    - "email"
+    - "password"
+    - "roleId"
+    properties:
+      firstName:
+        type: "string"
+        example: "Jhon"
+      lastName:
+        type: "string"
+        example: "Cena"
+      email:
+        type: "string"
+        example: "juan.silva.0270@gmail.com"
+      password:
+        type : "string"
+        example: "123abc"
+      roleId:
+        type: "integer"
+        format: "int32"
+        example: 1
+  Login:
+    type: "object"
+    required:
+    - "email"
+    - "password"
+    properties:
+      email:
+        type: "string"
+        example: "juan.silva.0270@gmail.com"
+      password:
+        type : "string"
+        example: "123abc"
